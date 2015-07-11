@@ -10,8 +10,8 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from oysterapp.models import Task
-from oysterapp.models import Wish
+from oysterapp.oyster.models import Task
+from oysterapp.oyster.models import Wish
 
 
 # Serializers define the API representation.

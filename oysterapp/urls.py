@@ -4,12 +4,12 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from rest_framework import routers
 
-from app.views import OysterView
-from app.serializers import current_user
-from app.serializers import UserViewSet
-from app.serializers import CompleteTaskViewSet
-from app.serializers import IncompleteTaskViewSet
-from app.serializers import WishViewSet
+from oysterapp.oyster.views import OysterView
+from oysterapp.oyster.serializers import current_user
+from oysterapp.oyster.serializers import UserViewSet
+from oysterapp.oyster.serializers import CompleteTaskViewSet
+from oysterapp.oyster.serializers import IncompleteTaskViewSet
+from oysterapp.oyster.serializers import WishViewSet
 
 
 router = routers.DefaultRouter()
