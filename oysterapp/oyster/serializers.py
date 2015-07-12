@@ -42,14 +42,6 @@ def current_user(request):
     return Response(serializer.data)
 
 
-# api = API(locale='us',
-#           associate_tag=ASSOCIATE_TAG,
-#           access_key_id=AWS_KEY,
-#           secret_access_key=AWS_SECRET_KEY)
-# result = api.item_lookup(asin)
-
-# item = result.Items.Item[0]
-
 class WishSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wish
