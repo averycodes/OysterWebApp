@@ -2,3 +2,4 @@
 staticfiles
 
 api_keys.py
+.env
