@@ -15,7 +15,9 @@ greenlet==0.4.7
 gunicorn==19.3.0
 ipdb==0.8.1
 ipython==3.2.0
+lxml==3.4.4
 psycopg2==2.6.1
+python-amazon-product-api==0.2.8
 requests==2.7.0
 six==1.9.0
 static3==0.6.1
