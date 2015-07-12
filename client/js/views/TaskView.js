@@ -31,7 +31,7 @@ define([
             var user = window.app.user,
                 bank_amt = user.get("bank");
 
-            user.set("bank", bank_amt + this.model.get("reward"));
+            user.set("bank", bank_amt + this.model.get("amount"));
 
             this.close();
         }

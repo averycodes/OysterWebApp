@@ -14,11 +14,17 @@ define([
             'click button': 'onClickButton'
         },
 
+        templateHelpers:function(){
+            return {
+                image: this.model.get('image'),
+            }
+        },
+
         onClickButton: function(e) {
             e.preventDefault();
 
             if (this.model.get('cost') <= window.app.user.get('bank')) {
-                this.model.set('purchased', true);
+                this.model.set('completed', true);
 
                 this.model.save();
 

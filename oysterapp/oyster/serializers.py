@@ -12,6 +12,10 @@ from rest_framework.views import APIView
 
 from oysterapp.oyster.models import Task
 from oysterapp.oyster.models import Wish
+from oysterapp.oyster.models import create_wish_from_url
+from oysterapp.oyster.models import BillableItem
+
+from amazonproduct import API
 
 
 # Serializers define the API representation.
@@ -38,6 +42,14 @@ def current_user(request):
     return Response(serializer.data)
 
 
+# api = API(locale='us',
+#           associate_tag=ASSOCIATE_TAG,
+#           access_key_id=AWS_KEY,
+#           secret_access_key=AWS_SECRET_KEY)
+# result = api.item_lookup(asin)
+
+# item = result.Items.Item[0]
+
 class WishSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wish
@@ -47,27 +59,38 @@ class WishViewSet(viewsets.ModelViewSet):
     serializer_class = WishSerializer
 
     def get_queryset(self):
-        return self.request.user.wish_set.filter(purchased=False)
+        return Wish.objects.filter(user=self.request.user, completed=False)
+
+    def create(self, request, *args, **kwargs):
+        data = request.DATA
+        wish = create_wish_from_url(request.user, data['amazon_link'])
+
+        serializer = WishSerializer(wish)
+        return Response(serializer.data)
 
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ('id', 'title', 'doable', 'reward', 'completed')
 
 
-class CompleteTaskViewSet(viewsets.ModelViewSet):
-    serializer_class = TaskSerializer
+class BillableItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BillableItem
+
+
+class HistoryViewSet(viewsets.ModelViewSet):
+    serializer_class = BillableItemSerializer
 
     def get_queryset(self):
-        return self.request.user.task_set.filter(completed=True).order_by('-updated')
+        return BillableItem.objects.filter(user=self.request.user, completed=True).order_by('-updated')
 
 
 class IncompleteTaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
 
     def get_queryset(self):
-        return self.request.user.task_set.filter(completed=False).order_by('-created')
+        return Task.objects.filter(user=self.request.user, completed=False).order_by('-created')
 
     def create(self, request, *args, **kwargs):
         data = request.DATA
@@ -77,6 +100,8 @@ class IncompleteTaskViewSet(viewsets.ModelViewSet):
         serialized_data = data
         serialized_data['user'] = request.user.id
         serialized_data['id'] = task.id
+        serialized_data['created'] = task.created
+        serialized_data['updated'] = task.updated
 
         return Response(serialized_data,
                         status=status.HTTP_201_CREATED)

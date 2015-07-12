@@ -8,7 +8,7 @@ define([
     return Backbone.Model.extend({
         defaults: {
             title: 'Historical Item',
-            reward: 1,
+            amount: 1,
             credit: true
         },
 

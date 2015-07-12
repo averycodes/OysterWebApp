@@ -7,7 +7,7 @@ from rest_framework import routers
 from oysterapp.oyster.views import OysterView
 from oysterapp.oyster.serializers import current_user
 from oysterapp.oyster.serializers import UserViewSet
-from oysterapp.oyster.serializers import CompleteTaskViewSet
+from oysterapp.oyster.serializers import HistoryViewSet
 from oysterapp.oyster.serializers import IncompleteTaskViewSet
 from oysterapp.oyster.serializers import WishViewSet
 
@@ -15,7 +15,7 @@ from oysterapp.oyster.serializers import WishViewSet
 router = routers.DefaultRouter()
 router.register(r'user', UserViewSet, base_name='user')
 router.register(r'tasks', IncompleteTaskViewSet, base_name='tasks')
-router.register(r'history', CompleteTaskViewSet, base_name='history')
+router.register(r'history', HistoryViewSet, base_name='history')
 router.register(r'wishes', WishViewSet, base_name='wish')
 
 urlpatterns = [

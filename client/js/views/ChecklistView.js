@@ -44,14 +44,17 @@ define([
             this.regionManager.close();
         },
 
-        addTaskWithReward: function(task, reward) {
+        addTaskWithReward: function(task, amount) {
             task = new Task({
                 title: task,
-                reward: reward,
-                doable: true
+                amount: amount,
+                doable: true,
+                is_credit: true
             });
             task.save();
-            this.collection.add(task);
+            task.on("change", function(model, response) {
+                this.collection.add(model);
+            }, this);
 
             this.showBasicAdd();
         },

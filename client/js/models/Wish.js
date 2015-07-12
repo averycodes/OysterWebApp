@@ -7,7 +7,11 @@ define([
     'use strict';
 
     return Backbone.Model.extend({
-        blacklist: ['created', 'updated', 'image'],
+        blacklist: ['image'],
+
+        defaults: {
+            'image_url': 'static/img/oyster.jpg'
+        },
 
         toJSON: function(options) {
             return _.omit(this.attributes, this.blacklist);
