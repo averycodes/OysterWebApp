@@ -31,18 +31,18 @@ define([
             e.preventDefault();
 
             var $target = $(e.target),
-                task, reward,
+                task, amount,
                 $input = $(this.ui.input);
 
             if ($target.hasClass('small-reward')) {
-                reward = 1;
+                amount = 1;
             } else if ($target.hasClass('mid-reward')) {
-                reward = 5;
+                amount = 5;
             } else if ($target.hasClass('large-reward')) {
-                reward = 10;
+                amount = 10;
             }
 
-            this.parent.addTaskWithReward($input.val(), reward);
+            this.parent.addTaskWithReward($input.val(), amount);
         },
 
         onSubmitInput: function(e) {

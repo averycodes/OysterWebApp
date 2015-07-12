@@ -1,7 +1,15 @@
+import re
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.db.models import Sum
+
+from api_keys import AWS_KEY
+from api_keys import AWS_SECRET_KEY
+from api_keys import ASSOCIATE_TAG
+
+from amazonproduct import API
 
 
 class UserProfile(models.Model):
@@ -19,20 +27,60 @@ def create_user_profile(sender, instance, created, **kwargs):
 post_save.connect(create_user_profile, sender=User)
 
 
-class Task(models.Model):
+class BillableItem(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
     title = models.CharField(max_length=255, null=True, blank=True)
-    doable = models.BooleanField(default=True)
-    reward = models.FloatField()
     completed = models.BooleanField(default=False)
+    amount = models.FloatField()
+    is_credit = models.BooleanField(default=False)
+
+
+class Task(BillableItem):
+    doable = models.BooleanField(default=True)
 
     def __unicode__(self):
         completed = "Incomplete"
         if self.completed:
             completed = "Complete"
         return "[%s] %s (%s)" % (self.user, self.title, completed)
+
+
+class Wish(BillableItem):
+    amazon_link = models.CharField(max_length=255, null=True, blank=True)
+    image_url = models.CharField(max_length=255, null=True, blank=True)
+    asin = models.CharField(max_length=255, null=True, blank=True)
+
+
+def create_wish_from_url(user, url):
+    ASIN_MATCH = 'http://www.amazon.com/([\\w-]+/)?(dp|gp/product)/(\\w+/)?(\\w{10})'
+
+    asin = list(re.match(ASIN_MATCH, url).groups())[-1]
+
+    api = API(locale='us',
+              associate_tag=ASSOCIATE_TAG,
+              access_key_id=AWS_KEY,
+              secret_access_key=AWS_SECRET_KEY)
+    result = api.item_lookup(asin, ResponseGroup='ItemAttributes')
+
+    item = result.Items.Item[0]
+
+    wish = Wish(
+        user=user,
+        asin=asin,
+        title=item.ItemAttributes.Title,
+        amount=(item.ItemAttributes.ListPrice.Amount / 100.0),
+        is_credit=False
+    )
+    wish.save()
+
+    result = api.item_lookup(asin, ResponseGroup='Images')
+    item = result.Items.Item[0]
+    wish.image_url = item.MediumImage.URL
+    wish.save()
+
+    return wish
 
 
 class TaskRule(models.Model):
@@ -44,24 +92,14 @@ class TaskRule(models.Model):
     schedule = models.CharField(max_length=255, null=True, blank=True)
 
 
-class Wish(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User)
-    title = models.CharField(max_length=255, null=True, blank=True)
-    image = models.ImageField(null=True)
-    cost = models.FloatField(default=0)
-    purchased = models.BooleanField(default=False)
-
-
 def update_piggy_bank(sender, instance, created, **kwargs):
     profile = instance.user.userprofile
     credits = Task.objects.filter(user=instance.user,
                                   completed=True).aggregate(
-                                  amount=Sum('reward'))
+                                  amount=Sum('amount'))
     deductions = Wish.objects.filter(user=instance.user,
-                                     purchased=True).aggregate(
-                                     amount=Sum('cost'))
+                                     completed=True).aggregate(
+                                     amount=Sum('amount'))
     amount = 0
     if credits.get('amount', 0):
         amount = credits.get('amount', 0)

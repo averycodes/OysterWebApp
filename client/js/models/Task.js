@@ -9,7 +9,7 @@ define([
         defaults: {
             title: 'Task Title',
             doable: true,
-            reward: 1,
+            amount: 1,
             completed: false
         },
 

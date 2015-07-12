@@ -11,7 +11,9 @@ define(function (require) {
         basicadditem: require('tpl!templates/basicadditem.html'),
         taskcompletion: require('tpl!templates/taskcompletion.html'),
         piggybank: require('tpl!templates/piggy_bank.html'),
-	history: require('tpl!templates/history.html')
+        history: require('tpl!templates/history.html'),
+        addamazonwish: require('tpl!templates/addamazonwish.html'),
+	wishlist: require('tpl!templates/wishlist.html'),
 	};
 });
 

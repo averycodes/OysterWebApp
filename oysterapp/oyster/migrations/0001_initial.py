@@ -13,20 +13,23 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Task',
+            name='BillableItem',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('created', models.DateTimeField(auto_now_add=True)),
+                ('updated', models.DateTimeField(auto_now=True)),
                 ('title', models.CharField(max_length=255, null=True, blank=True)),
-                ('doable', models.BooleanField(default=True)),
-                ('reward', models.FloatField()),
                 ('completed', models.BooleanField(default=False)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('amount', models.FloatField()),
+                ('is_credit', models.BooleanField(default=False)),
             ],
         ),
         migrations.CreateModel(
             name='TaskRule',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('created', models.DateTimeField(auto_now_add=True)),
+                ('updated', models.DateTimeField(auto_now=True)),
                 ('title', models.CharField(max_length=255, null=True, blank=True)),
                 ('start', models.DateTimeField(auto_now_add=True)),
                 ('schedule', models.CharField(max_length=255, null=True, blank=True)),
@@ -42,14 +45,25 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Task',
+            fields=[
+                ('billableitem_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='oyster.BillableItem')),
+                ('doable', models.BooleanField(default=True)),
+            ],
+            bases=('oyster.billableitem',),
+        ),
+        migrations.CreateModel(
             name='Wish',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('title', models.CharField(max_length=255, null=True, blank=True)),
+                ('billableitem_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='oyster.BillableItem')),
+                ('amazon_link', models.CharField(max_length=255, null=True, blank=True)),
                 ('image', models.ImageField(null=True, upload_to=b'')),
-                ('cost', models.FloatField(default=0)),
-                ('purchased', models.BooleanField(default=False)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
+            bases=('oyster.billableitem',),
+        ),
+        migrations.AddField(
+            model_name='billableitem',
+            name='user',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
         ),
     ]
