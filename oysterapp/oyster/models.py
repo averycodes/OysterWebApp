@@ -1,15 +1,16 @@
 import re
+import os
 
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.db.models import Sum
 
-from api_keys import AWS_KEY
-from api_keys import AWS_SECRET_KEY
-from api_keys import ASSOCIATE_TAG
-
 from amazonproduct import API
+
+AWS_KEY = os.environ['AWS_KEY']
+AWS_SECRET_KEY = os.environ['AWS_SECRET_KEY']
+ASSOCIATE_TAG = os.environ['ASSOCIATE_TAG']
 
 
 class UserProfile(models.Model):
