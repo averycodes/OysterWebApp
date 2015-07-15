@@ -36,7 +36,6 @@ require([
 	'app',
     'modules/Pages',
     'jquery',
-	'bootstrap'
 ], function (app, PagesModule) {
 	'use strict';
 

@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block pageTitle %}Oyster App{% endblock pageTitle %}
+
 {% block navigation %}
-  <li role="presentation" class="checklist active"><a href="#checklist">Checklist</a></li>
-  <li role="presentation" class="wishlist"><a href="#wishlist">Wishlist</a></li>
-  <li role="presentation" class="history"><a href="#history">History</a></li>
+<a class="tab-item active" href="#checklist">
+   <span class="icon icon-check"></span>
+  <span class="tab-label">Checklist</span>
+</a>
+<a class="tab-item" href="#wishlist">
+  <span class="icon icon-star-filled"></span>
+  <span class="tab-label">Wishlist</span>
+</a>
+<a class="tab-item" href="#history">
+  <span class="icon icon-bars"></span>
+  <span class="tab-label">History</span>
+</a>
+<a class="tab-item" href="#settings">
+  <span class="icon icon-gear"></span>
+  <span class="tab-label">Settings</span>
+</a>
 {% endblock navigation %}
 
 {% block javascripts %}
-    <script data-main="/static/js/main" src="{% static 'bower_components/requirejs/require.js' %}"></script>
+<script data-main="/static/js/main" src="{% static 'bower_components/requirejs/require.js' %}"></script>
 {% endblock javascripts %}

@@ -1,68 +1,51 @@
 {% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Oyster{% endblock %}</title>
 
-<!doctype html>
-<html lang="en" data-framework="marionettejs">
-    <head>
-        <meta charset="utf-8">
-        <title>{% block title %}Oyster{% endblock %}</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        {% block styles %}
-        {% endblock styles %}
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
+    <!-- Include the compiled Ratchet CSS -->
+    <link rel="stylesheet" href="{% static 'css/ratchet.min.css' %}">
+    {# <link rel="stylesheet" href="{% static 'css/ratchet-theme-ios.min.css' %}"> #}
+    {# <link rel="stylesheet" href="{% static 'css/ratchet-theme-android.min.css' %}"> #}
+    {% block styles %}
+    {% endblock styles %}
+  </head>
+  <body>
 
-    <body>
-        <div class="container">
-            <div class="header">
-                <h3 class="text-muted">Oyster</h3>
-                {% if user.is_authenticated %}
-                <span>{{user.first_name}} {{user.last_name}} <a href="/accounts/logout/">Logout</a></span>
-                {% else %}
-                <span><a href="/accounts/login/">Login</a></span>
-                {% endif %}
-                <span id="piggy-bank"></span>
-            </div>
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+      <h1 class="title">{% block pageTitle %}{% endblock pageTitle %}</h1>
+      <button class="btn pull-right">
+      {% if user.is_authenticated %}
+        Logout
+      {% else %}
+        Login
+      {% endif %}
+      </button>
+    </header>
 
-            <ul id="nav" class="nav nav-tabs nav-justified">
-                {% block navigation %}
-                {% endblock navigation %}
-            </ul>
-
-
-            <div id="notification">
-                {% block notification %}
-                {% endblock notification %}
-            </div><!-- /#notification -->
-
-            <div id="main">
-                {% block content %}
-                {% endblock content %}
-            </div>
-
-
-            <div class="footer">
-                <p>&copy; Avery M. Anderson 2015</p>
-            </div>
-
-            <!-- To be used as modal and notifications-->
-            <div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-hidden="true">
-            </div><!-- /.modal -->
-
-        </div> <!-- /container -->
-
-
-
-        <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-        <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>
-        {% block javascripts %}
-        {% endblock javascripts %}
-    </body>
-
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div id="main" class="content">
+      {% block content %}
+      {% endblock content %}
+      <nav id="navigation" class="bar bar-tab">
+      {% block navigation %}
+      {% endblock navigation %}
+      </nav>
+    </div>
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>
+    <script src="{% static 'js/lib/ratchet.min.js' %}"></script>
+    {% block javascripts %}
+    {% endblock javascripts %}
+  </body>
 </html>
