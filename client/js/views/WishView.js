@@ -9,6 +9,8 @@ define([
 
     return Marionette.ItemView.extend({
         template: templates.wish,
+        className: 'table-view-cell media',
+        tagName: 'li',
 
         events: {
             'click button': 'onClickButton'

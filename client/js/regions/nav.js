@@ -7,11 +7,12 @@ define([
         ui: {
             history: '.history',
             wishlist: '.wishlist',
-            checklist: '.checklist'
+            checklist: '.checklist',
+            settings: '.settings'
         },
 
         deactivateEverything: function() {
-            $(this.el).find('li').removeClass('active');
+            $(this.el).find('.tab-item').removeClass('active');
         },
 
         activateChecklist: function() {
@@ -27,6 +28,11 @@ define([
         activateHistory: function() {
             this.deactivateEverything();
             $(this.ui.history).addClass('active');
+        },
+
+        activateSettings: function() {
+            this.deactivateEverything();
+            $(this.ui.settings).addClass('active');
         }
     });
 

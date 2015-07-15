@@ -18,6 +18,9 @@
     {# <link rel="stylesheet" href="{% static 'css/ratchet-theme-android.min.css' %}"> #}
     {% block styles %}
     {% endblock styles %}
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>
+    <script src="{% static 'js/lib/ratchet.js' %}"></script>
   </head>
   <body>
 
@@ -34,17 +37,16 @@
     </header>
 
     <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-    <div id="main" class="content">
+    <div class="content">
+      <div id="main">
       {% block content %}
       {% endblock content %}
-      <nav id="navigation" class="bar bar-tab">
+      </div>
+      <nav id="nav" class="bar bar-tab">
       {% block navigation %}
       {% endblock navigation %}
       </nav>
     </div>
-    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-    <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>
-    <script src="{% static 'js/lib/ratchet.min.js' %}"></script>
     {% block javascripts %}
     {% endblock javascripts %}
   </body>

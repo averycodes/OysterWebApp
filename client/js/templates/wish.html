@@ -1,6 +1,8 @@
-<button type="button" class="btn btn-lg
-<% if (window.app.user.get('bank') >= amount) { %> btn-primary"<% } %>">
-    <img src="<%= image_url %>" alt="<%= title %>" class="img-rounded">
-    <%= title %>
-    $<%= amount %>
-</button>
+<img class="media-object pull-left" src="<%= image_url %>">
+<div class="media-body">
+    <h5><%= title %></h5>
+    <% if (window.app.user.get('bank') >= amount) { %>
+        <button class="btn btn-positive"><span class="icon icon-plus"></span>$<%= amount %></button>
+    <% } %>
+    <button class="btn btn-negative"><span class="icon icon-trash"></span></button>
+</div>

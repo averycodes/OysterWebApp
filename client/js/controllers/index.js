@@ -23,6 +23,10 @@ define([
         showHistory: function() {
             app.main.show(new HistoryView());
             app.nav.activateHistory();
+        },
+        showSettings: function() {
+            // app.main.show(new HistoryView());
+            app.nav.activateSettings();
         }
 	};
 });
