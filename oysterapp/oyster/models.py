@@ -8,10 +8,6 @@ from django.db.models import Sum
 
 from amazonproduct import API
 
-AWS_KEY = os.environ['AWS_KEY']
-AWS_SECRET_KEY = os.environ['AWS_SECRET_KEY']
-ASSOCIATE_TAG = os.environ['ASSOCIATE_TAG']
-
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -55,6 +51,9 @@ class Wish(BillableItem):
 
 
 def create_wish_from_url(user, url):
+    AWS_KEY = os.environ['AWS_KEY']
+    AWS_SECRET_KEY = os.environ['AWS_SECRET_KEY']
+    ASSOCIATE_TAG = os.environ['ASSOCIATE_TAG']
     ASIN_MATCH = 'http://www.amazon.com/([\\w-]+/)?(dp|gp/product)/(\\w+/)?(\\w{10})'
 
     asin = list(re.match(ASIN_MATCH, url).groups())[-1]
