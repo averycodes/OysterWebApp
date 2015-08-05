@@ -16,7 +16,7 @@ define([
 
 	app.addRegions({
 		main: '#main',
-        // bank: '#piggy-bank',
+        bank: '#bank',
         nav: {
             selector: '#nav',
             regionType: NavRegion
@@ -26,7 +26,7 @@ define([
 	app.addInitializer(function () {
         app.user = new User();
         app.user.fetch();
-        // app.bank.show(new PiggyBankView());
+        app.bank.show(new PiggyBankView());
 	});
 
     app.on("initialize:after", function(options){
