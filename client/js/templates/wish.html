@@ -1,6 +1,6 @@
 <img class="media-object pull-left" src="<%= image_url %>">
 <div class="media-body">
-    <h5><%= title %></h5>
+    <h4><%= title %></h4>
     <% if (window.app.user.get('bank') >= amount) { %>
         <button class="btn btn-positive"><span class="icon icon-plus"></span>$<%= amount %></button>
     <% } %>
