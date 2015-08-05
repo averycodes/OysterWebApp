@@ -10,6 +10,8 @@ define([
     return Marionette.ItemView.extend({
         className: 'history-item-view list-group-item',
         template: templates.history,
+        tagName: 'li',
+        className: 'table-view-cell media',
 
         events: {
             'click': 'onClickTask'
