@@ -1,11 +1,11 @@
 <% if (is_credit) { %>
-<span class="media-object pull-left icon icon-up-nav"></span>
+<span class="media-object pull-left icon icon-add"></span>
 <% } else { %>
-<span class="media-object pull-left icon icon-down-nav"></span>
+<span class="media-object pull-left icon icon-minus"></span>
 <% } %>
 <div class="media-body">
 $<%= amount %> <%= title %>
-<span class="media-object pull-right icon icon-refresh"></span>
-<span class="media-object pull-right icon icon-trash"></span>
+<a href=""><span class="media-object pull-right icon icon-undo"></span></a>
+<a href=""><span class="media-object pull-right icon icon-trashcan"></span></a>
 </div>
 

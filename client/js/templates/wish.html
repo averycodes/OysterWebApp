@@ -1,8 +1,9 @@
 <img class="media-object pull-left" src="<%= image_url %>">
 <div class="media-body">
     <h4><%= title %></h4>
+    <p>$<%= amount %></p>
     <% if (window.app.user.get('bank') >= amount) { %>
-        <button class="btn btn-positive"><span class="icon icon-plus"></span>$<%= amount %></button>
+        <button class="btn btn-positive"><span class="icon icon-cart"></span></button>
     <% } %>
-    <button class="btn btn-negative"><span class="icon icon-trash"></span></button>
+    <button class="btn btn-negative"><span class="icon icon-trashcan"></span></button>
 </div>
