@@ -29,6 +29,7 @@ define([
 
             // event listener
             this.listenTo(app.events, 'editButtonClicked', this.onClickEdit);
+            this.listenTo(app.events, 'doneButtonClicked', this.onClickDone);
         },
 
         onClickTask: function(e) {
@@ -54,6 +55,10 @@ define([
 
         onClickEdit: function() {
             this.ui.remove.removeClass('display-none');
+        },
+
+        onClickDone: function() {
+            this.ui.remove.addClass('display-none');
         }
     });
 });

@@ -32,6 +32,14 @@ define([
 
         $(".edit").on("click", function() {
             app.events.trigger("editButtonClicked");
+            $(".done").removeClass("display-none");
+            $(".edit").addClass("display-none");
+        });
+
+        $(".done").on("click", function() {
+            app.events.trigger("doneButtonClicked");
+            $(".edit").removeClass("display-none");
+            $(".done").addClass("display-none");
         });
 	});
 
