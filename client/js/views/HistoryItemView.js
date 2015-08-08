@@ -13,28 +13,51 @@ define([
         tagName: 'li',
         className: 'table-view-cell media',
 
+        ui: {
+            'undo': '.undo',
+            'remove': '.remove',
+            'vector': '.vector'
+        },
+
         events: {
-            'click': 'onClickTask'
+            'click .undo': 'onClickUndo',
+            'click .remove': 'onClickRemove'
         },
 
-        onRender: function() {
-            // $(this.el).attr('href', '#');
-            // if (!this.model.get('doable')) {
-            //     $(this.el).addClass('disabled');
-            // }
+        onShow: function() {
+            this.listenTo(app.events, 'editButtonClicked', this.onClickEdit);
+            this.listenTo(app.events, 'doneButtonClicked', this.onClickDone);
         },
 
-        onClickTask: function(e) {
+        onClickUndo: function(e) {
             e.preventDefault();
-            // this.model.set('completed', true);
-            // this.model.save();
+            this.model.set('completed', false);
+            this.model.save();
 
-            // var user = window.app.user,
-            //     bank_amt = user.get("bank");
+            var user = window.app.user,
+                bank_amt = user.get("bank");
 
-            // user.set("bank", bank_amt + this.model.get("reward"));
+            user.set("bank", bank_amt - this.model.get("amount"));
 
-            // this.close();
+            this.close();
+        },
+
+        onClickRemove: function(e) {
+            e.preventDefault();
+            this.model.destroy();
+            this.close();
+        },
+
+        onClickEdit: function() {
+            this.ui.remove.removeClass('display-none');
+            this.ui.undo.removeClass('display-none');
+            this.ui.vector.addClass('display-none');
+        },
+
+        onClickDone: function() {
+            this.ui.remove.addClass('display-none');
+            this.ui.undo.addClass('display-none');
+            this.ui.vector.removeClass('display-none');
         }
     });
 });

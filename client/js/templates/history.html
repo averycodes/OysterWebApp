@@ -1,11 +1,10 @@
+<span class="undo primary pull-left icon icon-undo display-none"></span>
 <% if (is_credit) { %>
-<span class="media-object pull-left icon icon-add"></span>
+<span class="vector positive pull-left icon icon-add"></span>
 <% } else { %>
-<span class="media-object pull-left icon icon-minus"></span>
+<span class="vector negative pull-left icon icon-minus"></span>
 <% } %>
 <div class="media-body">
-$<%= amount %> <%= title %>
-<a href=""><span class="media-object pull-right icon icon-undo"></span></a>
-<a href=""><span class="media-object pull-right icon icon-trashcan"></span></a>
+    $<%= amount %> <%= title %>
 </div>
-
+<span class="remove icon icon-minus2 btn-icon negative display-none"></span>

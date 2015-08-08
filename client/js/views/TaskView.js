@@ -50,9 +50,7 @@ define([
 
         onClickRemove: function(e) {
             e.preventDefault();
-
             this.model.destroy();
-
             this.close();
         },
 
