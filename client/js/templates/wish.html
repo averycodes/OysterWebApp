@@ -2,8 +2,8 @@
 <div class="media-body">
     <h4><%= title %></h4>
     <p>$<%= amount %></p>
-    <% if (window.app.user.get('bank') >= amount) { %>
-        <button class="btn btn-positive"><span class="icon icon-cart"></span></button>
-    <% } %>
-    <button class="btn btn-negative"><span class="icon icon-trashcan"></span></button>
 </div>
+<% if (window.app.user.get('bank') >= amount) { %>
+    <span class="add-to-cart icon icon-cart btn-icon positive"></span>
+<% } %>
+<span class="remove icon icon-minus2 btn-icon negative display-none"></span>

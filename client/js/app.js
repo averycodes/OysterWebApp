@@ -2,13 +2,14 @@
 
 define([
     'backbone',
-	'marionette',
+    'marionette',
+	'underscore',
     'regions/notification',
     'regions/dialog',
     'regions/nav',
     'models/User',
 	'views/PiggyBankView'
-], function (Backbone, Marionette, NotifyRegion, DialogRegion, NavRegion,
+], function (Backbone, Marionette, _, NotifyRegion, DialogRegion, NavRegion,
              User, PiggyBankView) {
 	'use strict';
 
@@ -27,6 +28,11 @@ define([
         app.user = new User();
         app.user.fetch();
         app.bank.show(new PiggyBankView());
+        app.events = _.clone(Backbone.Events);
+
+        $(".edit").on("click", function() {
+            app.events.trigger("editButtonClicked");
+        });
 	});
 
     app.on("initialize:after", function(options){
