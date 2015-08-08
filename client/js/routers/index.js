@@ -10,9 +10,9 @@ define([
             'checklist': 'showChecklist',
             'wishlist': 'showWishlist',
             'history': 'showHistory',
+            'settings': 'showSettings',
+            'logout': 'logout',
             '': 'showChecklist',
-
-
 		}
 	});
 });

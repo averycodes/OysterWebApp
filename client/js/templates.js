@@ -13,7 +13,8 @@ define(function (require) {
         piggybank: require('tpl!templates/piggy_bank.html'),
         history: require('tpl!templates/history.html'),
         addamazonwish: require('tpl!templates/addamazonwish.html'),
-	wishlist: require('tpl!templates/wishlist.html'),
+        wishlist: require('tpl!templates/wishlist.html'),
+	settings: require('tpl!templates/settings.html'),
 	};
 });
 

@@ -29,16 +29,13 @@
     <header class="bar bar-nav">
       <h1 class="title">{% block pageTitle %}{% endblock pageTitle %}</h1>
       <button class="btn pull-right">
-      {% if user.is_authenticated %}
-        Logout
-      {% else %}
-        Login
-      {% endif %}
+        <span class="icon icon-cart"></span>
+        (empty)
       </button>
-      <a href="#myModalexample" class="btn pull-left"><span id="bank"></span></a>
-      <div id="myModalexample" class="modal">
+      <div class="pull-left" id="bank"></div>
+      <divclass="modal">
         <header class="bar bar-nav">
-          <a class="icon icon-close pull-right" href="#myModalexample"></a>
+          <a class="icon icon-close pull-right"></a>
           <h1 class="title">Modal</h1>
         </header>
         <div class="content">
