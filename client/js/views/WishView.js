@@ -12,8 +12,14 @@ define([
         className: 'table-view-cell media',
         tagName: 'li',
 
+        ui: {
+            'remove': '.remove',
+            'cart': '.add-to-cart'
+        },
+
         events: {
-            'click button': 'onClickButton'
+            'click .add-to-cart': 'onClickCart',
+            'click .remove': 'onClickRemove'
         },
 
         templateHelpers:function(){
@@ -22,20 +28,41 @@ define([
             }
         },
 
-        onClickButton: function(e) {
+        onShow: function() {
+            this.listenTo(app.events, 'editButtonClicked', this.onClickEdit);
+            this.listenTo(app.events, 'doneButtonClicked', this.onClickDone);
+        },
+
+        onClickCart: function(e) {
             e.preventDefault();
 
-            if (this.model.get('cost') <= window.app.user.get('bank')) {
+            if (this.model.get('amount') <= window.app.user.get('bank')) {
                 this.model.set('completed', true);
 
                 this.model.save();
 
                 var amount = window.app.user.get('bank');
-                amount = amount - this.model.get('cost');
+                amount = amount - this.model.get('amount');
                 window.app.user.set('bank', amount);
 
                 this.close();
             }
+        },
+
+        onClickRemove: function(e) {
+            e.preventDefault();
+            this.model.destroy();
+            this.close();
+        },
+
+        onClickEdit: function() {
+            this.ui.remove.removeClass('display-none');
+            this.ui.cart.addClass('display-none');
+        },
+
+        onClickDone: function() {
+            this.ui.remove.addClass('display-none');
+            this.ui.cart.removeClass('display-none');
         }
     });
 });
