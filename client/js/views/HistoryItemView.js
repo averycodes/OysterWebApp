@@ -37,7 +37,11 @@ define([
             var user = window.app.user,
                 bank_amt = user.get("bank");
 
-            user.set("bank", bank_amt - this.model.get("amount"));
+            if (this.model.get('is_credit')) {
+                user.set("bank", bank_amt - this.model.get("amount"));
+            } else {
+                user.set("bank", bank_amt + this.model.get("amount"));
+            }
 
             this.close();
         },

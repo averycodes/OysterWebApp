@@ -14,9 +14,9 @@ define([
 
         url: function() {
             if (this.id) {
-                return '/api/v1/tasks/' + this.id;
+                return '/api/v1/history/' + this.id + '/';
             } else {
-                return '/api/v1/tasks/';
+                return '/api/v1/history/';
             }
         },
 
