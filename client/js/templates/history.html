@@ -1,1 +1,10 @@
-<% if (is_credit) { %>+<% } else { %>-<% } %>$<%= amount %> <%= title %>
+<span class="undo primary pull-left icon icon-undo display-none"></span>
+<% if (is_credit) { %>
+<span class="vector positive pull-left icon icon-add"></span>
+<% } else { %>
+<span class="vector negative pull-left icon icon-minus"></span>
+<% } %>
+<div class="media-body">
+    $<%= amount %> <%= title %>
+</div>
+<span class="remove icon icon-minus2 btn-icon negative display-none"></span>

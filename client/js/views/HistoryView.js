@@ -11,6 +11,8 @@ define([
 
     return Marionette.CollectionView.extend({
         itemView: HistoryItemView,
+        tagName: 'ul',
+        className: 'table-view',
 
         onShow: function() {
             this.trigger('nav:history');

@@ -1,0 +1,59 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Oyster{% endblock %}</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link rel="stylesheet" href="{% static 'css/ratchet.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ratchet-theme-ios.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/oyster.css' %}">
+    {# <link rel="stylesheet" href="{% static 'css/ratchet-theme-android.min.css' %}"> #}
+    {% block styles %}
+    {% endblock styles %}
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>
+    <script src="{% static 'js/lib/ratchet.js' %}"></script>
+  </head>
+  <body>
+
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+      <h1 class="title">{% block pageTitle %}{% endblock pageTitle %}</h1>
+      {% block header_buttons %}
+      {% endblock header_buttons %}
+      <divclass="modal">
+        <header class="bar bar-nav">
+          <a class="icon icon-close pull-right"></a>
+          <h1 class="title">Oyster</h1>
+        </header>
+        <div class="content">
+          <p class="content-padded">The contents of my modal go here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
+      <div id="main">
+      {% block content %}
+      {% endblock content %}
+      </div>
+      <nav id="nav" class="bar bar-tab">
+      {% block navigation %}
+      {% endblock navigation %}
+      </nav>
+    </div>
+    {% block javascripts %}
+    {% endblock javascripts %}
+  </body>
+</html>

@@ -19,10 +19,6 @@ define([
         itemView: TaskView,
         itemViewContainer: '.checklist-items',
 
-        events: {
-            'click .task-view': 'onClickTask'
-        },
-
         initialize: function() {
             this.regionManager = new Marionette.RegionManager();
             this.collection = new TaskCollection();

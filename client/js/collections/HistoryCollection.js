@@ -2,12 +2,12 @@
 
 define([
     'backbone',
-    'models/Task'
-], function (Backbone, Task) {
+    'models/History'
+], function (Backbone, History) {
     'use strict';
 
     return Backbone.Collection.extend({
-        model: Task,
+        model: History,
         url: "/api/v1/history/"
     });
 });

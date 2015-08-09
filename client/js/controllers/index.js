@@ -5,9 +5,10 @@ define([
     'views/ChecklistView',
     'views/WishlistView',
     'views/HistoryView',
+    'views/SettingsView',
     'collections/TaskCollection',
     'collections/WishCollection'
-], function (app, ChecklistView, WishlistView, HistoryView,
+], function (app, ChecklistView, WishlistView, HistoryView, SettingsView,
              TaskCollection, WishCollection) {
 	'use strict';
 
@@ -23,6 +24,15 @@ define([
         showHistory: function() {
             app.main.show(new HistoryView());
             app.nav.activateHistory();
+        },
+        showSettings: function() {
+            app.main.show(new SettingsView());
+            app.nav.activateSettings();
+        },
+        logout: function() {
+            Backbone.history.navigate('/accounts/logout', {
+                trigger: true
+            });
         }
 	};
 });

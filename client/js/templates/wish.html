@@ -1,6 +1,9 @@
-<button type="button" class="btn btn-lg
-<% if (window.app.user.get('bank') >= amount) { %> btn-primary"<% } %>">
-    <img src="<%= image_url %>" alt="<%= title %>" class="img-rounded">
-    <%= title %>
-    $<%= amount %>
-</button>
+<img class="media-object pull-left" src="<%= image_url %>">
+<div class="media-body">
+    <h4><%= title %></h4>
+    <p>$<%= amount %></p>
+</div>
+<% if (window.app.user.get('bank') >= amount) { %>
+    <span class="add-to-cart icon icon-cart btn-icon positive"></span>
+<% } %>
+<span class="remove icon icon-minus2 btn-icon negative display-none"></span>

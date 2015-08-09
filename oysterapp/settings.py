@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'registration',
     'rest_framework',
     'oysterapp.oyster'
 )
@@ -108,6 +109,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     CLIENT_PATH,
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7
 
 # from settings import *
 

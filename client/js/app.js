@@ -2,13 +2,14 @@
 
 define([
     'backbone',
-	'marionette',
+    'marionette',
+	'underscore',
     'regions/notification',
     'regions/dialog',
     'regions/nav',
     'models/User',
 	'views/PiggyBankView'
-], function (Backbone, Marionette, NotifyRegion, DialogRegion, NavRegion,
+], function (Backbone, Marionette, _, NotifyRegion, DialogRegion, NavRegion,
              User, PiggyBankView) {
 	'use strict';
 
@@ -16,18 +17,10 @@ define([
 
 	app.addRegions({
 		main: '#main',
-        bank: '#piggy-bank',
+        bank: '#bank',
         nav: {
             selector: '#nav',
             regionType: NavRegion
-        },
-        notification: {
-            selector: "#notification",
-            regionType: NotifyRegion
-        },
-        dialog: {
-            selector: "#dialog",
-            regionType: DialogRegion
         }
 	});
 
@@ -35,27 +28,25 @@ define([
         app.user = new User();
         app.user.fetch();
         app.bank.show(new PiggyBankView());
+        app.events = _.clone(Backbone.Events);
+
+        $(".edit").on("click", function() {
+            app.events.trigger("editButtonClicked");
+            $(".done").removeClass("display-none");
+            $(".edit").addClass("display-none");
+        });
+
+        $(".done").on("click", function() {
+            app.events.trigger("doneButtonClicked");
+            $(".edit").removeClass("display-none");
+            $(".done").addClass("display-none");
+        });
 	});
 
     app.on("initialize:after", function(options){
         if (Backbone.history){
             Backbone.history.start();
         }
-    });
-
-	app.vent.on('menu:activate', function (activePageModel) {
-        menu.collection.findWhere({active: true})
-            .set('active', false);
-        activePageModel.set('active', true);
-        menu.render();
-	});
-
-    app.commands.setHandler("app:notify", function(jsonData) {
-        require(['views/NotificationView'], function(NotifyView) {
-            app.notification.show(new NotifyView({
-                model: new Backbone.Model(jsonData)
-            }));
-        });
     });
 
 	return window.app = app;

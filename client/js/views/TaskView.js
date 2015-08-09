@@ -4,23 +4,35 @@ define([
     'marionette',
     'templates',
     'underscore',
-], function (Marionette, templates, _) {
+    'app'
+], function (Marionette, templates, _, app) {
     'use strict';
 
     return Marionette.ItemView.extend({
-        tagName: 'a',
-        className: 'task-view list-group-item',
+        tagName: 'li',
+        className: 'task-view table-view-cell',
         template: templates.task,
 
+        ui: {
+            'remove': '.remove'
+        },
+
         events: {
-            'click': 'onClickTask'
+            'click': 'onClickTask',
+            'click .remove': 'onClickRemove'
         },
 
         onRender: function() {
-            $(this.el).attr('href', '#');
             if (!this.model.get('doable')) {
                 $(this.el).addClass('disabled');
             }
+
+            // event listener
+        },
+
+        onShow: function() {
+            this.listenTo(app.events, 'editButtonClicked', this.onClickEdit);
+            this.listenTo(app.events, 'doneButtonClicked', this.onClickDone);
         },
 
         onClickTask: function(e) {
@@ -34,6 +46,20 @@ define([
             user.set("bank", bank_amt + this.model.get("amount"));
 
             this.close();
+        },
+
+        onClickRemove: function(e) {
+            e.preventDefault();
+            this.model.destroy();
+            this.close();
+        },
+
+        onClickEdit: function() {
+            this.ui.remove.removeClass('display-none');
+        },
+
+        onClickDone: function() {
+            this.ui.remove.addClass('display-none');
         }
     });
 });

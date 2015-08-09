@@ -1,10 +1,12 @@
 from django.conf.urls import include, url
+from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic.base import RedirectView
 
 from rest_framework import routers
 
-from oysterapp.oyster.views import OysterView
+from oysterapp.oyster import views as oyster_views
 from oysterapp.oyster.serializers import current_user
 from oysterapp.oyster.serializers import UserViewSet
 from oysterapp.oyster.serializers import HistoryViewSet
@@ -23,7 +25,9 @@ urlpatterns = [
     url(r'^api/v1/profile/$', current_user),
     url(r'^api/v1/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', OysterView.as_view())
+    url(r'^accounts/profile/', RedirectView.as_view(url='/')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^$', oyster_views.app)
 ]
 
 urlpatterns += staticfiles_urlpatterns()

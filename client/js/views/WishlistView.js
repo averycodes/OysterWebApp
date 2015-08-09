@@ -32,7 +32,8 @@ define([
 
         onShow: function() {
             this.trigger('nav:wishlist');
-        },
+
+        }
 
     });
 });

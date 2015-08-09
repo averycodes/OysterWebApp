@@ -1,54 +1,36 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
 
-<!doctype html>
-<html lang="en" data-framework="marionettejs">
-	<head>
-		<meta charset="utf-8">
-		<title>Oyster</title>
+{% block pageTitle %}Oyster App{% endblock pageTitle %}
 
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block header_buttons %}
+<div class="pull-left" id="bank"></div>
+<button class="btn pull-left">
+    <span class="icon icon-cart"></span>(empty)
+</button>
+<button class="edit btn pull-right">Edit</button>
+<button class="done btn pull-right display-none">Done</button>
+{% endblock header_buttons %}
 
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-	</head>
+{% block navigation %}
+<a class="tab-item checklist" href="#checklist">
+   <span class="icon icon-clipboard"></span>
+  <span class="tab-label">Checklist</span>
+</a>
+<a class="tab-item wishlist" href="#wishlist">
+  <span class="icon icon-heart2"></span>
+  <span class="tab-label">Wishlist</span>
+</a>
+<a class="tab-item history" href="#history">
+  <span class="icon icon-history"></span>
+  <span class="tab-label">History</span>
+</a>
+<a class="tab-item settings" href="#settings">
+  <span class="icon icon-cog"></span>
+  <span class="tab-label">Settings</span>
+</a>
+{% endblock navigation %}
 
-    <body>
-        <div class="container">
-            <div class="header">
-                <h3 class="text-muted">Oyster</h3>
-                <span id="piggy-bank"></span>
-            </div>
-            <ul id="nav" class="nav nav-tabs nav-justified">
-              <li role="presentation" class="checklist active"><a href="#checklist">Checklist</a></li>
-              <li role="presentation" class="wishlist"><a href="#wishlist">Wishlist</a></li>
-              <li role="presentation" class="history"><a href="#history">History</a></li>
-            </ul>
-
-
-            <div id="notification"></div><!-- /#notification -->
-
-            <div id="main">
-            </div>
-
-            <div class="footer">
-                <p>&copy; Avery M. Anderson 2015</p>
-            </div>
-
-            <!-- To be used as modal and notifications-->
-            <div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-hidden="true">
-            </div><!-- /.modal -->
-
-        </div> <!-- /container -->
-
-
-
-        <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-        <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>
-        <script data-main="static/js/main" src="{% static 'bower_components/requirejs/require.js' %}"></script>
-    </body>
-
-</html>
+{% block javascripts %}
+<script data-main="/static/js/main" src="{% static 'bower_components/requirejs/require.js' %}"></script>
+{% endblock javascripts %}

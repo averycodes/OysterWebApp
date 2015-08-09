@@ -1,0 +1,127 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?fqpxmj');
+	src:url('../fonts/icomoon.eot?#iefixfqpxmj') format('embedded-opentype'),
+		url('../fonts/icomoon.ttf?fqpxmj') format('truetype'),
+		url('../fonts/icomoon.woff?fqpxmj') format('woff'),
+		url('../fonts/icomoon.svg?fqpxmj#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-three-bars:before {
+	content: "\e61c";
+}
+.icon-undo:before {
+	content: "\e61f";
+}
+.icon-cart:before {
+	content: "\e619";
+}
+.icon-history:before {
+	content: "\e61d";
+}
+.icon-receipt:before {
+	content: "\e61e";
+}
+.icon-tag:before {
+	content: "\e600";
+}
+.icon-tag2:before {
+	content: "\e601";
+}
+.icon-monitor:before {
+	content: "\e61a";
+}
+.icon-ipod:before {
+	content: "\e61b";
+}
+.icon-plus:before {
+	content: "\e620";
+}
+.icon-minus2:before {
+	content: "\e621";
+}
+.icon-cog:before {
+	content: "\e602";
+}
+.icon-basket:before {
+	content: "\e603";
+}
+.icon-trashcan:before {
+	content: "\e604";
+}
+.icon-locked:before {
+	content: "\e605";
+}
+.icon-unlocked:before {
+	content: "\e606";
+}
+.icon-lamp:before {
+	content: "\e607";
+}
+.icon-moneybag:before {
+	content: "\e608";
+}
+.icon-pencil:before {
+	content: "\e609";
+}
+.icon-edit:before {
+	content: "\e60a";
+}
+.icon-dollar:before {
+	content: "\e60b";
+}
+.icon-dollar2:before {
+	content: "\e60c";
+}
+.icon-coins:before {
+	content: "\e60d";
+}
+.icon-pig:before {
+	content: "\e60e";
+}
+.icon-heart:before {
+	content: "\e60f";
+}
+.icon-barcode:before {
+	content: "\e610";
+}
+.icon-checked:before {
+	content: "\e611";
+}
+.icon-error:before {
+	content: "\e612";
+}
+.icon-add:before {
+	content: "\e613";
+}
+.icon-minus:before {
+	content: "\e614";
+}
+.icon-tags:before {
+	content: "\e615";
+}
+.icon-heart2:before {
+	content: "\e616";
+}
+.icon-heart3:before {
+	content: "\e617";
+}
+.icon-clipboard:before {
+	content: "\e618";
+}
