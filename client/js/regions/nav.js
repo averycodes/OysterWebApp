@@ -5,14 +5,13 @@ define([
 
     return  Marionette.Region.extend({
         ui: {
-            history: '.history',
-            wishlist: '.wishlist',
-            checklist: '.checklist',
-            settings: '.settings'
+            history: '.history-nav',
+            wishlist: '.wishlist-nav',
+            checklist: '.checklist-nav'
         },
 
         deactivateEverything: function() {
-            $(this.el).find('.tab-item').removeClass('active');
+            $(this.el).find('a').removeClass('active');
         },
 
         activateChecklist: function() {
@@ -28,11 +27,6 @@ define([
         activateHistory: function() {
             this.deactivateEverything();
             $(this.ui.history).addClass('active');
-        },
-
-        activateSettings: function() {
-            this.deactivateEverything();
-            $(this.ui.settings).addClass('active');
         }
     });
 

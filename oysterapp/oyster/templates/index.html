@@ -1,35 +1,36 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block pageTitle %}Oyster App{% endblock pageTitle %}
+{% block header %}
+<div class="ui fixed teal menu" id="nav">
+  <div class="header teal item"><img src="{% static 'img/icons/oyster-icon.png' %}"></div>
+  <a class="active item checklist-nav" href="#checklist">Checklist</a>
+  <a class="item wishlist-nav" href="#wishlist">Wishlist</a>
+  <a class="item history-nav" href="#history">History</a>
+  <div class="right menu">
 
-{% block header_buttons %}
-<div class="pull-left" id="bank"></div>
-<button class="btn pull-left">
-    <span class="icon icon-cart"></span>(empty)
-</button>
+    <div class="item">
+      <div class="statistic" id="bank"></div>
+      <button class="ui green button">
+        <i class="icon cart"></i>
+        (empty)
+      </button>
+    </div>
+    <a class="item" href="/accounts/logout">Logout</a>
+  </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+
+<div class="pull-left" ></div>
 <button class="edit btn pull-right">Edit</button>
 <button class="done btn pull-right display-none">Done</button>
-{% endblock header_buttons %}
 
-{% block navigation %}
-<a class="tab-item checklist" href="#checklist">
-   <span class="icon icon-clipboard"></span>
-  <span class="tab-label">Checklist</span>
-</a>
-<a class="tab-item wishlist" href="#wishlist">
-  <span class="icon icon-heart2"></span>
-  <span class="tab-label">Wishlist</span>
-</a>
-<a class="tab-item history" href="#history">
-  <span class="icon icon-history"></span>
-  <span class="tab-label">History</span>
-</a>
-<a class="tab-item settings" href="#settings">
-  <span class="icon icon-cog"></span>
-  <span class="tab-label">Settings</span>
-</a>
-{% endblock navigation %}
+{% endblock content %}
+
+
+
 
 {% block javascripts %}
 <script data-main="/static/js/main" src="{% static 'bower_components/requirejs/require.js' %}"></script>
