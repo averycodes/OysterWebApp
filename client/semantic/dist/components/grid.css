@@ -1397,7 +1397,7 @@
 .ui.grid > .teal.row,
 .ui.grid > .teal.column,
 .ui.grid > .row > .teal.column {
-  background-color: #00b5ad !important;
+  background-color: #37a9bb !important;
   color: #ffffff;
 }
 
@@ -1445,7 +1445,7 @@
 .ui.grid > .grey.row,
 .ui.grid > .grey.column,
 .ui.grid > .row > .grey.column {
-  background-color: #767676 !important;
+  background-color: #6c6c6c !important;
   color: #ffffff;
 }
 

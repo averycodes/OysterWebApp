@@ -773,7 +773,7 @@ select.ui.dropdown {
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   border-radius: 500rem;
-  border-color: #767676 transparent transparent;
+  border-color: #6c6c6c transparent transparent;
   border-style: solid;
   border-width: 0.2em;
 }

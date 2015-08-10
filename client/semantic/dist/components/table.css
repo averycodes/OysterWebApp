@@ -616,10 +616,10 @@
 
 /* Teal */
 .ui.teal.table {
-  border-top: 0.2em solid #00b5ad;
+  border-top: 0.2em solid #37a9bb;
 }
 .ui.inverted.teal.table {
-  background-color: #00b5ad !important;
+  background-color: #37a9bb !important;
   color: #ffffff !important;
 }
 
@@ -670,10 +670,10 @@
 
 /* Grey */
 .ui.grey.table {
-  border-top: 0.2em solid #767676;
+  border-top: 0.2em solid #6c6c6c;
 }
 .ui.inverted.grey.table {
-  background-color: #767676 !important;
+  background-color: #6c6c6c !important;
   color: #ffffff !important;
 }
 

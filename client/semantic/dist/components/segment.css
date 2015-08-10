@@ -433,7 +433,7 @@
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   border-radius: 500rem;
-  border-color: #767676 rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1);
+  border-color: #6c6c6c rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1);
   border-style: solid;
   border-width: 0.2em;
   box-shadow: 0px 0px 0px 1px transparent;
@@ -542,10 +542,10 @@
 
 /* Teal */
 .ui.teal.segment:not(.inverted) {
-  border-top: 2px solid #00b5ad;
+  border-top: 2px solid #37a9bb;
 }
 .ui.inverted.teal.segment {
-  background-color: #00b5ad !important;
+  background-color: #37a9bb !important;
   color: #ffffff !important;
 }
 
@@ -596,10 +596,10 @@
 
 /* Grey */
 .ui.grey.segment:not(.inverted) {
-  border-top: 2px solid #767676;
+  border-top: 2px solid #6c6c6c;
 }
 .ui.inverted.grey.segment {
-  background-color: #767676 !important;
+  background-color: #6c6c6c !important;
   color: #ffffff !important;
 }
 
