@@ -25,9 +25,9 @@
 
     <!-- CSS -->
 
-    <link rel="stylesheet" href="{% static 'semantic/dist/semantic.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/oyster.css' %}">
+    <link rel="stylesheet" href="{% static 'semantic/dist/semantic.min.css' %}">
 
     {% block styles %}
     {% endblock styles %}
@@ -36,34 +36,16 @@
     <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
   </head>
   <body>
-
-    <!-- Make sure all your bars are the first things in your <body> -->
-    <header class="bar bar-nav">
-      <h1 class="title">{% block pageTitle %}{% endblock pageTitle %}</h1>
-      {% block header_buttons %}
-      {% endblock header_buttons %}
-      <divclass="modal">
-        <header class="bar bar-nav">
-          <a class="icon icon-close pull-right"></a>
-          <h1 class="title">Oyster</h1>
-        </header>
-        <div class="content">
-          <p class="content-padded">The contents of my modal go here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>
-        </div>
-      </div>
-    </header>
-
-    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-    <div class="content">
+    {% block header %}
+    {% endblock header %}
+    <div class="ui main text container">
       <div id="main">
-      {% block content %}
-      {% endblock content %}
+        {% block content %}
+        {% endblock content %}
       </div>
-      <nav id="nav" class="bar bar-tab">
-      {% block navigation %}
-      {% endblock navigation %}
-      </nav>
     </div>
+
+
     {% block javascripts %}
     {% endblock javascripts %}
   </body>
