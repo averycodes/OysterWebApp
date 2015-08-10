@@ -4,5 +4,6 @@
 
 @primaryColor   : @teal;
 @secondaryColor : @grey;
+@inverted       : @teal;
 @teal           : #37A9BB;
 @grey           : #6C6C6C;
