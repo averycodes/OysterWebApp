@@ -2,11 +2,11 @@
 {% load staticfiles %}
 
 {% block header %}
-<div class="ui fixed teal menu">
+<div class="ui fixed teal menu" id="nav">
   <div class="header teal item"><img src="{% static 'img/icons/oyster-icon.png' %}"></div>
-  <a class="active item" href="#checklist">Checklist</a>
-  <a class="item" href="#wishlist">Wishlist</a>
-  <a class="item" href="#history">History</a>
+  <a class="active item checklist-nav" href="#checklist">Checklist</a>
+  <a class="item wishlist-nav" href="#wishlist">Wishlist</a>
+  <a class="item history-nav" href="#history">History</a>
   <div class="right menu">
 
     <div class="item">
