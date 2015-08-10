@@ -9,24 +9,28 @@ define([
     'use strict';
 
     return Marionette.ItemView.extend({
-        tagName: 'li',
-        className: 'task-view table-view-cell',
+        className: 'task-view item',
         template: templates.task,
 
         ui: {
-            'remove': '.remove'
+            'remove': '.remove',
+            'edit': '.edit'
         },
 
         events: {
             'click': 'onClickTask',
-            'click .remove': 'onClickRemove'
+            'click .remove': 'onClickRemove',
+            'mouseover': 'onHover',
+            'mouseout': 'onStopHover'
+
         },
 
         onRender: function() {
             if (!this.model.get('doable')) {
                 $(this.el).addClass('disabled');
             }
-
+            this.ui.remove.hide();
+            this.ui.edit.hide();
             // event listener
         },
 
@@ -54,12 +58,14 @@ define([
             this.close();
         },
 
-        onClickEdit: function() {
-            this.ui.remove.removeClass('display-none');
+        onHover: function() {
+            this.ui.remove.show();
+            this.ui.edit.show();
         },
 
-        onClickDone: function() {
-            this.ui.remove.addClass('display-none');
+        onStopHover: function() {
+            this.ui.remove.hide();
+            this.ui.edit.hide();
         }
     });
 });
