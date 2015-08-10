@@ -9,8 +9,7 @@ define([
     'use strict';
 
     return Marionette.ItemView.extend({
-        tagName: 'li',
-        className: 'task-view table-view-cell',
+        className: 'task-view item',
         template: templates.task,
 
         ui: {
