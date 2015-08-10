@@ -1,39 +1,58 @@
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">Add Item</h3>
+<form class="ui form">
+  <div class="field ui fluid input">
+    <input type="text" class="new-task" placeholder="I will...">
   </div>
-  <div class="panel-body">
-    <input class="form-control" placeholder="I will...">
-    <div class="btn-toolbar" role="toolbar">
-      <div class="btn-group" role="group">
-        <button class="btn btn-default">Today</button>
-        <button class="btn btn-default">Tomorrow</button>
-        <button class="btn btn-default">This Weekend</button>
-        <button class="btn btn-default">Set Date</button>
-      </div>
-      <div class="btn-group" role="group">
-        <button class="btn btn-default">Anytime</button>
-        <button class="btn btn-default">1 Time Per Day</button>
-        <button class="btn btn-default">1 Time Per Week</button>
-        <div class="input-group">
-          <input type="text" class="form-control" id="exampleInputAmount" placeholder="1">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Time(s) Per Day <span class="caret"></span></button>
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li><a href="#">Time(s) Per Week</a></li>
-              <li><a href="#">Time(s) Per Month</a></li>
-              <li><a href="#">Time(s) Per Year</a></li>
-            </ul>
+  <div class="field">
+    <label>Needs to be completed by...</label>
+    <div class="ui buttons">
+      <button class="ui primary button">Today</button>
+      <div class="or"></div>
+      <button class="ui button">Tomorrow</button>
+      <div class="or"></div>
+      <button class="ui button">This Weekend</button>
+      <div class="or"></div>
+      <button class="ui button">Set Date</button>
+    </div>
+  </div>
+  <div class="field">
+    <label>Should be completed...</label>
+    <div class="ui buttons">
+      <button class="ui primary button">Anytime</button>
+      <div class="or"></div>
+      <button class="ui button">1 Time Per Day</button>
+      <div class="or"></div>
+      <button class="ui button">1 Time Per Week</button>
+      <div class="or"></div>
+      <button class="ui button">
+        <div class="ui right labeled input">
+          <input type="text" placeholder="1">
+          <div class="ui dropdown label">
+            <div class="text">Time(s) Per Day</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item">Time(s) Per Week</div>
+              <div class="item">Time(s) Per Month</div>
+              <div class="item">Time(s) Per Year</div>
+            </div>
           </div>
         </div>
-      </div>
-    </div><!-- /frequency -->
-    <div>
-    </div><!-- /it's worth -->
-    <div id="task-completion"></div><!-- /it's complete when -->
-    <button type="submit" class="btn btn-primary">Add</button>
-    <a href="#" class="cancel">Cancel</a>
+      </button>
+    </div>
   </div>
-</div>
+  <div class="field" id="task-completion">
+  </div>
+  <button class="ui button" type="submit">Add</button>
+  <p><a href="#" class="cancel">Cancel</a></p>
+
+</form>
+
+
+
+
+
+
+
+
+
 
 
