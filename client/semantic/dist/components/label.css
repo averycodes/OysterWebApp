@@ -501,14 +501,14 @@ a.ui.active.label:ActiveHover:before {
 
 .ui.red.labels .label,
 .ui.red.label {
-  background-color: #db2828 !important;
-  border-color: #db2828 !important;
+  background-color: #f76157 !important;
+  border-color: #f76157 !important;
   color: #ffffff !important;
 }
 .ui.labels .red.label:before,
 .ui.red.labels .label:before,
 .ui.red.label:before {
-  background-color: #db2828 !important;
+  background-color: #f76157 !important;
 }
 .ui.red.corner.label,
 .ui.red.corner.label:hover {
@@ -516,31 +516,31 @@ a.ui.active.label:ActiveHover:before {
 }
 a.ui.red.labels .label:hover,
 a.ui.red.label:hover {
-  background-color: #d01919 !important;
-  border-color: #d01919 !important;
+  background-color: #ff4235 !important;
+  border-color: #ff4235 !important;
   color: #ffffff !important;
 }
 .ui.labels a.red.label:hover:before,
 .ui.red.labels a.label:hover:before,
 a.ui.red.label:hover:before {
-  background-color: #d01919 !important;
+  background-color: #ff4235 !important;
 }
 .ui.red.ribbon.label {
-  border-color: #b21e1e !important;
+  border-color: #f53326 !important;
 }
 
 /*--- Orange ---*/
 
 .ui.orange.labels .label,
 .ui.orange.label {
-  background-color: #f2711c !important;
-  border-color: #f2711c !important;
+  background-color: #efa336 !important;
+  border-color: #efa336 !important;
   color: #ffffff !important;
 }
 .ui.labels .orange.label:before,
 .ui.orange.labels .label:before,
 .ui.orange.label:before {
-  background-color: #f2711c !important;
+  background-color: #efa336 !important;
 }
 .ui.orange.corner.label,
 .ui.orange.corner.label:hover {
@@ -548,31 +548,31 @@ a.ui.red.label:hover:before {
 }
 a.ui.orange.labels .label:hover,
 a.ui.orange.label:hover {
-  background-color: #f26202 !important;
-  border-color: #f26202 !important;
+  background-color: #f79a14 !important;
+  border-color: #f79a14 !important;
   color: #ffffff !important;
 }
 .ui.labels a.orange.label:hover:before,
 .ui.orange.labels a.label:hover:before,
 a.ui.orange.label:hover:before {
-  background-color: #f26202 !important;
+  background-color: #f79a14 !important;
 }
 .ui.orange.ribbon.label {
-  border-color: #cf590c !important;
+  border-color: #e08b12 !important;
 }
 
 /*--- Yellow ---*/
 
 .ui.yellow.labels .label,
 .ui.yellow.label {
-  background-color: #fbbd08 !important;
-  border-color: #fbbd08 !important;
+  background-color: #efc536 !important;
+  border-color: #efc536 !important;
   color: #ffffff !important;
 }
 .ui.labels .yellow.label:before,
 .ui.yellow.labels .label:before,
 .ui.yellow.label:before {
-  background-color: #fbbd08 !important;
+  background-color: #efc536 !important;
 }
 .ui.yellow.corner.label,
 .ui.yellow.corner.label:hover {
@@ -580,17 +580,17 @@ a.ui.orange.label:hover:before {
 }
 a.ui.yellow.labels .label:hover,
 a.ui.yellow.label:hover {
-  background-color: #eaae00 !important;
-  border-color: #eaae00 !important;
+  background-color: #f7c414 !important;
+  border-color: #f7c414 !important;
   color: #ffffff !important;
 }
 .ui.labels a.yellow.label:hover:before,
 .ui.yellow.labels a.label:hover:before,
 a.ui.yellow.label:hover:before {
-  background-color: #eaae00 !important;
+  background-color: #f7c414 !important;
 }
 .ui.yellow.ribbon.label {
-  border-color: #cd9903 !important;
+  border-color: #e0b112 !important;
 }
 
 /*--- Olive ---*/
@@ -622,21 +622,21 @@ a.ui.olive.label:hover:before {
   background-color: #a7bd0d !important;
 }
 .ui.olive.ribbon.label {
-  border-color: #198f35 !important;
+  border-color: #4fb694 !important;
 }
 
 /*--- Green ---*/
 
 .ui.green.labels .label,
 .ui.green.label {
-  background-color: #21ba45 !important;
-  border-color: #21ba45 !important;
+  background-color: #73c5aa !important;
+  border-color: #73c5aa !important;
   color: #ffffff !important;
 }
 .ui.labels .green.label:before,
 .ui.green.labels .label:before,
 .ui.green.label:before {
-  background-color: #21ba45 !important;
+  background-color: #73c5aa !important;
 }
 .ui.green.corner.label,
 .ui.green.corner.label:hover {
@@ -644,17 +644,17 @@ a.ui.olive.label:hover:before {
 }
 a.ui.green.labels .label:hover,
 a.ui.green.label:hover {
-  background-color: #16ab39 !important;
-  border-color: #16ab39 !important;
+  background-color: #5cc2a1 !important;
+  border-color: #5cc2a1 !important;
   color: #ffffff !important;
 }
 .ui.labels a.green.label:hover:before,
 .ui.green.labels a.label:hover:before,
 a.ui.green.label:hover:before {
-  background-color: #16ab39 !important;
+  background-color: #5cc2a1 !important;
 }
 .ui.green.ribbon.label {
-  border-color: #198f35 !important;
+  border-color: #4fb694 !important;
 }
 
 /*--- Teal ---*/
