@@ -402,13 +402,13 @@ a.ui.inverted.yellow.header:hover {
 /*--- Green ---*/
 
 .ui.green.header {
-  color: #73c5aa !important;
+  color: #89d374 !important;
 }
 a.ui.green.header:hover {
-  color: #5cc2a1 !important;
+  color: #76d25b !important;
 }
 .ui.green.dividing.header {
-  border-bottom: 2px solid #73c5aa;
+  border-bottom: 2px solid #89d374;
 }
 
 /* Inverted */

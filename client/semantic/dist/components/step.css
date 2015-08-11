@@ -408,7 +408,7 @@
 /* Completed */
 .ui.steps .step.completed > .icon:before,
 .ui.ordered.steps .step.completed:before {
-  color: #73c5aa;
+  color: #89d374;
 }
 
 /* Disabled */

@@ -607,10 +607,10 @@
 
 /* Green */
 .ui.green.table {
-  border-top: 0.2em solid #73c5aa;
+  border-top: 0.2em solid #89d374;
 }
 .ui.inverted.green.table {
-  background-color: #73c5aa !important;
+  background-color: #89d374 !important;
   color: #ffffff !important;
 }
 
