@@ -354,17 +354,17 @@
 }
 .ui.red.message {
   background-color: #ffe8e6;
-  color: #db2828;
+  color: #f76157;
 }
 .ui.red.message .header {
-  color: #c82121;
+  color: #f64a3f;
 }
 .ui.orange.message {
   background-color: #ffedde;
-  color: #f2711c;
+  color: #efa336;
 }
 .ui.orange.message .header {
-  color: #e7640d;
+  color: #ed981e;
 }
 .ui.yellow.message {
   background-color: #fff8db;

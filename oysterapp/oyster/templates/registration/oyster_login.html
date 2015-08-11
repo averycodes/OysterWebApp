@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}Sign in{% endblock title %}
+
+{% block content %}
+<div class="ui middle aligned center aligned two column grid">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <img src="{% static 'img/icons/oyster-icon.png' %}" class="image">
+      <div class="content">
+        Login to your account
+      </div>
+    </h2>
+    <form method="post" class="ui large form" action="">
+      <div class="ui stacked segment">
+        {% csrf_token %}
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" id="id_username" maxlength="254" name="username" placeholder="E-mail address">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input id="id_password" type="password" name="password" placeholder="Password">
+          </div>
+        </div>
+        <input type="submit" class="ui fluid large teal submit button" value="{% trans 'Log in' %}" />
+        <input type="hidden" name="next" value="{{ next }}" />
+      </div>
+    </form>
+    <div class="ui message">
+      <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
+      <p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+

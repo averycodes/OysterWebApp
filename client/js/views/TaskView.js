@@ -14,15 +14,20 @@ define([
 
         ui: {
             'remove': '.remove',
-            'edit': '.edit'
+            'edit': '.edit',
+            'task': '.task',
+            'editTask': '.edit-task',
+            'newTitle': '.new-title',
+            'newAmount': '.new-amount'
         },
 
         events: {
-            'click': 'onClickTask',
+            'click .task': 'onClickTask',
             'click .remove': 'onClickRemove',
+            'click .edit': 'onClickEdit',
+            'click .save-task': 'onClickSaveTask',
             'mouseover': 'onHover',
             'mouseout': 'onStopHover'
-
         },
 
         onRender: function() {
@@ -31,6 +36,7 @@ define([
             }
             this.ui.remove.hide();
             this.ui.edit.hide();
+            this.ui.editTask.hide();
             // event listener
         },
 
@@ -54,8 +60,24 @@ define([
 
         onClickRemove: function(e) {
             e.preventDefault();
+            e.stopPropagation();
             this.model.destroy();
             this.close();
+        },
+
+        onClickEdit: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.ui.task.hide();
+            this.ui.editTask.show();
+        },
+
+        onClickSaveTask: function(e) {
+            e.preventDefault();
+            this.model.set('title', this.ui.newTitle.val());
+            this.model.set('amount', this.ui.newAmount.val());
+            this.model.save();
+            this.render();
         },
 
         onHover: function() {
