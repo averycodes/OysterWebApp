@@ -44,6 +44,7 @@ define([
     onDomRefresh: function() {
       this.taskCompletion.show(new TaskCompletionView());
       this.frequency = 'once';
+      this.amount = app.user.get('small_amount');
       this.updateFrequencyUI();
     },
 
@@ -107,7 +108,7 @@ define([
       e.preventDefault();
 
       var title=this.ui.title.val(),
-        amount = 10,
+        amount = this.amount,
         csrftoken = Cookies.get('csrftoken'),
         data;
 

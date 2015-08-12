@@ -118,7 +118,7 @@ class TaskRuleViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         data = request.DATA
         task_rule = None
-        if data['frequency'] and data['scale']:
+        if data.get('frequency') and data.get('scale'):
             task_rule = TaskRule.objects.create(
                 user=request.user,
                 amount=float(data['amount']),
