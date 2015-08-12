@@ -21,6 +21,10 @@ define([
       taskCompletion: '#task-completion'
     },
 
+    ui: {
+      'customFrequency': '.custom-frequency'
+    },
+
     initialize: function(options) {
       this.parent = this.options.parent;
     },
@@ -55,6 +59,12 @@ define([
     updateFrequencyUI: function() {
       $(this.el).find('.frequency-button').removeClass('primary');
       $(this.el).find('.frequency-button.' + this.frequency).addClass('primary');
+
+      if (this.frequency == 'custom') {
+        this.ui.customFrequency.show();
+      } else {
+        this.ui.customFrequency.hide();
+      }
     },
 
     onAddTask: function(e) {
@@ -76,6 +86,9 @@ define([
       } else if (this.frequency == 'weekly') {
         data['frequency'] = 1
         data['scale'] = 'week'
+      } else if (this.frequency == 'custom') {
+        data['frequency'] = $(this.el).find('input.frequency').val();
+        data['scale'] = $(this.el).find('input.scale').val();
       }
 
       $.ajaxSetup({

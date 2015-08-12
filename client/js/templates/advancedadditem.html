@@ -27,15 +27,17 @@
       <div class="or"></div>
       <button class="ui button frequency-button custom">Custom</button>
     </div>
-    <div class="ui right labeled input">
-      <input type="text" placeholder="1">
-      <div class="ui dropdown label">
-        <div class="text">Time(s) Per Day</div>
+    <div class="ui right labeled input custom-frequency">
+      <input type="text" placeholder="1" class="frequency">
+      <div class="ui selection dropdown">
+        <input type="hidden" class="scale">
         <i class="dropdown icon"></i>
+        <div class="default text">Frequency</div>
         <div class="menu">
-          <div class="item">Time(s) Per Week</div>
-          <div class="item">Time(s) Per Month</div>
-          <div class="item">Time(s) Per Year</div>
+          <div class="item" data-value="day">Time(s) Per Day</div>
+          <div class="item" data-value="week">Time(s) Per Week</div>
+          <div class="item" data-value="month">Time(s) Per Month</div>
+          <div class="item" data-value="year">Time(s) Per Year</div>
         </div>
       </div>
     </div>
@@ -46,6 +48,10 @@
   <p><a href="#" class="cancel">Cancel</a></p>
 
 </form>
+
+<script>
+$(function(){ $('.ui.dropdown').dropdown(); });
+</script>
 
 
 

@@ -30,9 +30,7 @@
 
     {% block styles %}
     {% endblock styles %}
-    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-    <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>
-    <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+
   </head>
   <body>
     {% block header %}
@@ -43,7 +41,8 @@
       {% endblock content %}
     </div>
 
-
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>
     {% block javascripts %}
     {% endblock javascripts %}
   </body>
