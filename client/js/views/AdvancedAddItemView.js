@@ -77,7 +77,8 @@ define([
         data['frequency'] = 1
         data['scale'] = 'week'
       } else if (this.frequency == 'custom') {
-        data['frequency'] = 'day'
+        data['frequency'] = $(this.el).find('input.frequency').val();
+        data['scale'] = $(this.el).find('input.scale').val();
       }
 
       $.ajaxSetup({
