@@ -113,6 +113,7 @@ class TaskRuleViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         data = request.DATA
+        task_rule = None
         if data['frequency'] and data['scale']:
             task_rule = TaskRule.objects.create(
                 user=request.user,
@@ -121,5 +122,11 @@ class TaskRuleViewSet(viewsets.ModelViewSet):
                 frequency=data['frequency'],
                 scale=data['scale']
             )
+        task = Task.objects.create(
+            user=request.user,
+            amount=float(data['amount']),
+            title=data['title'],
+            task_rule=task_rule
+        )
 
         return Response(data, status=status.HTTP_201_CREATED)

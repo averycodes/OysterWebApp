@@ -2,9 +2,10 @@
 
 define([
   'marionette',
+  'underscore',
   'templates',
   'views/TaskCompletionView'
-], function (Marionette, templates, TaskCompletionView) {
+], function (Marionette, _, templates, TaskCompletionView) {
   'use strict';
 
   return Marionette.Layout.extend({
@@ -87,8 +88,12 @@ define([
         type: "POST",
         url: '/api/v1/rules/',
         data: data,
+        statusCode: {
+          201: _.bind(function() {
+            this.parent.render();
+          }, this)
+        }
       });
     }
-
   });
 });
