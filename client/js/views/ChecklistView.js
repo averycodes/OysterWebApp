@@ -22,7 +22,6 @@ define([
         initialize: function() {
             this.regionManager = new Marionette.RegionManager();
             this.collection = new TaskCollection();
-            this.collection.fetch();
         },
 
         onDomRefresh: function() {
@@ -34,6 +33,7 @@ define([
 
         onRender: function() {
             // used to contain filter
+            this.collection.fetch();
         },
 
         onClose: function() {

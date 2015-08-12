@@ -14,6 +14,7 @@ from oysterapp.oyster.models import Task
 from oysterapp.oyster.models import Wish
 from oysterapp.oyster.models import create_wish_from_url
 from oysterapp.oyster.models import BillableItem
+from oysterapp.oyster.models import TaskRule
 
 from amazonproduct import API
 
@@ -97,3 +98,35 @@ class IncompleteTaskViewSet(viewsets.ModelViewSet):
 
         return Response(serialized_data,
                         status=status.HTTP_201_CREATED)
+
+
+class TaskRuleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskRule
+
+
+class TaskRuleViewSet(viewsets.ModelViewSet):
+    serializer_class = TaskRuleSerializer
+
+    def get_queryset(self):
+        return TaskRule.objects.filter(user=self.request.user)
+
+    def create(self, request, *args, **kwargs):
+        data = request.DATA
+        task_rule = None
+        if data['frequency'] and data['scale']:
+            task_rule = TaskRule.objects.create(
+                user=request.user,
+                amount=float(data['amount']),
+                title=data['title'],
+                frequency=data['frequency'],
+                scale=data['scale']
+            )
+        task = Task.objects.create(
+            user=request.user,
+            amount=float(data['amount']),
+            title=data['title'],
+            task_rule=task_rule
+        )
+
+        return Response(data, status=status.HTTP_201_CREATED)

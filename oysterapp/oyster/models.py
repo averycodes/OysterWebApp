@@ -37,6 +37,7 @@ class BillableItem(models.Model):
 
 class Task(BillableItem):
     doable = models.BooleanField(default=True)
+    task_rule = models.ForeignKey('TaskRule', null=True)
 
     def __unicode__(self):
         completed = "Incomplete"
