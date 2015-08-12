@@ -4,8 +4,9 @@ define([
   'marionette',
   'underscore',
   'templates',
+  'app',
   'views/TaskCompletionView'
-], function (Marionette, _, templates, TaskCompletionView) {
+], function (Marionette, _, templates, app, TaskCompletionView) {
   'use strict';
 
   return Marionette.Layout.extend({
@@ -22,7 +23,17 @@ define([
     },
 
     ui: {
-      'customFrequency': '.custom-frequency'
+      'customFrequency': '.custom-frequency',
+      'title': '.new-task'
+    },
+
+    templateHelpers: function() {
+      var user = app.user;
+      return {
+        'small': user.get('small_amount'),
+        'mid': user.get('mid_amount'),
+        'large': user.get('large_amount')
+      };
     },
 
     initialize: function(options) {
@@ -70,7 +81,7 @@ define([
     onAddTask: function(e) {
       e.preventDefault();
 
-      var title=$(this.el).find('.new-task').val(),
+      var title=this.ui.title.val(),
         amount = 10,
         csrftoken = Cookies.get('csrftoken'),
         data;

@@ -22,10 +22,14 @@ from amazonproduct import API
 # Serializers define the API representation.
 class UserSerializer(serializers.ModelSerializer):
     bank = serializers.FloatField(source='userprofile.piggy_bank')
+    small_amount = serializers.FloatField(source='userprofile.small_amount')
+    mid_amount = serializers.FloatField(source='userprofile.mid_amount')
+    large_amount = serializers.FloatField(source='userprofile.large_amount')
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'id', 'bank')
+        fields = ('url', 'username', 'id', 'bank', 'small_amount',
+                  'mid_amount', 'large_amount')
         depth = 1
 
 
