@@ -17,4 +17,5 @@ class Command(BaseCommand):
 
         for task_rule in recurring_tasks:
             task_rule.create_new_task()
-            task_rule.calculate_next_run
+            run = task_rule.calculate_next_run()
+            print "updating rule: %s next run: %s" % (task_rule.title, run)
