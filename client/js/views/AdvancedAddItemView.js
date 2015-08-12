@@ -15,7 +15,8 @@ define([
     events: {
       'click .cancel': 'onClickCancel',
       'click .frequency-button': 'onChangeFrequency',
-      'click .add-task': 'onAddTask'
+      'click .add-task': 'onAddTask',
+      'click .amount-button': 'onChangeAmount'
     },
 
     regions: {
@@ -49,6 +50,30 @@ define([
     onClickCancel: function(e) {
       e.preventDefault();
       this.parent.showBasicAdd();
+    },
+
+    onChangeAmount: function(e) {
+      e.preventDefault();
+
+      if ($(e.target).hasClass('custom')) {
+        this.amount = undefined;
+      } else {
+        this.amount = $(e.target).attr('data-amount');
+      }
+
+      this.updateAmountUI();
+    },
+
+    updateAmountUI: function() {
+      $(this.el).find('.amount-button').removeClass('primary');
+
+      var active = $(this.el).find('[data-amount="'+this.amount+'"]');
+      if (active.length) {
+        active.addClass('primary');
+      } else {
+        $(this.el).find('.amount-button.custom').addClass('primary');
+        // todo show custom input
+      }
     },
 
     onChangeFrequency: function(e) {
