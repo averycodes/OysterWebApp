@@ -12,6 +12,7 @@ from oysterapp.oyster.serializers import UserViewSet
 from oysterapp.oyster.serializers import HistoryViewSet
 from oysterapp.oyster.serializers import IncompleteTaskViewSet
 from oysterapp.oyster.serializers import WishViewSet
+from oysterapp.oyster.serializers import TaskRuleViewSet
 
 
 router = routers.DefaultRouter()
@@ -19,6 +20,7 @@ router.register(r'user', UserViewSet, base_name='user')
 router.register(r'tasks', IncompleteTaskViewSet, base_name='tasks')
 router.register(r'history', HistoryViewSet, base_name='history')
 router.register(r'wishes', WishViewSet, base_name='wish')
+router.register(r'rules', TaskRuleViewSet, base_name='rule')
 
 urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),

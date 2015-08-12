@@ -5,7 +5,9 @@
   <div class="field">
     <label>Needs to be completed by...</label>
     <div class="ui buttons">
-      <button class="ui primary button">Today</button>
+      <button class="ui primary button">Whenever</button>
+      <div class="or"></div>
+      <button class="ui button">Today</button>
       <div class="or"></div>
       <button class="ui button">Tomorrow</button>
       <div class="or"></div>
@@ -17,13 +19,13 @@
   <div class="field">
     <label>Should be completed...</label>
     <div class="ui buttons">
-      <button class="ui primary button">Once</button>
+      <button class="ui button frequency-button once">Once</button>
       <div class="or"></div>
-      <button class="ui button">1 Time Per Day</button>
+      <button class="ui button frequency-button daily">1 Time Per Day</button>
       <div class="or"></div>
-      <button class="ui button">1 Time Per Week</button>
+      <button class="ui button frequency-button weekly">1 Time Per Week</button>
       <div class="or"></div>
-      <button class="ui button">Custom</button>
+      <button class="ui button frequency-button custom">Custom</button>
     </div>
     <div class="ui right labeled input">
       <input type="text" placeholder="1">
@@ -40,7 +42,7 @@
   </div>
   <div class="field" id="task-completion">
   </div>
-  <button class="ui button" type="submit">Add</button>
+  <button class="ui button add-task">Add</button>
   <p><a href="#" class="cancel">Cancel</a></p>
 
 </form>
