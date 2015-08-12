@@ -123,7 +123,14 @@ class TaskRule(models.Model):
         return self.next_scheduled_run
 
     def create_new_task(self):
-        return
+        new_task = Task(
+            user=self.user,
+            title=self.title,
+            amount=self.amount,
+            doable=True
+        )
+        new_task.save()
+        return new_task
 
 
 def update_piggy_bank(sender, instance, created, **kwargs):
