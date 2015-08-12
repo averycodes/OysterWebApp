@@ -1,5 +1,6 @@
 import re
 import os
+import datetime
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -77,10 +78,18 @@ def create_wish_from_url(user, url):
 
     result = api.item_lookup(asin, ResponseGroup='Images')
     item = result.Items.Item[0]
-    wish.image_url = item.MediumImage.URL
+    wish.image_url = item.LargeImage.URL
     wish.save()
 
     return wish
+
+
+FREQUENCY_CHOICES = (
+    ('day', 'day'),
+    ('week', 'week'),
+    ('month', 'month'),
+    ('year', 'year')
+)
 
 
 class TaskRule(models.Model):
@@ -88,8 +97,40 @@ class TaskRule(models.Model):
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
     title = models.CharField(max_length=255, null=True, blank=True)
+    amount = models.FloatField(null=True)
     start = models.DateTimeField(auto_now_add=True)
-    schedule = models.CharField(max_length=255, null=True, blank=True)
+    frequency = models.IntegerField(null=True)
+    scale = models.CharField(max_length=30, choices=FREQUENCY_CHOICES,
+                             null=True, blank=True)
+    next_scheduled_run = models.DateTimeField(auto_now_add=True)
+
+    def calculate_next_run(self):
+        if self.scale == 'day':
+            hours = 24
+        elif self.scale == 'week':
+            hours = 168
+        elif self.scale == 'month':
+            hours = 720
+        elif self.scale == 'year':
+            hours = 8760
+        else:
+            return
+        delta = datetime.timedelta(hours=(hours / self.frequency))
+        next_run = self.next_scheduled_run + delta
+        self.next_scheduled_run = next_run
+        self.save()
+
+        return self.next_scheduled_run
+
+    def create_new_task(self):
+        new_task = Task(
+            user=self.user,
+            title=self.title,
+            amount=self.amount,
+            doable=True
+        )
+        new_task.save()
+        return new_task
 
 
 def update_piggy_bank(sender, instance, created, **kwargs):
