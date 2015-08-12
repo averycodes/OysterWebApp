@@ -76,6 +76,8 @@ define([
       } else if (this.frequency == 'weekly') {
         data['frequency'] = 1
         data['scale'] = 'week'
+      } else if (this.frequency == 'custom') {
+        data['frequency'] = 'day'
       }
 
       $.ajaxSetup({
