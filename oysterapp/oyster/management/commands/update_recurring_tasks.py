@@ -15,8 +15,8 @@ class Command(BaseCommand):
 
         print "###################################################"
 
-        print "Now: %s" % now.strftime("%h %D %H:%M %z")
-        print "Last Run: %s" % last_run.strftime("%h %D %H:%M %z")
+        print "Now: %s" % now.strftime("%D %H:%M %z")
+        print "Last Run: %s" % last_run.strftime("%D %H:%M %z")
 
         all_recurring_tasks = TaskRule.objects.all()
         recurring_tasks = TaskRule.objects.filter(next_scheduled_run__gt=last_run,
@@ -26,9 +26,14 @@ class Command(BaseCommand):
 
         for task_rule in recurring_tasks:
             print "updating rule: %s" % task_rule.title
-            task_rule.create_new_task()
-            run = task_rule.calculate_next_run()
-            print "next run: %s" % run.strftime("%h %D %H:%M %z")
+            tasks = Task.objects.filter(completed=False, task_rule=task_rule)
+            if not tasks.count():
+                task_rule.create_new_task()
+                run = task_rule.calculate_next_run()
+                print "task created, next run: %s" % run.strftime("%D %H:%M %z")
+            else:
+                run = task_rule.calculate_next_run()
+                print "a task already exists, no task created"
 
         print "###################################################"
 

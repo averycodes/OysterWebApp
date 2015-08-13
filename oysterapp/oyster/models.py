@@ -13,6 +13,9 @@ from amazonproduct import API
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     piggy_bank = models.FloatField(default=0)
+    small_amount = models.FloatField(default=1)
+    mid_amount = models.FloatField(default=5)
+    large_amount = models.FloatField(default=10)
 
     def __unicode__(self):
         return "%s's profile" % self.user

@@ -4,8 +4,9 @@ define([
   'marionette',
   'underscore',
   'templates',
+  'app',
   'views/TaskCompletionView'
-], function (Marionette, _, templates, TaskCompletionView) {
+], function (Marionette, _, templates, app, TaskCompletionView) {
   'use strict';
 
   return Marionette.Layout.extend({
@@ -14,7 +15,8 @@ define([
     events: {
       'click .cancel': 'onClickCancel',
       'click .frequency-button': 'onChangeFrequency',
-      'click .add-task': 'onAddTask'
+      'click .add-task': 'onAddTask',
+      'click .amount-button': 'onChangeAmount'
     },
 
     regions: {
@@ -22,7 +24,17 @@ define([
     },
 
     ui: {
-      'customFrequency': '.custom-frequency'
+      'customFrequency': '.custom-frequency',
+      'title': '.new-task'
+    },
+
+    templateHelpers: function() {
+      var user = app.user;
+      return {
+        'small': user.get('small_amount'),
+        'mid': user.get('mid_amount'),
+        'large': user.get('large_amount')
+      };
     },
 
     initialize: function(options) {
@@ -32,12 +44,37 @@ define([
     onDomRefresh: function() {
       this.taskCompletion.show(new TaskCompletionView());
       this.frequency = 'once';
+      this.amount = app.user.get('small_amount');
       this.updateFrequencyUI();
     },
 
     onClickCancel: function(e) {
       e.preventDefault();
       this.parent.showBasicAdd();
+    },
+
+    onChangeAmount: function(e) {
+      e.preventDefault();
+
+      if ($(e.target).hasClass('custom')) {
+        this.amount = undefined;
+      } else {
+        this.amount = $(e.target).attr('data-amount');
+      }
+
+      this.updateAmountUI();
+    },
+
+    updateAmountUI: function() {
+      $(this.el).find('.amount-button').removeClass('primary');
+
+      var active = $(this.el).find('[data-amount="'+this.amount+'"]');
+      if (active.length) {
+        active.addClass('primary');
+      } else {
+        $(this.el).find('.amount-button.custom').addClass('primary');
+        // todo show custom input
+      }
     },
 
     onChangeFrequency: function(e) {
@@ -70,8 +107,8 @@ define([
     onAddTask: function(e) {
       e.preventDefault();
 
-      var title=$(this.el).find('.new-task').val(),
-        amount = 10,
+      var title=this.ui.title.val(),
+        amount = this.amount,
         csrftoken = Cookies.get('csrftoken'),
         data;
 

@@ -3,6 +3,18 @@
     <input type="text" class="new-task" placeholder="I will...">
   </div>
   <div class="field">
+    <label>It's worth</label>
+    <div class="ui buttons">
+      <button class="ui primary button amount-button" data-amount=<%= small %>>$<%= small %></button>
+      <div class="or"></div>
+      <button class="ui button amount-button" data-amount=<%= mid %>>$<%= mid %></button>
+      <div class="or"></div>
+      <button class="ui button amount-button" data-amount=<%= large %>>$<%= large %></button>
+      <div class="or"></div>
+      <button class="ui button amount-button custom">Custom</button>
+    </div>
+  </div>
+  <div class="field">
     <label>Needs to be completed by...</label>
     <div class="ui buttons">
       <button class="ui primary button">Whenever</button>
@@ -21,9 +33,9 @@
     <div class="ui buttons">
       <button class="ui button frequency-button once">Once</button>
       <div class="or"></div>
-      <button class="ui button frequency-button daily">1 Time Per Day</button>
+      <button class="ui button frequency-button daily">Daily</button>
       <div class="or"></div>
-      <button class="ui button frequency-button weekly">1 Time Per Week</button>
+      <button class="ui button frequency-button weekly">Weekly</button>
       <div class="or"></div>
       <button class="ui button frequency-button custom">Custom</button>
     </div>
