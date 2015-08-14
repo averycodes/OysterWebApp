@@ -19,8 +19,7 @@ class Command(BaseCommand):
         print "Last Run: %s" % last_run.strftime("%D %H:%M %z")
 
         all_recurring_tasks = TaskRule.objects.all()
-        recurring_tasks = TaskRule.objects.filter(next_scheduled_run__gt=last_run,
-                                                  next_scheduled_run__lte=now)
+        recurring_tasks = TaskRule.objects.filter(next_scheduled_run__lte=now)
 
         print "Total rules: %s out of %s" % (recurring_tasks.count(), all_recurring_tasks.count())
 
