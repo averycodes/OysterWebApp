@@ -5,6 +5,7 @@ from rest_framework import serializers
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework import permissions
+from rest_framework.decorators import detail_route
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
@@ -134,3 +135,14 @@ class TaskRuleViewSet(viewsets.ModelViewSet):
         )
 
         return Response(data, status=status.HTTP_201_CREATED)
+
+    @detail_route(methods=['get'])
+    def completed(self, request, pk=None):
+        task_rule = TaskRule.objects.get(pk=pk)
+        task = task_rule.get_first_open_task()
+
+        if task:
+            task.completed = True
+            task.save()
+
+        return Response({}, status=status.HTTP_201_CREATED)
