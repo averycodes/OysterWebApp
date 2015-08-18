@@ -131,6 +131,7 @@ class TaskRule(models.Model):
             user=self.user,
             title=self.title,
             amount=self.amount,
+            task_rule=self,
             doable=True
         )
         new_task.save()
