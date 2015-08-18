@@ -136,6 +136,15 @@ class TaskRule(models.Model):
         new_task.save()
         return new_task
 
+    def get_open_tasks(self):
+        return Task.objects.filter(task_rule=self, completed=False).order_by('-created')
+
+    def get_first_open_task(self):
+        open_tasks = self.get_open_tasks()
+        if open_tasks:
+            return open_tasks.first()
+        return None
+
 
 def update_piggy_bank(sender, instance, created, **kwargs):
     profile = instance.user.userprofile
