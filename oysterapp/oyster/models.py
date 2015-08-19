@@ -1,6 +1,7 @@
 import re
 import os
 import datetime
+import uuid
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -95,17 +96,25 @@ FREQUENCY_CHOICES = (
     ('year', 'year')
 )
 
+COMPLETABLE_BY = (
+    ('Oyster', 'Oyster'),
+    ('IFTTT', 'IFTTT')
+)
+
 
 class TaskRule(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
+    uuid = models.CharField(max_length=255, null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
     amount = models.FloatField(null=True)
     start = models.DateTimeField(auto_now_add=True)
     frequency = models.IntegerField(null=True)
     scale = models.CharField(max_length=30, choices=FREQUENCY_CHOICES,
                              null=True, blank=True)
+    completable_by = models.CharField(max_length=30, choices=COMPLETABLE_BY,
+                                      default='Oyster')
     next_scheduled_run = models.DateTimeField(auto_now_add=True)
 
     def calculate_next_run(self):
@@ -127,12 +136,15 @@ class TaskRule(models.Model):
         return self.next_scheduled_run
 
     def create_new_task(self):
+        doable = True
+        if completable_by != 'Oyster':
+            doable = False
         new_task = Task(
             user=self.user,
             title=self.title,
             amount=self.amount,
             task_rule=self,
-            doable=True
+            doable=doable
         )
         new_task.save()
         return new_task

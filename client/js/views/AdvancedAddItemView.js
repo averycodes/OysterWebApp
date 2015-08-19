@@ -29,7 +29,8 @@ define([
       return {
         'small': user.get('small_amount'),
         'mid': user.get('mid_amount'),
-        'large': user.get('large_amount')
+        'large': user.get('large_amount'),
+        'url': this.url()
       };
     },
 
@@ -38,10 +39,11 @@ define([
     },
 
     onDomRefresh: function() {
-      this.taskCompletion.show(new TaskCompletionView());
       this.frequency = 'once';
       this.amount = app.user.get('small_amount');
+      this.completion = 'Oyster';
       this.updateFrequencyUI();
+      this.updateCompletionUI();
     },
 
     onClickCancel: function(e) {
@@ -59,6 +61,18 @@ define([
       }
 
       this.updateAmountUI();
+    },
+
+    onChangeCompletion: function(e) {
+      e.preventDefault();
+
+      if ($(e.target).hasClass('Oyster')) {
+        this.completion = 'Oyster';
+      } else {
+        this.completion = 'IFTTT';
+      }
+
+      this.updateCompletionUI();
     },
 
     updateAmountUI: function() {
@@ -80,13 +94,20 @@ define([
         this.frequency = 'daily';
       } else if ($(e.target).hasClass('weekly')) {
         this.frequency = 'weekly';
-      } else if ($(e.target).hasClass('custom')) {
+      } else if ($(e.target).hasClass('anytime')) {
+        this.frequency = 'anytime';
+      }else if ($(e.target).hasClass('custom')) {
         this.frequency = 'custom';
       } else {
         this.frequency = 'once';
       }
 
       this.updateFrequencyUI();
+    },
+
+    updateCompletionUI: function() {
+      $(this.el).find('.completion-button').removeClass('primary');
+      $(this.el).find('.completion-button.' + this.completion).addClass('primary');
     },
 
     updateFrequencyUI: function() {
@@ -104,13 +125,14 @@ define([
       e.preventDefault();
 
       var title=this.ui.title.val(),
-        amount = this.amount,
         csrftoken = Cookies.get('csrftoken'),
         data;
 
       data = {
         'title': title,
-        'amount': amount
+        'amount': this.amount,
+        'uuid': this.ifttt_guid,
+        'completable_by': this.completion
       }
 
       if (this.frequency == 'daily') {
@@ -140,6 +162,23 @@ define([
           }, this)
         }
       });
+    },
+
+    guid: function() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+    },
+
+    url: function() {
+      if (!this.ifttt_guid) {
+        this.ifttt_guid = this.guid();
+      }
+      return "http://oystr.herokuapp.com/api/v1/rules/" + this.ifttt_guid + "/completed/";
     }
   });
 });

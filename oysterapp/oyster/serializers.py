@@ -112,6 +112,8 @@ class TaskRuleSerializer(serializers.ModelSerializer):
 
 class TaskRuleViewSet(viewsets.ModelViewSet):
     serializer_class = TaskRuleSerializer
+    lookup_field = 'uuid'
+    lookup_value_regex = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 
     def get_queryset(self):
         return TaskRule.objects.filter(user=self.request.user)
@@ -125,7 +127,9 @@ class TaskRuleViewSet(viewsets.ModelViewSet):
                 amount=float(data['amount']),
                 title=data['title'],
                 frequency=data['frequency'],
-                scale=data['scale']
+                scale=data['scale'],
+                uuid=data['uuid'],
+                completable_by=data['completable_by']
             )
         task = Task.objects.create(
             user=request.user,
@@ -137,8 +141,8 @@ class TaskRuleViewSet(viewsets.ModelViewSet):
         return Response(data, status=status.HTTP_201_CREATED)
 
     @detail_route(methods=['get'])
-    def completed(self, request, pk=None):
-        task_rule = TaskRule.objects.get(pk=pk)
+    def completed(self, request, uuid=None):
+        task_rule = TaskRule.objects.get(uuid=uuid)
         task = task_rule.get_first_open_task()
 
         if task:
