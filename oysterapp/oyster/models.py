@@ -1,7 +1,9 @@
 import re
 import os
-import datetime
 import uuid
+
+from datetime import datetime, timedelta
+from pytz import timezone
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -42,6 +44,8 @@ class BillableItem(models.Model):
 class Task(BillableItem):
     doable = models.BooleanField(default=True)
     task_rule = models.ForeignKey('TaskRule', null=True)
+    due_date = models.DateTimeField(null=True, blank=True)
+    can_be_overdue = models.BooleanField(default=False)
 
     def __unicode__(self):
         completed = "Incomplete"
@@ -116,6 +120,10 @@ class TaskRule(models.Model):
     completable_by = models.CharField(max_length=30, choices=COMPLETABLE_BY,
                                       default='Oyster')
     next_scheduled_run = models.DateTimeField(auto_now_add=True)
+    must_be_completed_by_time = models.TimeField(null=True)
+    must_be_completed_in_x_days = models.IntegerField(null=True)
+    can_be_overdue = models.BooleanField(default=False)
+    cancelled = models.BooleanField(default=False)
 
     def calculate_next_run(self):
         if self.scale == 'day':
@@ -128,23 +136,49 @@ class TaskRule(models.Model):
             hours = 8760
         else:
             return
-        delta = datetime.timedelta(hours=(hours / self.frequency))
+        delta = timedelta(hours=(hours / self.frequency))
         next_run = self.next_scheduled_run + delta
         self.next_scheduled_run = next_run
         self.save()
 
         return self.next_scheduled_run
 
+    def infer_due_date(self):
+        time = self.must_be_completed_by_time
+        days = self.must_be_completed_in_x_days
+
+        if not time and not days:
+            return None
+
+        now_utc = datetime.now(timezone('UTC'))
+        now_pacific = now_utc.astimezone(timezone('US/Pacific'))
+
+        due_date = now_pacific
+
+        if time:
+            due_date = due_date.replace(hour=time.hour, minute=time.minute)
+            if due_date < now_pacific and not days:
+                delta = timedelta(days=1)
+                due_date = due_date + delta
+
+        if days:
+            delta = timedelta(days=days)
+            due_date = due_date + delta
+
+        return due_date
+
     def create_new_task(self):
         doable = True
-        if completable_by != 'Oyster':
+        if self.completable_by != 'Oyster':
             doable = False
         new_task = Task(
             user=self.user,
             title=self.title,
             amount=self.amount,
             task_rule=self,
-            doable=doable
+            doable=doable,
+            due_date=self.infer_due_date(),
+            can_be_overdue=self.can_be_overdue
         )
         new_task.save()
         return new_task
