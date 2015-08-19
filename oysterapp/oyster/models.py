@@ -136,7 +136,7 @@ class TaskRule(models.Model):
             hours = 8760
         else:
             return
-        delta = datetime.timedelta(hours=(hours / self.frequency))
+        delta = timedelta(hours=(hours / self.frequency))
         next_run = self.next_scheduled_run + delta
         self.next_scheduled_run = next_run
         self.save()
@@ -169,7 +169,7 @@ class TaskRule(models.Model):
 
     def create_new_task(self):
         doable = True
-        if completable_by != 'Oyster':
+        if self.completable_by != 'Oyster':
             doable = False
         new_task = Task(
             user=self.user,
