@@ -9,7 +9,6 @@ define(function (require) {
         wish: require('tpl!templates/wish.html'),
         advancedadditem: require('tpl!templates/advancedadditem.html'),
         basicadditem: require('tpl!templates/basicadditem.html'),
-        taskcompletion: require('tpl!templates/taskcompletion.html'),
         piggybank: require('tpl!templates/piggy_bank.html'),
         history: require('tpl!templates/history.html'),
         addamazonwish: require('tpl!templates/addamazonwish.html'),

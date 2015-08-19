@@ -47,15 +47,17 @@ define([
 
         onClickTask: function(e) {
             e.preventDefault();
-            this.model.set('completed', true);
-            this.model.save();
+            if (this.model.get('doable')) {
+                this.model.set('completed', true);
+                this.model.save();
 
-            var user = window.app.user,
-                bank_amt = user.get("bank");
+                var user = window.app.user,
+                    bank_amt = user.get("bank");
 
-            user.set("bank", bank_amt + this.model.get("amount"));
+                user.set("bank", bank_amt + this.model.get("amount"));
 
-            this.close();
+                this.close();
+            }
         },
 
         onClickRemove: function(e) {

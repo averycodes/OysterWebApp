@@ -2,8 +2,11 @@
   <div class="field ui fluid input">
     <input type="text" class="new-task" placeholder="I will...">
   </div>
+
+  <div class="ui hidden divider"></div>
+
   <div class="field">
-    <label>It's worth</label>
+    <label>It's worth...</label>
     <div class="ui buttons">
       <button class="ui primary button amount-button" data-amount=<%= small %>>$<%= small %></button>
       <div class="or"></div>
@@ -14,6 +17,9 @@
       <button class="ui button amount-button custom">Custom</button>
     </div>
   </div>
+
+  <div class="ui hidden divider"></div>
+
   <div class="field">
     <label>Needs to be completed by...</label>
     <div class="ui buttons">
@@ -28,7 +34,10 @@
       <button class="ui button">Set Date</button>
     </div>
   </div>
-  <div class="field">
+
+  <div class="ui hidden divider"></div>
+
+  <div class="grouped field">
     <label>Should be completed...</label>
     <div class="ui buttons">
       <button class="ui button frequency-button once">Once</button>
@@ -36,6 +45,8 @@
       <button class="ui button frequency-button daily">Daily</button>
       <div class="or"></div>
       <button class="ui button frequency-button weekly">Weekly</button>
+      <div class="or"></div>
+      <button class="ui button frequency-button anytime">Anytime</button>
       <div class="or"></div>
       <button class="ui button frequency-button custom">Custom</button>
     </div>
@@ -54,8 +65,24 @@
       </div>
     </div>
   </div>
-  <div class="field" id="task-completion">
+
+  <div class="ui hidden divider"></div>
+
+  <div class="grouped field">
+    <label>Completeable by... </label>
+    <div class="ui buttons">
+      <button class="ui button completion-button Oyster"><img height="30px" src="static/img/icons/oyster-icon.png" alt="oyster"></button>
+      <div class="or"></div>
+      <button class="ui button completion-button IFTTT"><img height="30px" src="static/img/ifttt.png" alt="ifttt"></button>
+    </div>
+    <div>
+      Add to IFTTT using the following URL:
+      <a href="<%= url %>" class="completion-url"><%= url %></a>
+    </div>
   </div>
+
+  <div class="ui hidden divider"></div>
+
   <button class="ui button add-task">Add</button>
   <p><a href="#" class="cancel">Cancel</a></p>
 

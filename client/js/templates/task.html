@@ -1,35 +1,48 @@
-<div class="content">
-  <div class="task">
-    <div class="header"><%= title %></div>
-    $<%= amount %>
+<div class="content ui grid">
 
-    <button class="circular ui blue icon right floated button edit">
-      <i class="icon edit"></i>
-    </button>
-    <button class="circular ui red icon right floated button remove">
-      <i class="icon trash"></i>
-    </button>
-  </div>
-  <div class="edit-task ui grid">
-    <div class="sixteen column row">
-      <div class="twelve wide column">
-        <div class="ui left icon fluid input">
-          <i class="checkmark box icon"></i>
-          <input type="text" maxlength="254" class="new-title" placeholder="Task name" value="<%= title %>">
-        </div>
+  <div class="task sixteen column row">
+    <div class="fourteen wide column">
+      <div class="ui left fluid">
+        <div class="header"><%= title %></div>
+        $<%= amount %>
       </div>
+    </div>
 
-      <div class="two wide column">
-        <div class="ui left icon fluid input">
-          <i class="dollar icon"></i>
-          <input type="text" maxlength="254" class="new-amount" placeholder="10" value="<%= amount %>">
-        </div>
-      </div>
-      <div class="two wide column">
-        <button class="ui fluid blue button save-task">
-          Save
+    <div class="two wide column">
+      <div class="ui right fluid">
+        <button class="circular ui blue icon button edit">
+          <i class="icon edit"></i>
+        </button>
+        <button class="circular ui red icon button remove">
+          <i class="icon trash"></i>
         </button>
       </div>
     </div>
   </div>
+
+
+  <div class="edit-task sixteen column row">
+    <div class="twelve wide column">
+      <div class="ui left icon fluid input">
+        <i class="checkmark box icon"></i>
+        <input type="text" maxlength="254" class="new-title" placeholder="Task name" value="<%= title %>">
+      </div>
+    </div>
+
+    <div class="two wide column">
+      <div class="ui left icon fluid input">
+        <i class="dollar icon"></i>
+        <input type="text" maxlength="254" class="new-amount" placeholder="10" value="<%= amount %>">
+      </div>
+    </div>
+    <div class="two wide column">
+      <button class="ui fluid blue button save-task">
+        Save
+      </button>
+    </div>
+  </div>
+
 </div>
+
+
+
