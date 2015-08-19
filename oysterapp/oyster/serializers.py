@@ -135,7 +135,8 @@ class TaskRuleViewSet(viewsets.ModelViewSet):
             user=request.user,
             amount=float(data['amount']),
             title=data['title'],
-            task_rule=task_rule
+            task_rule=task_rule,
+            doable=bool(data['completable_by'] == 'Oyster')
         )
 
         return Response(data, status=status.HTTP_201_CREATED)
