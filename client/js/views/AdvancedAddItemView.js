@@ -4,9 +4,8 @@ define([
   'marionette',
   'underscore',
   'templates',
-  'app',
-  'views/TaskCompletionView'
-], function (Marionette, _, templates, app, TaskCompletionView) {
+  'app'
+], function (Marionette, _, templates, app) {
   'use strict';
 
   return Marionette.Layout.extend({
@@ -16,11 +15,8 @@ define([
       'click .cancel': 'onClickCancel',
       'click .frequency-button': 'onChangeFrequency',
       'click .add-task': 'onAddTask',
-      'click .amount-button': 'onChangeAmount'
-    },
-
-    regions: {
-      taskCompletion: '#task-completion'
+      'click .amount-button': 'onChangeAmount',
+      'click .completion-button': 'onChangeCompletion'
     },
 
     ui: {
