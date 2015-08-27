@@ -122,6 +122,7 @@ class TaskRule(models.Model):
     next_scheduled_run = models.DateTimeField(auto_now_add=True)
     must_be_completed_by_time = models.TimeField(null=True)
     must_be_completed_in_x_days = models.IntegerField(null=True)
+    regenerate_on_completion = models.BooleanField(default=False)
     can_be_overdue = models.BooleanField(default=False)
     cancelled = models.BooleanField(default=False)
 
@@ -209,5 +210,11 @@ def update_piggy_bank(sender, instance, created, **kwargs):
     profile.piggy_bank = amount
     profile.save()
 
+
+def complete_task(sender, instance, created, **kwargs):
+    if instance.completed and instance.task_rule.regenerate_on_completion:
+        instance.task_rule.create_new_task()
+
 post_save.connect(update_piggy_bank, sender=Task)
+post_save.connect(complete_task, sender=Task)
 post_save.connect(update_piggy_bank, sender=Wish)
