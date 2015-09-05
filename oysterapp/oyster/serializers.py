@@ -61,7 +61,11 @@ class WishViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         data = request.DATA
-        wish = create_wish_from_url(request.user, data['amazon_link'])
+        if data['amazon_link']:
+            wish = create_wish_from_url(request.user, data['amazon_link'])
+        else:
+            wish = Wish(data)
+            wish.save()
 
         serializer = WishSerializer(wish)
         return Response(serializer.data)

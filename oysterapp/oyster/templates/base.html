@@ -28,6 +28,24 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'semantic/dist/semantic.min.css' %}">
 
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:title" content="Oyster - Turn sand into pearls.">
+    <meta name="twitter:description" content="Oyster makes keeping up with your todos rewarding by letting you connect everyday tasks with your purchasing goals.">
+    <meta name="twitter:image" content="">
+
+    <!-- iTunes app -->
+    {# <meta name="apple-itunes-app" content="app-id=969977669"> #}
+
+    <!-- open graph -->
+    <meta property="og:title" content="Oyster - Turn sand into pearls.">
+    <meta property="og:image" content="">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="http://sandtopearls.com">
+    <meta property="og:description" content="Oyster makes keeping up with your todos rewarding by letting you connect everyday tasks with your purchasing goals.">
+    <meta property="og:type" content="website">
+
     {% block styles %}
     {% endblock styles %}
 
@@ -36,10 +54,12 @@
     {% block header %}
     {% endblock header %}
 
+    {% block main %}
     <div class="ui main container" id="main">
       {% block content %}
       {% endblock content %}
     </div>
+    {% endblock main %}
 
     <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>

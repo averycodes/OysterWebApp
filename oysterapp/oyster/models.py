@@ -56,8 +56,9 @@ class Task(BillableItem):
 
 class Wish(BillableItem):
     amazon_link = models.CharField(max_length=255, null=True, blank=True)
-    image_url = models.CharField(max_length=255, null=True, blank=True)
     asin = models.CharField(max_length=255, null=True, blank=True)
+    link = models.CharField(max_length=255, null=True, blank=True)
+    image_url = models.CharField(max_length=255, null=True, blank=True)
 
 
 def create_wish_from_url(user, url):
