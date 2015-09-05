@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^accounts/profile/', RedirectView.as_view(url='/')),
     url(r'^accounts/login/', auth_views.login, {'template_name': 'registration/oyster_login.html'}),
     url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^about/$', oyster_views.about),
     url(r'^$', oyster_views.app)
 ]
 

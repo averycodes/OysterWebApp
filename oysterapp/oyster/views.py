@@ -12,3 +12,7 @@ def app(request):
 def logout_view(request):
     logout(request)
     # Redirect to a success page.
+
+
+def about(request):
+    return render(request, "intro.html", {})
