@@ -64,7 +64,13 @@ class WishViewSet(viewsets.ModelViewSet):
         if data['amazon_link']:
             wish = create_wish_from_url(request.user, data['amazon_link'])
         else:
-            wish = Wish(data)
+            wish = Wish(
+                link=data['link'],
+                image_url=data['image_url'],
+                amount=data['amount'],
+                title=data['title'],
+                user=request.user
+            )
             wish.save()
 
         serializer = WishSerializer(wish)

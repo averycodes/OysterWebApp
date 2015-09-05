@@ -14,11 +14,10 @@ define([
 
         ui: {
             'remove': '.remove',
-            'cart': '.add-to-cart'
         },
 
         events: {
-            'click .add-to-cart': 'onClickCart',
+            'click .buy': 'onClickBuy',
             'click .remove': 'onClickRemove'
         },
 
@@ -33,7 +32,7 @@ define([
             this.listenTo(app.events, 'doneButtonClicked', this.onClickDone);
         },
 
-        onClickCart: function(e) {
+        onClickBuy: function(e) {
             e.preventDefault();
 
             if (this.model.get('amount') <= window.app.user.get('bank')) {
@@ -47,6 +46,8 @@ define([
 
                 this.close();
             }
+
+            // TODO: open the buy link
         },
 
         onClickRemove: function(e) {
