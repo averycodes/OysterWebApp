@@ -10,12 +10,10 @@ define([
     'use strict';
 
     return Marionette.CollectionView.extend({
-        // template: templates.recurring_tasks,
         itemView: TaskRuleView,
-        // itemViewContainer: '.task-rule-items',
+        className: 'recurring-tasks-view ui four cards',
 
         initialize: function() {
-            // this.regionManager = new Marionette.RegionManager();
             this.collection = new TaskRuleCollection();
             this.collection.fetch();
         },
