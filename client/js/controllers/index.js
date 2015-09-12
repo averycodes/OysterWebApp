@@ -5,11 +5,10 @@ define([
     'views/ChecklistView',
     'views/WishlistView',
     'views/HistoryView',
-    'views/SettingsView',
-    'collections/TaskCollection',
-    'collections/WishCollection'
-], function (app, ChecklistView, WishlistView, HistoryView, SettingsView,
-             TaskCollection, WishCollection) {
+    'views/RecurringTasksView',
+    'views/SettingsView'
+], function (app, ChecklistView, WishlistView, HistoryView, RecurringTasksView,
+             SettingsView) {
 	'use strict';
 
 	return {
@@ -24,6 +23,10 @@ define([
         showHistory: function() {
             app.main.show(new HistoryView());
             app.nav.activateHistory();
+        },
+        showRecurringTasks: function() {
+            app.main.show(new RecurringTasksView());
+            app.nav.activateRecurring();
         },
         showSettings: function() {
             app.main.show(new SettingsView());

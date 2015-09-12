@@ -27,7 +27,7 @@ define([
 	app.addInitializer(function () {
         app.user = new User();
         app.user.fetch();
-        app.bank.show(new PiggyBankView());
+        app.bank.show(new PiggyBankView({model: app.user}));
         app.events = _.clone(Backbone.Events);
 
         $(".edit").on("click", function() {

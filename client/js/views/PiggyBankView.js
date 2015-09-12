@@ -1,24 +1,27 @@
 /*global define */
 
 define([
-    'marionette',
-    'templates',
+  'marionette',
+  'templates',
 ], function (Marionette, templates) {
-    'use strict';
+  'use strict';
 
-    return Marionette.ItemView.extend({
-        template: templates.piggybank,
+  return Marionette.ItemView.extend({
+    template: templates.piggybank,
 
-        modelEvents: {
-            "change": "onModelChanged"
-        },
+    templateHelpers: function() {
+      var amount = this.model.get("bank");
+      return {
+        'amount': amount.toFixed(2)
+      }
+    },
 
-        initialize: function() {
-            this.model = window.app.user;
-        },
+    modelEvents: {
+      "change": "onUserChanged"
+    },
 
-        onModelChanged: function() {
-            this.render();
-        }
-    });
+    onUserChanged: function() {
+      this.render();
+    }
+  });
 });

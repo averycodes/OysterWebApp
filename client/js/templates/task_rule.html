@@ -1,0 +1,25 @@
+<div class="content">
+  <div class="header"><%= title %></div>
+  <div class="meta">Next Run: <%= next_run %></div>
+  <div class="description">
+    <p>amount: $<%= amount %></p>
+
+    <!-- show as T/F -->
+    <h4>Rules for Completion</h4>
+    <p>Time <%= must_be_completed_by_time %></p>
+    <p>Days <%= must_be_completed_in_x_days %></p>
+    <p>Can be overdue <%= can_be_overdue %></p>
+
+    <h4>Rules for Generating</h4>
+    <!-- if frequence and scale -->
+    <p><%= frequency %> times per <%= scale %></p>
+    <p>Regenerates on Completion: <%= regenerate_on_completion  %></p>
+    <!-- if equals ifttt then show symbol (completable_by) -->
+  </div>
+</div>
+
+<div class="extra content">
+  <button class="ui button">Cancel</button>
+  <button class="ui button">Edit</button>
+</div>
+

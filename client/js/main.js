@@ -4,7 +4,8 @@ require.config({
 		backbone: '../bower_components/backbone/backbone',
 		marionette: '../bower_components/backbone.marionette/lib/backbone.marionette',
 		jquery: '../bower_components/jquery/dist/jquery',
-		localStorage: '../bower_components/backbone.localStorage/backbone.localStorage',
+        localStorage: '../bower_components/backbone.localStorage/backbone.localStorage',
+		moment: '../bower_components/moment/min/moment.min',
 		tpl: 'lib/tpl',
         bootstrap: 'lib/bootstrap.min',
         semantic: '../semantic/dist/semantic.min'
