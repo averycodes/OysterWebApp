@@ -24,7 +24,9 @@ define([
 		},
 
 		events: {
-
+			'click .edit-button': '',
+			'click .cancel-button': 'onClickCancelButton',
+			'click .reinstate-button': 'onClickReinstateButton',
 		},
 
 		initialize: function() {
@@ -38,6 +40,22 @@ define([
 		onShow: function() {
 
 		},
+
+		onClickCancelButton: function(e) {
+			e.preventDefault();
+
+			this.model.set('cancelled', true);
+			this.model.save();
+			this.render();
+		},
+
+		onClickReinstateButton: function(e) {
+			e.preventDefault();
+
+			this.model.set('cancelled', false);
+			this.model.save();
+			this.render();
+		}
 
 	});
 });

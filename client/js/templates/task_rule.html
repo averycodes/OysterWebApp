@@ -1,3 +1,4 @@
+<% if (!cancelled) { %>
 <div class="content">
   <div class="header"><%= title %></div>
   <div class="meta">Next Run: <%= next_run %></div>
@@ -5,21 +6,51 @@
     <p>amount: $<%= amount %></p>
 
     <!-- show as T/F -->
+    <% if (must_be_completed_by_time || must_be_completed_in_x_days) { %>
     <h4>Rules for Completion</h4>
-    <p>Time <%= must_be_completed_by_time %></p>
-    <p>Days <%= must_be_completed_in_x_days %></p>
-    <p>Can be overdue <%= can_be_overdue %></p>
+    <% } %>
+    <% if (must_be_completed_by_time) { %>
+    <p>Must be completed by <%= must_be_completed_by_time %></p>
+    <% } %>
+    <% if (must_be_completed_in_x_days) { %>
+    <p>Due date <%= must_be_completed_in_x_days %> days after generation</p>
+    <% } %>
+    <% if ((must_be_completed_by_time || must_be_completed_in_x_days) && can_be_overdue) { %>
+      <p>Can be overdue</p>
+    <% } %>
 
-    <h4>Rules for Generating</h4>
-    <!-- if frequence and scale -->
-    <p><%= frequency %> times per <%= scale %></p>
-    <p>Regenerates on Completion: <%= regenerate_on_completion  %></p>
+    <% if (completable_by == 'ifttt') { %>
+    <p>
+      <img height="30px" src="static/img/ifttt.png" alt="ifttt">
+      http://oystr.herokuapp.com/api/v1/rules/<%= uuid %>/completed/
+    </p>
+    <% } %>
     <!-- if equals ifttt then show symbol (completable_by) -->
+
+
+    <!-- if frequence and scale -->
+    <% if (frequency && scale) { %>
+      <h4>Rules for Generating</h4>
+      <p><%= frequency %> times per <%= scale %></p>
+    <% } else if (regenerate_on_completion == true) { %>
+      <h4>Rules for Generating</h4>
+      <p>Regenerates on completion</p>
+    <% } %>
+
   </div>
 </div>
 
 <div class="extra content">
-  <button class="ui button">Cancel</button>
-  <button class="ui button">Edit</button>
+  <button class="ui button edit-button">Edit</button>
+  <button class="ui button cancel-button">Cancel</button>
+</div>
+<% } else { %>
+<div class="content">
+  <div class="header"><%= title %></div>
+  <div class="meta">Cancelled</div>
 </div>
 
+<div class="extra content">
+  <button class="ui button reinstate-button">Reinstate</button>
+</div>
+<% } %>
