@@ -8,7 +8,7 @@ define([
 ], function (Marionette, _, templates, app) {
   'use strict';
 
-  return Marionette.Layout.extend({
+  return Marionette.LayoutView.extend({
     template: templates.advancedadditem,
 
     events: {
@@ -25,7 +25,7 @@ define([
     },
 
     templateHelpers: function() {
-      var user = app.user;
+      var user = window.app.user;
       return {
         'small': user.get('small_amount'),
         'mid': user.get('mid_amount'),
@@ -40,7 +40,7 @@ define([
 
     onDomRefresh: function() {
       this.frequency = 'once';
-      this.amount = app.user.get('small_amount');
+      this.amount = window.app.user.get('small_amount');
       this.completion = 'Oyster';
       this.updateFrequencyUI();
       this.updateCompletionUI();

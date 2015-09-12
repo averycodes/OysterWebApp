@@ -40,11 +40,6 @@ define([
             // event listener
         },
 
-        onShow: function() {
-            this.listenTo(app.events, 'editButtonClicked', this.onClickEdit);
-            this.listenTo(app.events, 'doneButtonClicked', this.onClickDone);
-        },
-
         onClickTask: function(e) {
             e.preventDefault();
             if (this.model.get('doable')) {
