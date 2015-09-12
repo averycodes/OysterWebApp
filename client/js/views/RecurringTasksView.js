@@ -10,7 +10,7 @@ define([
     'use strict';
 
     return Marionette.CollectionView.extend({
-        itemView: TaskRuleView,
+        childView: TaskRuleView,
         className: 'recurring-tasks-view ui four cards',
 
         initialize: function() {

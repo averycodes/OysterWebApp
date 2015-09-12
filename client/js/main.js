@@ -2,7 +2,7 @@ require.config({
 	paths: {
 		underscore: '../bower_components/underscore/underscore',
 		backbone: '../bower_components/backbone/backbone',
-		marionette: '../bower_components/backbone.marionette/lib/backbone.marionette',
+		marionette: '../bower_components/marionette/lib/backbone.marionette.min',
 		jquery: '../bower_components/jquery/dist/jquery',
         localStorage: '../bower_components/backbone.localStorage/backbone.localStorage',
 		moment: '../bower_components/moment/min/moment.min',
@@ -22,7 +22,7 @@ require.config({
 		},
 
 		marionette: {
-			exports: 'Backbone.Marionette',
+            exports: 'Backbone.Marionette',
 			deps: ['backbone']
 		},
 
@@ -86,15 +86,10 @@ require.config({
 
 require([
 	'app',
-    'modules/Pages',
     'jquery',
     'semantic',
 ], function (app, PagesModule) {
 	'use strict';
-
-    app.addInitializer(function() {
-        PagesModule.start();
-    });
 
 	app.start();
 });

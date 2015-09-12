@@ -10,7 +10,7 @@ define([
     'use strict';
 
     return Marionette.CollectionView.extend({
-        itemView: HistoryItemView,
+        childView: HistoryItemView,
         tagName: 'ul',
         className: 'table-view',
 
@@ -22,15 +22,6 @@ define([
             this.collection = new HistoryCollection();
             this.collection.fetch();
         },
-
-
-        // template: templates.checklist,
-
-        // ui: {
-        //     header: 'h2'
-        // },
-
-
 
     });
 });

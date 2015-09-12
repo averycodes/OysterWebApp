@@ -8,6 +8,6 @@ define([
 
     return Backbone.Collection.extend({
         model: TaskRule,
-        url: "/api/v1/rules/"
+        url: "/api/v1/rules/",
     });
 });

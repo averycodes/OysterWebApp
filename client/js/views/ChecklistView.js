@@ -16,12 +16,11 @@ define([
     return Marionette.CompositeView.extend({
         template: templates.checklist,
         className: 'checklist-view',
-        itemView: TaskView,
+        childView: TaskView,
         itemViewContainer: '.checklist-items',
 
         initialize: function() {
             this.regionManager = new Marionette.RegionManager();
-            this.collection = new TaskCollection();
         },
 
         onDomRefresh: function() {
@@ -29,11 +28,6 @@ define([
                 "addItemForm", "#add-item-form"
             );
             this.showBasicAdd();
-        },
-
-        onRender: function() {
-            // used to contain filter
-            this.collection.fetch();
         },
 
         onClose: function() {
