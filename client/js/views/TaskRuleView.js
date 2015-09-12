@@ -15,7 +15,7 @@ define([
 		templateHelpers: function() {
 			var datestr = "M-D-YYYY, h A";
 			return {
-				'next_run': moment(this.model.get('next_scheduled_run')).toNow()
+				'next_run': moment(this.model.get('next_scheduled_run')).fromNow()
 			};
 		},
 
