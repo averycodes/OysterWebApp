@@ -12,6 +12,7 @@ define([
     return Marionette.CollectionView.extend({
         childView: TaskRuleView,
         className: 'recurring-tasks-view ui four cards',
+        viewComparator: 'cancelled',
 
         initialize: function() {
             this.collection = new TaskRuleCollection();

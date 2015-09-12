@@ -1,64 +1,66 @@
 /*global define */
 
 define([
-    'marionette',
-    'templates',
-    'underscore',
-    'views/TaskView',
-    'views/BasicAddItemView',
-    'views/AdvancedAddItemView',
-    'models/Task',
-    'collections/TaskCollection'
+  'marionette',
+  'templates',
+  'underscore',
+  'views/TaskView',
+  'views/BasicAddItemView',
+  'views/AdvancedAddItemView',
+  'models/Task',
+  'collections/TaskCollection'
 ], function (Marionette, templates, _, TaskView, BasicAddItemView,
-            AdvancedAddItemView, Task, TaskCollection) {
-    'use strict';
+      AdvancedAddItemView, Task, TaskCollection) {
+  'use strict';
 
-    return Marionette.CompositeView.extend({
-        template: templates.checklist,
-        className: 'checklist-view',
-        childView: TaskView,
-        itemViewContainer: '.checklist-items',
+  return Marionette.CompositeView.extend({
+    template: templates.checklist,
+    className: 'checklist-view',
+    childView: TaskView,
+    childViewContainer: '.checklist-items',
 
-        initialize: function() {
-            this.regionManager = new Marionette.RegionManager();
-        },
+    attachHtml: function(compositeView, itemView, index) {
+      return compositeView.$el.find(compositeView.childViewContainer).prepend(itemView.el);
+    },
 
-        onDomRefresh: function() {
-            this.addItemForm = this.regionManager.addRegion(
-                "addItemForm", "#add-item-form"
-            );
-            this.showBasicAdd();
-        },
+    initialize: function() {
+      this.regionManager = new Marionette.RegionManager();
+    },
 
-        onClose: function() {
-            this.regionManager.close();
-        },
+    onDomRefresh: function() {
+      this.addItemForm = this.regionManager.addRegion(
+        "addItemForm", "#add-item-form"
+      );
+      this.showBasicAdd();
+    },
 
-        addTaskWithReward: function(task, amount) {
-            task = new Task({
-                title: task,
-                amount: amount,
-                doable: true,
-                is_credit: true
-            });
-            task.save();
-            task.on("change", function(model, response) {
-                this.collection.add(model);
-            }, this);
+    onClose: function() {
+      this.regionManager.close();
+    },
 
-            this.showBasicAdd();
-        },
+    addTaskWithReward: function(task, amount) {
+      task = new Task({
+        title: task,
+        amount: amount,
+        doable: true,
+        is_credit: true
+      });
+      task.save();
+      this.collection.add(task);
 
-        showAdvancedAdd: function() {
-            this.addItemForm.show(new AdvancedAddItemView({
-                parent: this
-            }));
-        },
+      this.showBasicAdd();
+    },
 
-        showBasicAdd: function() {
-            this.addItemForm.show(new BasicAddItemView({
-                parent: this
-            }));
-        }
-    });
+    showAdvancedAdd: function() {
+      this.addItemForm.show(new AdvancedAddItemView({
+        parent: this
+      }));
+    },
+
+    showBasicAdd: function() {
+      this.addItemForm.show(new BasicAddItemView({
+        parent: this
+      }));
+    }
+  });
 });
