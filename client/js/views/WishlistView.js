@@ -12,6 +12,7 @@ define([
         template: templates.wishlist,
         childView: WishView,
         childViewContainer: '.wishlist-items',
+        viewComparator: "amount"
 
     });
 });

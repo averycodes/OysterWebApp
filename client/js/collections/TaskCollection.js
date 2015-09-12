@@ -8,6 +8,7 @@ define([
 
     return Backbone.Collection.extend({
         model: Task,
-        url: "/api/v1/tasks/"
+        url: "/api/v1/tasks/",
+        comparator: 'created'
     });
 });
