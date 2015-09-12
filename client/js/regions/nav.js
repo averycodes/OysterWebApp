@@ -7,7 +7,8 @@ define([
         ui: {
             history: '.history-nav',
             wishlist: '.wishlist-nav',
-            checklist: '.checklist-nav'
+            checklist: '.checklist-nav',
+            recurring: '.recurring-nav'
         },
 
         deactivateEverything: function() {
@@ -22,6 +23,11 @@ define([
         activateWishlist: function() {
             this.deactivateEverything();
             $(this.ui.wishlist).addClass('active');
+        },
+
+        activateRecurring: function() {
+            this.deactivateEverything();
+            $(this.ui.recurring).addClass('active');
         },
 
         activateHistory: function() {
