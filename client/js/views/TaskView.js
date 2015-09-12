@@ -51,7 +51,7 @@ define([
 
                 user.set("bank", bank_amt + this.model.get("amount"));
 
-                this.close();
+                this.destroy();
             }
         },
 
@@ -59,7 +59,7 @@ define([
             e.preventDefault();
             e.stopPropagation();
             this.model.destroy();
-            this.close();
+            this.destroy();
         },
 
         onClickEdit: function(e) {

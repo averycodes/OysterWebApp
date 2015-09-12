@@ -44,7 +44,7 @@ define([
                 amount = amount - this.model.get('amount');
                 window.app.user.set('bank', amount);
 
-                this.close();
+                this.destroy();
             }
 
             // TODO: open the buy link
@@ -53,7 +53,7 @@ define([
         onClickRemove: function(e) {
             e.preventDefault();
             this.model.destroy();
-            this.close();
+            this.destroy();
         },
 
         onClickEdit: function() {

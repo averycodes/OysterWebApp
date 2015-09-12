@@ -213,7 +213,7 @@ def update_piggy_bank(sender, instance, created, **kwargs):
 
 
 def complete_task(sender, instance, created, **kwargs):
-    if instance.completed and instance.task_rule.regenerate_on_completion:
+    if instance.completed and instance.task_rule and instance.task_rule.regenerate_on_completion:
         instance.task_rule.create_new_task()
 
 post_save.connect(update_piggy_bank, sender=Task)
