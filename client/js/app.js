@@ -25,7 +25,7 @@ define([
     app.events = _.clone(Backbone.Events);
 
     window.app = app;
-    this.router = new Router();
+    app.router = new Router();
   });
 
   app.on("start", function(options){
