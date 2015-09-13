@@ -19,10 +19,14 @@ define([
       "checklist": "showChecklist",
       "wishlist": "showWishlist",
       "history": "showHistory",
-      "recurring-tasks": "showRecurring",
       "recurring-task-rule/:uuid": "showEditRecurringTaskRule",
+      "recurring-tasks": "showRecurring",
       "" : "showChecklist",
     },
+
+    // onRoute: function(name, path, args) {
+    //   debugger;
+    // },
 
     showChecklist : function() {
       var checklist_items = new TaskCollection();
