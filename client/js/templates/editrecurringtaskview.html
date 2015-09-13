@@ -91,9 +91,18 @@
     <p>http://oystr.herokuapp.com/api/v1/rules/<%= uuid %>/completed/</p>
   </div>
 
-  <div class="ui divider"></div>
+  <div class="ui divider hidden"></div>
 
-  <button class="ui button save-task primary">Save</button>
+  <button class="ui button save-task primary">
+  <% if (isNew) {%>
+    Add
+  <% } else { %>
+    Save
+  <% } %>
+  </button>
+  <% if (isNew) {%>
+    <p><a href="#" class="cancel">Cancel</a></p>
+  <% } %>
 </form>
 
 

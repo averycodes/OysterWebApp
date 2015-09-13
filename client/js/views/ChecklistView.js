@@ -6,11 +6,12 @@ define([
   'underscore',
   'views/TaskView',
   'views/BasicAddItemView',
-  'views/AdvancedAddItemView',
+  'views/EditRecurringTaskRuleView',
   'models/Task',
+  'models/TaskRule',
   'collections/TaskCollection'
 ], function (Marionette, templates, _, TaskView, BasicAddItemView,
-      AdvancedAddItemView, Task, TaskCollection) {
+      EditRecurringTaskRuleView, Task, TaskRule, TaskCollection) {
   'use strict';
 
   return Marionette.CompositeView.extend({
@@ -52,15 +53,35 @@ define([
     },
 
     showAdvancedAdd: function() {
-      this.addItemForm.show(new AdvancedAddItemView({
-        parent: this
+      this.addItemForm.show(new EditRecurringTaskRuleView({
+        parent: this,
+        uuid: this.guid(),
+        model: new TaskRule({
+          title: undefined,
+          amount: app.user.get('small_amount'),
+          frequency: undefined,
+          scale: undefined,
+          must_be_completed_by_time: undefined,
+          must_be_completed_in_x_days: undefined,
+          completable_by: 'Oyster'
+        })
       }));
     },
 
     showBasicAdd: function() {
       this.addItemForm.show(new BasicAddItemView({
-        parent: this
+        parent: this,
       }));
-    }
+    },
+
+    guid: function() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+    },
   });
 });

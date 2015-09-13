@@ -12,11 +12,13 @@ define([
     template: templates.editrecurringtaskview,
 
     templateHelpers: function() {
-
+      var uuid = this.model.get('uuid') || this.uuid;
       return {
-      'small': this.small,
-      'mid': this.mid,
-      'large': this.large
+        'uuid': uuid,
+        'small': this.small,
+        'mid': this.mid,
+        'large': this.large,
+        'isNew': !(this.model.get('uuid'))
       };
     },
 
@@ -29,6 +31,7 @@ define([
       'click .completion-button': 'onChangeCompletion',
       'click .overdue-button': 'onChangeOverdue',
       'click .save-task': 'onClickSave',
+      'click .cancel': 'onClickCancel'
     },
 
     ui: {
@@ -42,6 +45,9 @@ define([
 
     initialize: function() {
       var user = window.app.user;
+
+      this.uuid = this.options.uuid
+      this.parent = this.options.parent
 
       this.small = user.get('small_amount');
       this.mid = user.get('mid_amount');
@@ -249,10 +255,30 @@ define([
     },
 
     onClickSave: function() {
-      this.model.save();
+      if (!this.model.get('uuid')) {
+        // TODO: too kludgy, clean up
+        this.model.set('temp_guid', this.uuid);
+      }
 
-      this.destroy();
-      window.app.router.navigate('checklist', true);
+      var promise = this.model.save();
+
+      if (this.parent) {
+        $.when(promise).done(_.bind(function() {
+          this.parent.collection.add(this.model);
+          this.parent.showBasicAdd();
+        }, this));
+      } else {
+        // TODO: router not working correctly when "?" in URL
+        window.app.router.navigate('checklist', true);
+      }
+
+    },
+
+    onClickCancel: function(e) {
+      e.preventDefault();
+      if (this.parent) {
+        this.parent.showBasicAdd();
+      }
     }
 
   });
