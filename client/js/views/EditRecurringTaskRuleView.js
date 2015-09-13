@@ -257,12 +257,9 @@ define([
     onClickSave: function() {
       if (!this.model.get('uuid')) {
         // TODO: too kludgy, clean up
-        this.model.save();
-        this.model.set('uuid', this.uuid);
-        this.model.save();
-      } else {
-        this.model.save();
+        this.model.set('temp_guid', this.uuid);
       }
+      this.model.save();
 
       if (this.parent) {
         this.parent.showBasicAdd();

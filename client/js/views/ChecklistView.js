@@ -63,7 +63,7 @@ define([
           scale: undefined,
           must_be_completed_by_time: undefined,
           must_be_completed_in_x_days: undefined,
-
+          completable_by: 'Oyster'
         })
       }));
     },

@@ -131,24 +131,23 @@ class TaskRuleViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         data = request.DATA
         task_rule = None
-        if data.get('frequency') and data.get('scale'):
+        if (data.get('frequency') and data.get('scale')) or data.get('regenerate_on_completion'):
             task_rule = TaskRule.objects.create(
                 user=request.user,
-                amount=float(data['amount']),
-                title=data['title'],
-                frequency=data['frequency'],
-                scale=data['scale'],
-                uuid=data['uuid'],
-                completable_by=data['completable_by']
+                amount=float(data.get('amount')),
+                title=data.get('title'),
+                frequency=data.get('frequency'),
+                scale=data.get('scale'),
+                uuid=data.get('temp_guid'),
+                completable_by=data.get('completable_by')
             )
         task = Task.objects.create(
             user=request.user,
-            amount=float(data['amount']),
-            title=data['title'],
+            amount=float(data.get('amount')),
+            title=data.get('title'),
             task_rule=task_rule,
-            doable=bool(data['completable_by'] == 'Oyster')
+            doable=bool(data.get('completable_by') == 'Oyster')
         )
-
         return Response(data, status=status.HTTP_201_CREATED)
 
     @detail_route(methods=['get'])
