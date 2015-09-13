@@ -1,0 +1,111 @@
+<form class="ui form">
+  <div class="field ui fluid input">
+  <input type="text" class="title" placeholder="I will..." value="<%= title %>">
+  </div>
+
+  <div class="ui hidden divider"></div>
+
+  <div class="field">
+  <label>It's worth...</label>
+  <div class="ui buttons">
+    <button class="ui button amount-button small">$<%= small %></button>
+    <div class="or"></div>
+    <button class="ui button amount-button mid">$<%= mid %></button>
+    <div class="or"></div>
+    <button class="ui button amount-button large">$<%= large %></button>
+    <!--<div class="or"></div>
+    <button class="ui button amount-button custom">Custom</button>-->
+  </div>
+  </div>
+
+  <div class="ui hidden divider"></div>
+
+  <div class="grouped field">
+    <label>It should recur...</label>
+    <div class="ui buttons">
+      <button class="ui button frequency-button never">Never</button>
+      <div class="or"></div>
+      <button class="ui button frequency-button daily">Daily</button>
+      <div class="or"></div>
+      <button class="ui button frequency-button weekly">Weekly</button>
+      <div class="or"></div>
+      <button class="ui button frequency-button completion">On Completion</button>
+      <div class="or"></div>
+      <button class="ui button frequency-button custom">Custom Interval</button>
+    </div>
+  </div>
+  <div class="ui right labeled input custom-frequency">
+    <input type="text" placeholder="1" class="frequency" value="<%= frequency %>">
+    <div class="ui selection dropdown">
+    <input type="hidden" class="scale" value="<%= scale %>">
+    <i class="dropdown icon"></i>
+    <div class="default text">Frequency</div>
+    <div class="menu">
+      <div class="item" data-value="day">Time(s) Per Day</div>
+      <div class="item" data-value="week">Time(s) Per Week</div>
+      <div class="item" data-value="month">Time(s) Per Month</div>
+      <div class="item" data-value="year">Time(s) Per Year</div>
+    </div>
+    </div>
+  </div>
+
+  <div class="deadline">
+    <div class="ui hidden divider"></div>
+    <div class="field">
+    <label>It needs to be completed by...</label>
+    <div class="ui buttons">
+      <button class="ui primary button">No Deadline</button>
+      <div class="or"></div>
+      <button class="ui button">Today</button>
+      <div class="or"></div>
+      <button class="ui button">Tomorrow</button>
+      <div class="or"></div>
+      <button class="ui button">This Weekend</button>
+      <div class="or"></div>
+      <button class="ui button">Set Date</button>
+    </div>
+    </div>
+  </div>
+
+  <div class="deadline-rules">
+    <div class="ui hidden divider"></div>
+    <div class="ui right field">
+      <label>[Optional] Set deadline to specific time of day after generation</label>
+      <input type="text" placeholder="18:00" class="frequency" value="<%= must_be_completed_by_time %>">
+    </div>
+    <div class="ui right field">
+      <label>[Optional] Set deadline to number of days after generation</label>
+      <input type="text" placeholder="1" class="frequency" value="<%= must_be_completed_in_x_days %>">
+    </div>
+    <div class="ui right field">
+      <button class="ui button overdue-button">Delete Task if Overdue</button>
+    </div>
+  </div>
+
+  <div class="ui hidden divider"></div>
+
+  <button class="ui button completion-button IFTTT"><img height="30px" src="static/img/ifttt.png" alt="ifttt"></button>
+
+  <div class="ifttt-instructions">
+    <div class="ui hidden divider"></div>
+    <p>http://oystr.herokuapp.com/api/v1/rules/<%= uuid %>/completed/</p>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <button class="ui button save-task primary">Save</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

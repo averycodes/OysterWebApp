@@ -14,7 +14,8 @@ define(function (require) {
         history: require('tpl!templates/history.html'),
         addamazonwish: require('tpl!templates/addamazonwish.html'),
         wishlist: require('tpl!templates/wishlist.html'),
-	settings: require('tpl!templates/settings.html'),
+        settings: require('tpl!templates/settings.html'),
+	editrecurringtaskview: require('tpl!templates/editrecurringtaskview.html'),
 	};
 });
 

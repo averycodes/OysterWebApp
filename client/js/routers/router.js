@@ -2,14 +2,16 @@
 
 define([
   'marionette',
-  'views/ChecklistView',
+  'models/TaskRule',
   'collections/TaskCollection',
-  'views/WishlistView',
   'collections/WishCollection',
+  'views/ChecklistView',
+  'views/WishlistView',
   'views/HistoryView',
   'views/RecurringTasksView',
-], function (Marionette, ChecklistView, TaskCollection, WishlistView, WishCollection,
-             HistoryView, RecurringTasksView) {
+  'views/EditRecurringTaskRuleView',
+], function (Marionette, TaskRule, TaskCollection, WishCollection, ChecklistView,
+             WishlistView, HistoryView, RecurringTasksView, EditRecurringTaskRuleView) {
   'use strict';
 
   return Marionette.AppRouter.extend({
@@ -17,9 +19,14 @@ define([
       "checklist": "showChecklist",
       "wishlist": "showWishlist",
       "history": "showHistory",
+      "recurring-task-rule/:uuid": "showEditRecurringTaskRule",
       "recurring-tasks": "showRecurring",
       "" : "showChecklist",
     },
+
+    // onRoute: function(name, path, args) {
+    //   debugger;
+    // },
 
     showChecklist : function() {
       var checklist_items = new TaskCollection();
@@ -52,6 +59,22 @@ define([
       // var wishlist_items = new WishCollection();
       // wishlist_items.fetch();
       window.app.main.show(new RecurringTasksView());
+
+      $(".nav-item").removeClass("active");
+      $(".recurring-nav").addClass("active");
+    },
+
+    showEditRecurringTaskRule : function(uuid) {
+      var taskRule = new TaskRule({
+        uuid:uuid
+      });
+      taskRule.fetch();
+
+      taskRule.on("change", function() {
+        window.app.main.show(new EditRecurringTaskRuleView({
+          model: taskRule
+        }));
+      }, this);
 
       $(".nav-item").removeClass("active");
       $(".recurring-nav").addClass("active");

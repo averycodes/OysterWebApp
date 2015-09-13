@@ -7,7 +7,7 @@ define([
 
     return Backbone.Model.extend({
         url: function() {
-            if (this.id) {
+            if (this.get('uuid')) {
                 return '/api/v1/rules/' + this.get('uuid') + '/';
             } else {
                 return '/api/v1/rules/';
