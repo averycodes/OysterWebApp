@@ -259,10 +259,14 @@ define([
         // TODO: too kludgy, clean up
         this.model.set('temp_guid', this.uuid);
       }
-      this.model.save();
+
+      var promise = this.model.save();
 
       if (this.parent) {
-        this.parent.showBasicAdd();
+        $.when(promise).done(_.bind(function() {
+          this.parent.collection.add(this.model);
+          this.parent.showBasicAdd();
+        }, this));
       } else {
         // TODO: router not working correctly when "?" in URL
         window.app.router.navigate('checklist', true);
