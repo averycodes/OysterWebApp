@@ -170,6 +170,8 @@ class TaskRule(models.Model):
         return due_date
 
     def create_new_task(self):
+        if self.cancelled:
+            return
         doable = True
         if self.completable_by != 'Oyster':
             doable = False
