@@ -1,6 +1,6 @@
 <form class="ui form">
   <div class="field ui fluid input">
-  <input type="text" class="new-task" placeholder="I will..." value="<%= title %>">
+  <input type="text" class="title" placeholder="I will..." value="<%= title %>">
   </div>
 
   <div class="ui hidden divider"></div>
@@ -37,7 +37,7 @@
   <div class="ui right labeled input custom-frequency">
     <input type="text" placeholder="1" class="frequency" value="<%= frequency %>">
     <div class="ui selection dropdown">
-    <input type="hidden" class="scale">
+    <input type="hidden" class="scale" value="<%= scale %>">
     <i class="dropdown icon"></i>
     <div class="default text">Frequency</div>
     <div class="menu">

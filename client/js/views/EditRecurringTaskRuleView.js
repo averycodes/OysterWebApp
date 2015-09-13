@@ -21,6 +21,9 @@ define([
     },
 
     events: {
+      'blur .title': 'onUpdateTitle',
+      'blur .frequency': 'onUpdateFrequency',
+      'change .scale': 'onUpdateScale',
       'click .frequency-button': 'onChangeFrequency',
       'click .amount-button': 'onChangeAmount',
       'click .completion-button': 'onChangeCompletion',
@@ -52,6 +55,10 @@ define([
       this.updateOverdueUI();
 
       $('.ui.dropdown').dropdown();
+    },
+
+    onUpdateTitle: function(e) {
+      this.model.set('title', $(e.target).val());
     },
 
     onChangeAmount: function(e) {
@@ -179,6 +186,14 @@ define([
         $(this.ui.deadlineRulesBlock).show();
         $(this.ui.deadlineBlock).hide();
       }
+    },
+
+    onUpdateFrequency: function(e) {
+      this.model.set('frequency', $(e.target).val());
+    },
+
+    onUpdateScale: function(e) {
+      this.model.set('scale', $(e.target).val());
     },
 
     onChangeOverdue: function(e) {
