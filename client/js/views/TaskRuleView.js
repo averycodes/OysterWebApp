@@ -19,10 +19,6 @@ define([
 			};
 		},
 
-		ui: {
-
-		},
-
 		events: {
 			'click .edit-button': '',
 			'click .cancel-button': 'onClickCancelButton',
