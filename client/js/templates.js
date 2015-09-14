@@ -8,7 +8,6 @@ define(function (require) {
         task: require('tpl!templates/task.html'),
         taskrule: require('tpl!templates/task_rule.html'),
         wish: require('tpl!templates/wish.html'),
-        advancedadditem: require('tpl!templates/advancedadditem.html'),
         basicadditem: require('tpl!templates/basicadditem.html'),
         piggybank: require('tpl!templates/piggy_bank.html'),
         history: require('tpl!templates/history.html'),

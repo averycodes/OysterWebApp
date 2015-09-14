@@ -60,6 +60,7 @@ class Wish(BillableItem):
     link = models.CharField(max_length=255, null=True, blank=True)
     image_url = models.CharField(max_length=255, null=True, blank=True)
     featured = models.BooleanField(default=False)
+    url = models.CharField(max_length=255, null=True, blank=True)
 
 
 def create_wish_from_url(user, url):
@@ -74,16 +75,26 @@ def create_wish_from_url(user, url):
               associate_tag=ASSOCIATE_TAG,
               access_key_id=AWS_KEY,
               secret_access_key=AWS_SECRET_KEY)
-    result = api.item_lookup(asin, ResponseGroup='ItemAttributes')
-
+    result = api.item_lookup(asin, ResponseGroup='ItemAttributes, OfferFull')
     item = result.Items.Item[0]
+
+    title = item.ItemAttributes.Title
+    url = item.DetailPageURL
+
+    if item.OfferSummary:
+        amount = (item.OfferSummary.LowestNewPrice.Amount / 100)
+    elif item.ItemAttributes.ListPrice:
+        amount = (item.ItemAttributes.ListPrice.Amount / 100)
+    else:
+        amount = 0.0
 
     wish = Wish(
         user=user,
         asin=asin,
-        title=item.ItemAttributes.Title,
-        amount=(item.ItemAttributes.ListPrice.Amount / 100.0),
-        is_credit=False
+        title=title,
+        amount=amount,
+        is_credit=False,
+        url=url
     )
     wish.save()
 
