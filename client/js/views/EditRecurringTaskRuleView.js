@@ -25,6 +25,7 @@ define([
     events: {
       'blur .title': 'onUpdateTitle',
       'blur .frequency': 'onUpdateFrequency',
+      'blur .amount': 'onUpdateAmount',
       'change .scale': 'onUpdateScale',
       'click .frequency-button': 'onChangeFrequency',
       'click .amount-button': 'onChangeAmount',
@@ -36,6 +37,7 @@ define([
 
     ui: {
       'customFrequency': '.custom-frequency',
+      'customAmount': '.custom-amount',
       'deadlineBlock': '.deadline',
       'deadlineRulesBlock': '.deadline-rules',
       'completion': '.completion-button',
@@ -84,7 +86,7 @@ define([
         });
       } else if ($(e.target).hasClass("custom")) {
         this.model.set({
-          amount: undefined
+          amount: null
         });
       }
 
@@ -109,10 +111,14 @@ define([
       $(this.el).find('.amount-button.' + set_amount_to).addClass('primary');
 
       if (set_amount_to == 'custom') {
-        // $(this.ui.customFrequency).show();
+        $(this.ui.customAmount).show();
       } else {
-        // $(this.ui.customFrequency).hide();
+        $(this.ui.customAmount).hide();
       }
+    },
+
+    onUpdateAmount: function(e) {
+      this.model.set('amount', $(e.target).val());
     },
 
     onChangeFrequency: function(e) {
@@ -122,8 +128,8 @@ define([
         this.model.set({
           custom_interval:false,
           regenerate_on_completion: false,
-          frequency: undefined,
-          scale: undefined
+          frequency: null,
+          scale: null
         });
       } else if ($(e.target).hasClass('daily')) {
         this.model.set({
@@ -143,15 +149,15 @@ define([
         this.model.set({
           custom_interval:false,
           regenerate_on_completion: true,
-          frequency: undefined,
-          scale: undefined
+          frequency: null,
+          scale: null
         });
       } else if ($(e.target).hasClass('custom')) {
         this.model.set({
           custom_interval:true,
           regenerate_on_completion: false,
-          frequency: undefined,
-          scale: undefined
+          frequency: null,
+          scale: null
         });
       }
 
