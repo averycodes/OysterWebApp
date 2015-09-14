@@ -14,6 +14,12 @@ define([
     childViewContainer: '.wishlist-items',
     viewComparator: "amount",
 
+    templateHelpers: function() {
+      return {
+        showFeaturedCard: !!this.model
+      }
+    },
+
     initialize: function() {
       this.listenTo(this.collection, "change:featured", this.setFeatured);
       this.fullCollection = this.collection;
