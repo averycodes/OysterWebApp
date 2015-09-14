@@ -57,7 +57,6 @@ class Task(BillableItem):
 class Wish(BillableItem):
     amazon_link = models.CharField(max_length=255, null=True, blank=True)
     asin = models.CharField(max_length=255, null=True, blank=True)
-    link = models.CharField(max_length=255, null=True, blank=True)
     image_url = models.CharField(max_length=255, null=True, blank=True)
     featured = models.BooleanField(default=False)
     url = models.CharField(max_length=255, null=True, blank=True)
@@ -75,7 +74,7 @@ def create_wish_from_url(user, url):
               associate_tag=ASSOCIATE_TAG,
               access_key_id=AWS_KEY,
               secret_access_key=AWS_SECRET_KEY)
-    result = api.item_lookup(asin, ResponseGroup='ItemAttributes, OfferFull')
+    result = api.item_lookup(asin, ResponseGroup='ItemAttributes, OfferFull, Images')
     item = result.Items.Item[0]
 
     title = item.ItemAttributes.Title
@@ -88,19 +87,17 @@ def create_wish_from_url(user, url):
     else:
         amount = 0.0
 
+    image_url = item.LargeImage.URL
+
     wish = Wish(
         user=user,
         asin=asin,
         title=title,
         amount=amount,
         is_credit=False,
-        url=url
+        url=url,
+        image_url=image_url
     )
-    wish.save()
-
-    result = api.item_lookup(asin, ResponseGroup='Images')
-    item = result.Items.Item[0]
-    wish.image_url = item.LargeImage.URL
     wish.save()
 
     return wish

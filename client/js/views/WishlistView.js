@@ -6,7 +6,9 @@ define([
   'underscore',
   'views/WishView',
   'views/AddAmazonWish',
-], function (Marionette, templates, _, WishView, AddAmazonWish) {
+  'views/EditWishView',
+  'models/Wish',
+], function (Marionette, templates, _, WishView, AddAmazonWish, EditWishView, Wish) {
   'use strict';
 
   return Marionette.CompositeView.extend({
@@ -22,18 +24,20 @@ define([
     },
 
     ui: {
-      'addWish': '.add-wish'
+      'addWishes': '.add-wishes'
     },
 
     events: {
-      'click .add-wish': 'onClickAddWish'
+      'click .add-wish': 'onClickAddWish',
+      'click .add-amazon-wish': 'onClickAddAmazonWish'
     },
 
     initialize: function() {
       this.regionManager = new Marionette.RegionManager();
 
-      this.listenTo(this.collection, "change:featured", this.setFeatured);
       this.fullCollection = this.collection;
+      this.listenTo(this.fullCollection, "change:featured", this.setFeatured);
+      this.listenTo(this.fullCollection, 'add', this.onAddWish);
 
       this.model = this.fullCollection.find(function(wish) {
         return wish.get('featured') === true;
@@ -68,13 +72,29 @@ define([
       }
     },
 
-    onClickAddWish: function(e) {
+    onClickAddAmazonWish: function(e) {
       e.preventDefault();
 
       this.wishContainer.show(new AddAmazonWish({
-        parent: this
+        parent: this,
+        model: new Wish()
       }));
-      this.ui.addWish.hide();
+      this.ui.addWishes.hide();
+    },
+
+    onClickAddWish: function(e) {
+      e.preventDefault();
+
+      this.wishContainer.show(new EditWishView({
+        parent: this,
+        model: new Wish()
+      }));
+      this.ui.addWishes.hide();
+    },
+
+    onAddWish: function() {
+      this.collection = this.fullCollection.unfeatured();
+      this.render();
     }
   });
 });

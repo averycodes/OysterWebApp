@@ -10,7 +10,10 @@ define([
         blacklist: ['image'],
 
         defaults: {
-            'image_url': 'static/img/oyster.jpg'
+            'title': null,
+            'amount': null,
+            'url': null,
+            'image_url': null
         },
 
         toJSON: function(options) {
