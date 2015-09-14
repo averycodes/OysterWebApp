@@ -59,6 +59,7 @@ class Wish(BillableItem):
     asin = models.CharField(max_length=255, null=True, blank=True)
     link = models.CharField(max_length=255, null=True, blank=True)
     image_url = models.CharField(max_length=255, null=True, blank=True)
+    featured = models.BooleanField(default=False)
 
 
 def create_wish_from_url(user, url):

@@ -1,13 +1,22 @@
 /*global define */
 
 define([
-    'backbone',
-    'models/Wish'
+  'backbone',
+  'models/Wish'
 ], function (Backbone, Wish) {
-    'use strict';
+  'use strict';
 
-    return Backbone.Collection.extend({
-        model: Wish,
-        url: "/api/v1/wishes/"
-    });
+  var WishCollection = Backbone.Collection.extend({
+    model: Wish,
+    url: "/api/v1/wishes/",
+
+    unfeatured: function () {
+      var filtered = this.filter(function (wish) {
+        return wish.get("featured") === false;
+      });
+      return new WishCollection(filtered);
+    }
+  });
+
+  return WishCollection;
 });
