@@ -1,0 +1,38 @@
+<form class="ui form">
+  <div class="field ui fluid input">
+    <input type="text" class="title" placeholder="The biggest box of chocolates" value="<%= title %>">
+  </div>
+
+  <div class="ui hidden divider"></div>
+
+  <div class="field ui fluid input">
+    <input type="text" class="amount" placeholder="10.00" value="<%= amount %>">
+  </div>
+
+  <div class="ui hidden divider"></div>
+
+  <div class="field ui fluid input">
+    <input type="text" class="url" placeholder="http://www.bananas.com" value="<%= url %>">
+  </div>
+
+  <div class="ui hidden divider"></div>
+
+  <div class="field ui fluid input">
+    <input type="text" class="image" placeholder="http://www.bananas.com/banana.png" value="<%= image_url %>">
+  </div>
+
+  <div class="ui hidden divider"></div>
+
+  <button class="ui button save-wish primary">
+  <% if (isNew) {%>
+    Add
+  <% } else { %>
+    Save
+  <% } %>
+  </button>
+  <% if (isNew) {%>
+    <p><a href="#" class="cancel">Cancel</a></p>
+  <% } %>
+</form>
+
+

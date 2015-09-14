@@ -61,14 +61,15 @@ class WishViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         data = request.DATA
-        if data['amazon_link']:
-            wish = create_wish_from_url(request.user, data['amazon_link'])
+
+        if data.get('amazon_link'):
+            wish = create_wish_from_url(request.user, data.get('amazon_link'))
         else:
             wish = Wish(
-                link=data['link'],
-                image_url=data['image_url'],
-                amount=data['amount'],
-                title=data['title'],
+                url=data.get('url'),
+                image_url=data.get('image_url'),
+                amount=data.get('amount'),
+                title=data.get('title'),
                 user=request.user
             )
             wish.save()
