@@ -84,7 +84,7 @@ define([
         });
       } else if ($(e.target).hasClass("custom")) {
         this.model.set({
-          amount: undefined
+          amount: null
         });
       }
 
@@ -122,8 +122,8 @@ define([
         this.model.set({
           custom_interval:false,
           regenerate_on_completion: false,
-          frequency: undefined,
-          scale: undefined
+          frequency: null,
+          scale: null
         });
       } else if ($(e.target).hasClass('daily')) {
         this.model.set({
@@ -143,15 +143,15 @@ define([
         this.model.set({
           custom_interval:false,
           regenerate_on_completion: true,
-          frequency: undefined,
-          scale: undefined
+          frequency: null,
+          scale: null
         });
       } else if ($(e.target).hasClass('custom')) {
         this.model.set({
           custom_interval:true,
           regenerate_on_completion: false,
-          frequency: undefined,
-          scale: undefined
+          frequency: null,
+          scale: null
         });
       }
 
