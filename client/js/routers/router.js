@@ -38,9 +38,12 @@ define([
     },
 
     showWishlist : function() {
-      var wishlist_items = new WishCollection();
-      wishlist_items.fetch();
-      window.app.main.show(new WishlistView({collection: wishlist_items}));
+      var wishlist_items = new WishCollection(),
+          promise = wishlist_items.fetch();
+
+      $.when(promise).then(function() {
+        window.app.main.show(new WishlistView({collection: wishlist_items}));
+      });
 
       $(".nav-item").removeClass("active");
       $(".wishlist-nav").addClass("active");

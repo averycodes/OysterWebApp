@@ -18,10 +18,11 @@ define([
 
         events: {
             'click .buy': 'onClickBuy',
-            'click .remove': 'onClickRemove'
+            'click .remove': 'onClickRemove',
+            'click .feature': 'onClickFeature'
         },
 
-        templateHelpers:function(){
+        templateHelpers:function() {
             return {
                 image: this.model.get('image'),
             }
@@ -56,6 +57,13 @@ define([
             this.destroy();
         },
 
+        onClickFeature: function(e) {
+            e.preventDefault();
+            this.model.set('featured', true);
+            this.model.save();
+        },
+
+        // TODO: deprecated
         onClickEdit: function() {
             this.ui.remove.removeClass('display-none');
             this.ui.cart.addClass('display-none');
@@ -64,6 +72,8 @@ define([
         onClickDone: function() {
             this.ui.remove.addClass('display-none');
             this.ui.cart.removeClass('display-none');
-        }
+        },
+
+
     });
 });
