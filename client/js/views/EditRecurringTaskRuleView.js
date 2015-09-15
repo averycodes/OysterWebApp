@@ -28,12 +28,10 @@ define([
       'blur .amount': 'onUpdateAmount',
       'change .scale': 'onUpdateScale',
       'change .amount-dropdown': 'onSelectAmount',
+      'change .period-dropdown': 'onSelectPeriod',
       'click .completion-button': 'onChangeCompletion',
       'click .save-task': 'onClickSave',
       'click .cancel': 'onClickCancel',
-      'click .frequency-button': 'onChangeFrequency',
-      'click .amount-button': 'onChangeAmount',
-      'click .overdue-button': 'onChangeOverdue',
     },
 
     ui: {
@@ -59,17 +57,9 @@ define([
     },
 
     onDomRefresh: function() {
-      if (!window.mobile) {
-        this.updateFrequencyUI();
-        this.updateAmountUI();
-        this.updateOverdueUI();
-      } else {
-        if (_.contains(this.valid_amounts, parseInt(this.model.get('amount')))) {
-          $(this.ui.customAmount).hide();
-        } else {
-          $(this.el).find('amount-dropdown').val('custom');
-        }
-      }
+      this.updatePeriodUI();
+      this.updateAmountUI();
+      this.updateOverdueUI();
       this.updateCompletionUI();
 
       $('.ui.dropdown').dropdown();
@@ -77,30 +67,6 @@ define([
 
     onUpdateTitle: function(e) {
       this.model.set('title', $(e.target).val());
-    },
-
-    onChangeAmount: function(e) {
-      e.preventDefault();
-
-      if ($(e.target).hasClass("small")) {
-        this.model.set({
-          amount: this.small
-        });
-      } else if ($(e.target).hasClass("mid")) {
-        this.model.set({
-          amount: this.mid
-        });
-      } else if ($(e.target).hasClass("large")) {
-        this.model.set({
-          amount: this.large
-        });
-      } else if ($(e.target).hasClass("custom")) {
-        this.model.set({
-          amount: null
-        });
-      }
-
-      this.updateAmountUI();
     },
 
     onSelectAmount: function(e) {
@@ -114,66 +80,52 @@ define([
       }
     },
 
-    updateAmountUI: function() {
-      var amount = this.model.get('amount'),
-          set_amount_to;
-
-      if (amount == this.small) {
-        set_amount_to = 'small';
-      } else if (amount == this.mid) {
-        set_amount_to = 'mid';
-      } else if (amount == this.large) {
-        set_amount_to = 'large';
-      } else {
-        set_amount_to = 'custom';
-      }
-
-      $(this.el).find('.amount-button').removeClass('primary');
-      $(this.el).find('.amount-button.' + set_amount_to).addClass('primary');
-
-      if (set_amount_to == 'custom') {
-        $(this.ui.customAmount).show();
-      } else {
-        $(this.ui.customAmount).hide();
-      }
-    },
-
     onUpdateAmount: function(e) {
       this.model.set('amount', $(e.target).val());
     },
 
-    onChangeFrequency: function(e) {
+    updateAmountUI: function() {
+      if (_.contains(this.valid_amounts, parseInt(this.model.get('amount')))) {
+        $(this.ui.customAmount).hide();
+      } else {
+        $(this.el).find('amount-dropdown').val('custom');
+      }
+    },
+
+    onSelectPeriod: function(e) {
       e.preventDefault();
 
-      if ($(e.target).hasClass('never')) {
+      var val = $(e.target).val();
+
+      if (val == 'never') {
         this.model.set({
           custom_interval:false,
           regenerate_on_completion: false,
           frequency: null,
           scale: null
         });
-      } else if ($(e.target).hasClass('daily')) {
+      } else if (val == 'daily') {
         this.model.set({
           custom_interval:false,
           frequency: 1,
           scale: 'day',
           regenerate_on_completion: false
         });
-      } else if ($(e.target).hasClass('weekly')) {
+      } else if (val == 'weekly') {
         this.model.set({
           custom_interval:false,
           frequency: 1,
           scale: 'week',
           regenerate_on_completion: false
         });
-      } else if ($(e.target).hasClass('completion')) {
+      } else if (val == 'completion') {
         this.model.set({
           custom_interval:false,
           regenerate_on_completion: true,
           frequency: null,
           scale: null
         });
-      } else if ($(e.target).hasClass('custom')) {
+      } else if (val == 'custom') {
         this.model.set({
           custom_interval:true,
           regenerate_on_completion: false,
@@ -182,37 +134,36 @@ define([
         });
       }
 
-      this.updateFrequencyUI();
+      this.updatePeriodUI();
     },
 
-    updateFrequencyUI: function() {
+    updatePeriodUI: function() {
       var freq = this.model.get('frequency'),
           scale = this.model.get('scale'),
           completion = this.model.get('regenerate_on_completion'),
-          set_frequency_to;
+          set_period_to;
 
       if (freq == 1 && scale == 'day') {
-        set_frequency_to = 'daily';
+        set_period_to = 'daily';
       } else if (freq == 1 && scale == 'week') {
-        set_frequency_to = 'weekly';
+        set_period_to = 'weekly';
       } else if (completion) {
-        set_frequency_to = 'completion';
+        set_period_to = 'completion';
       } else if ((freq && scale) || this.model.get('custom_interval')) {
-        set_frequency_to = 'custom';
+        set_period_to = 'custom';
       } else {
-        set_frequency_to = 'never';
+        set_period_to = 'never';
       }
 
-      $(this.el).find('.frequency-button').removeClass('primary');
-      $(this.el).find('.frequency-button.' + set_frequency_to).addClass('primary');
+      $(this.el).find('.period-dropdown').val(set_period_to);
 
-      if (set_frequency_to == 'custom') {
+      if (set_period_to == 'custom') {
         $(this.ui.customFrequency).show();
       } else {
         $(this.ui.customFrequency).hide();
       }
 
-      if (set_frequency_to == 'never') {
+      if (set_period_to == 'never') {
         $(this.ui.deadlineRulesBlock).hide();
         $(this.ui.deadlineBlock).show();
       } else {
@@ -227,31 +178,6 @@ define([
 
     onUpdateScale: function(e) {
       this.model.set('scale', $(e.target).val());
-    },
-
-    onChangeOverdue: function(e) {
-      var $t = $(e.target);
-      if ($t.hasClass('primary') || $t.closest('button').hasClass('primary')) {
-        this.model.set({
-          can_be_overdue: true
-        });
-      } else {
-        this.model.set({
-          can_be_overdue: false
-        });
-      }
-
-      this.updateOverdueUI();
-    },
-
-    updateOverdueUI: function() {
-      var can_be_overdue = this.model.get('can_be_overdue');
-
-      if (can_be_overdue == true) {
-        $(this.ui.overdue).removeClass('primary');
-      } else {
-        $(this.ui.overdue).addClass('primary');
-      }
     },
 
     onChangeCompletion: function(e) {

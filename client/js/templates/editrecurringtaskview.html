@@ -6,7 +6,7 @@
   <div class="ui hidden divider"></div>
 
   <div class="field">
-    <% if (window.mobile) { %>
+    <label>It's worth...</label>
     <div class="ui selection dropdown">
       <input type="hidden" class="amount-dropdown" value="<%= amount %>">
       <i class="dropdown icon"></i>
@@ -18,18 +18,6 @@
         <div class="item" data-value="custom">Custom</div>
       </div>
     </div>
-    <% } else { %>
-    <label>It's worth...</label>
-    <div class="ui buttons">
-      <button class="ui button amount-button small">$<%= small %></button>
-      <div class="or"></div>
-      <button class="ui button amount-button mid">$<%= mid %></button>
-      <div class="or"></div>
-      <button class="ui button amount-button large">$<%= large %></button>
-      <div class="or"></div>
-      <button class="ui button amount-button custom">Custom</button>
-    </div>
-    <% } %>
   </div>
 
   <div class="ui right labeled input custom-amount">
@@ -43,16 +31,17 @@
 
   <div class="grouped field">
     <label>It should recur...</label>
-    <div class="ui buttons">
-      <button class="ui button frequency-button never">Never</button>
-      <div class="or"></div>
-      <button class="ui button frequency-button daily">Daily</button>
-      <div class="or"></div>
-      <button class="ui button frequency-button weekly">Weekly</button>
-      <div class="or"></div>
-      <button class="ui button frequency-button completion">On Completion</button>
-      <div class="or"></div>
-      <button class="ui button frequency-button custom">Custom Interval</button>
+    <div class="ui selection dropdown">
+      <input type="hidden" class="period-dropdown">
+      <i class="dropdown icon"></i>
+      <div class="default text">It should recur...</div>
+      <div class="menu">
+        <div class="item" data-value="never">Never</div>
+        <div class="item" data-value="daily">Daily</div>
+        <div class="item" data-value="weekly">Weekly</div>
+        <div class="item" data-value="completion">On Completion</div>
+        <div class="item" data-value="custom">Custom Interval</div>
+      </div>
     </div>
   </div>
   <div class="ui right labeled input custom-frequency">
@@ -70,21 +59,21 @@
     </div>
   </div>
 
-  <div class="deadline">
-    <div class="ui hidden divider"></div>
-    <div class="field">
-    <label>It needs to be completed by...</label>
-    <div class="ui buttons">
-      <button class="ui button">No Deadline</button>
-      <div class="or"></div>
-      <button class="ui button">Today</button>
-      <div class="or"></div>
-      <button class="ui button">Tomorrow</button>
-      <div class="or"></div>
-      <button class="ui button">This Weekend</button>
-      <div class="or"></div>
-      <button class="ui button">Set Date</button>
-    </div>
+  <div class="ui hidden divider"></div>
+
+  <div class="grouped field deadline">
+    <label>It needs to be completed by....</label>
+    <div class="ui selection dropdown">
+      <input type="hidden" class="deadline-dropdown">
+      <i class="dropdown icon"></i>
+      <div class="default text">It needs to be completed by....</div>
+      <div class="menu">
+        <div class="item" data-value="never">No Deadline</div>
+        <div class="item" data-value="daily">Today</div>
+        <div class="item" data-value="weekly">Tomorrow</div>
+        <div class="item" data-value="completion">This Weekend</div>
+        <div class="item" data-value="custom">Set Date</div>
+      </div>
     </div>
   </div>
 
