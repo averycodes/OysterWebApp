@@ -5,6 +5,7 @@ define(function (require) {
 
 	return {
         checklist: require('tpl!templates/checklist.html'),
+        nav: require('tpl!templates/nav.html'),
         task: require('tpl!templates/task.html'),
         taskrule: require('tpl!templates/task_rule.html'),
         wish: require('tpl!templates/wish.html'),
