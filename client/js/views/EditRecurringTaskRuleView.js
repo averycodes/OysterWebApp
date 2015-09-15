@@ -234,6 +234,8 @@ define([
     },
 
     onChangeCompletion: function(e) {
+      e.preventDefault();
+
       var $t = $(e.target);
       if ($t.hasClass('primary') || $t.closest('button').hasClass('primary')) {
         this.model.set({
