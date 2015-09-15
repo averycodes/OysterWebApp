@@ -27,12 +27,13 @@ define([
       'blur .frequency': 'onUpdateFrequency',
       'blur .amount': 'onUpdateAmount',
       'change .scale': 'onUpdateScale',
+      'change .amount-dropdown': 'onSelectAmount',
+      'click .completion-button': 'onChangeCompletion',
+      'click .save-task': 'onClickSave',
+      'click .cancel': 'onClickCancel',
       'click .frequency-button': 'onChangeFrequency',
       'click .amount-button': 'onChangeAmount',
-      'click .completion-button': 'onChangeCompletion',
       'click .overdue-button': 'onChangeOverdue',
-      'click .save-task': 'onClickSave',
-      'click .cancel': 'onClickCancel'
     },
 
     ui: {
@@ -54,13 +55,22 @@ define([
       this.small = user.get('small_amount');
       this.mid = user.get('mid_amount');
       this.large = user.get('large_amount');
+      this.valid_amounts = [this.small, this.mid, this.large];
     },
 
     onDomRefresh: function() {
-      this.updateFrequencyUI();
-      this.updateAmountUI();
+      if (!window.mobile) {
+        this.updateFrequencyUI();
+        this.updateAmountUI();
+        this.updateOverdueUI();
+      } else {
+        if (_.contains(this.valid_amounts, this.model.get('amount'))) {
+          $(this.ui.customAmount).hide();
+        } else {
+          $(this.el).find('amount-dropdown').val('custom');
+        }
+      }
       this.updateCompletionUI();
-      this.updateOverdueUI();
 
       $('.ui.dropdown').dropdown();
     },
@@ -93,6 +103,11 @@ define([
       this.updateAmountUI();
     },
 
+    onSelectAmount: function(e) {
+      debugger
+      this.model.set('amount', $(e.target).val());
+    },
+
     updateAmountUI: function() {
       var amount = this.model.get('amount'),
           set_amount_to;
@@ -118,7 +133,15 @@ define([
     },
 
     onUpdateAmount: function(e) {
-      this.model.set('amount', $(e.target).val());
+      var amount = $(e.target).val();
+
+      if (amount) {
+        this.model.set('amount', val);
+        $(this.ui.customAmount).hide();
+      } else {
+        $(this.ui.customAmount).show();
+      }
+
     },
 
     onChangeFrequency: function(e) {
@@ -234,6 +257,8 @@ define([
     },
 
     onChangeCompletion: function(e) {
+      e.preventDefault();
+
       var $t = $(e.target);
       if ($t.hasClass('primary') || $t.closest('button').hasClass('primary')) {
         this.model.set({

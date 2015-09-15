@@ -6,16 +6,30 @@
   <div class="ui hidden divider"></div>
 
   <div class="field">
-  <label>It's worth...</label>
-  <div class="ui buttons">
-    <button class="ui button amount-button small">$<%= small %></button>
-    <div class="or"></div>
-    <button class="ui button amount-button mid">$<%= mid %></button>
-    <div class="or"></div>
-    <button class="ui button amount-button large">$<%= large %></button>
-    <div class="or"></div>
-    <button class="ui button amount-button custom">Custom</button>
-  </div>
+    <% if (window.mobile) { %>
+    <div class="ui selection dropdown">
+      <input type="hidden" class="amount-dropdown" value="<%= amount %>">
+      <i class="dropdown icon"></i>
+      <div class="default text">It's worth...</div>
+      <div class="menu">
+        <div class="item" data-value="<%= small %>">$<%= small %></div>
+        <div class="item" data-value="<%= mid %>">$<%= mid %></div>
+        <div class="item" data-value="<%= large %>">$<%= large %></div>
+        <div class="item" data-value="custom">Custom</div>
+      </div>
+    </div>
+    <% } else { %>
+    <label>It's worth...</label>
+    <div class="ui buttons">
+      <button class="ui button amount-button small">$<%= small %></button>
+      <div class="or"></div>
+      <button class="ui button amount-button mid">$<%= mid %></button>
+      <div class="or"></div>
+      <button class="ui button amount-button large">$<%= large %></button>
+      <div class="or"></div>
+      <button class="ui button amount-button custom">Custom</button>
+    </div>
+    <% } %>
   </div>
 
   <div class="ui right labeled input custom-amount">
@@ -41,15 +55,15 @@
   <div class="ui right labeled input custom-frequency">
     <input type="text" placeholder="1" class="frequency" value="<%= frequency %>">
     <div class="ui selection dropdown">
-    <input type="hidden" class="scale" value="<%= scale %>">
-    <i class="dropdown icon"></i>
-    <div class="default text">Frequency</div>
-    <div class="menu">
-      <div class="item" data-value="day">Time(s) Per Day</div>
-      <div class="item" data-value="week">Time(s) Per Week</div>
-      <div class="item" data-value="month">Time(s) Per Month</div>
-      <div class="item" data-value="year">Time(s) Per Year</div>
-    </div>
+      <input type="hidden" class="scale" value="<%= scale %>">
+      <i class="dropdown icon"></i>
+      <div class="default text">Frequency</div>
+      <div class="menu">
+        <div class="item" data-value="day">Time(s) Per Day</div>
+        <div class="item" data-value="week">Time(s) Per Week</div>
+        <div class="item" data-value="month">Time(s) Per Month</div>
+        <div class="item" data-value="year">Time(s) Per Year</div>
+      </div>
     </div>
   </div>
 
