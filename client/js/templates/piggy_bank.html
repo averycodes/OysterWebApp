@@ -1,3 +1,4 @@
 <div class="value">
-    <i class="money icon"></i> $<%= amount %>
+    <% if (!window.mobile) { %><i class="money icon"></i><% } %>
+    $<%= amount %>
 </div>

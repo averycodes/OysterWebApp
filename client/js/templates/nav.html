@@ -1,4 +1,4 @@
-<div class="header item"><img src="/static/img/icons/oyster-icon.png"></div>
+<% if (!window.mobile) { %><div class="header item"><img src="/static/img/icons/oyster-icon.png"></div><% } %>
 <a class="active item checklist-nav nav-item" href="#checklist"><% if (window.mobile) { %><i class="check square icon"></i><% } else { %>Checklist<% } %></a>
 <a class="item wishlist-nav nav-item" href="#wishlist"><% if (window.mobile) { %><i class="trophy icon"></i><% } else { %>Wishlist<% } %></a>
 <a class="item history-nav nav-item" href="#history"><% if (window.mobile) { %><i class="history icon"></i><% } else { %>History<% } %></a>
