@@ -27,7 +27,6 @@ define([
       'blur .frequency': 'onUpdateFrequency',
       'blur .amount': 'onUpdateAmount',
       'change .scale': 'onUpdateScale',
-      'change .amount-dropdown': 'onSelectAmount',
       'change .period-dropdown': 'onSelectPeriod',
       'click .completion-button': 'onChangeCompletion',
       'click .save-task': 'onClickSave',
@@ -49,17 +48,10 @@ define([
 
       this.uuid = this.options.uuid
       this.parent = this.options.parent
-
-      this.small = user.get('small_amount');
-      this.mid = user.get('mid_amount');
-      this.large = user.get('large_amount');
-      this.valid_amounts = [this.small, this.mid, this.large];
     },
 
     onDomRefresh: function() {
       this.updatePeriodUI();
-      this.updateAmountUI();
-      this.updateOverdueUI();
       this.updateCompletionUI();
 
       $('.ui.dropdown').dropdown();
@@ -69,27 +61,8 @@ define([
       this.model.set('title', $(e.target).val());
     },
 
-    onSelectAmount: function(e) {
-      var val = $(e.target).val();
-
-      if (_.contains(this.valid_amounts, parseInt(val))) {
-        this.model.set('amount', val);
-        $(this.ui.customAmount).hide();
-      } else {
-        $(this.ui.customAmount).show();
-      }
-    },
-
     onUpdateAmount: function(e) {
       this.model.set('amount', $(e.target).val());
-    },
-
-    updateAmountUI: function() {
-      if (_.contains(this.valid_amounts, parseInt(this.model.get('amount')))) {
-        $(this.ui.customAmount).hide();
-      } else {
-        $(this.el).find('amount-dropdown').val('custom');
-      }
     },
 
     onSelectPeriod: function(e) {
