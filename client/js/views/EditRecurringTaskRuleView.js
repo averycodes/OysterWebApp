@@ -64,7 +64,7 @@ define([
         this.updateAmountUI();
         this.updateOverdueUI();
       } else {
-        if (_.contains(this.valid_amounts, this.model.get('amount'))) {
+        if (_.contains(this.valid_amounts, parseInt(this.model.get('amount')))) {
           $(this.ui.customAmount).hide();
         } else {
           $(this.el).find('amount-dropdown').val('custom');
@@ -104,8 +104,14 @@ define([
     },
 
     onSelectAmount: function(e) {
-      debugger
-      this.model.set('amount', $(e.target).val());
+      var val = $(e.target).val();
+
+      if (_.contains(this.valid_amounts, parseInt(val))) {
+        this.model.set('amount', val);
+        $(this.ui.customAmount).hide();
+      } else {
+        $(this.ui.customAmount).show();
+      }
     },
 
     updateAmountUI: function() {
@@ -133,15 +139,7 @@ define([
     },
 
     onUpdateAmount: function(e) {
-      var amount = $(e.target).val();
-
-      if (amount) {
-        this.model.set('amount', val);
-        $(this.ui.customAmount).hide();
-      } else {
-        $(this.ui.customAmount).show();
-      }
-
+      this.model.set('amount', $(e.target).val());
     },
 
     onChangeFrequency: function(e) {
