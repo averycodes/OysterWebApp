@@ -1,27 +1,26 @@
 /*global define */
 
 define([
-    'marionette',
-    'templates',
-    'underscore',
-    'views/HistoryItemView',
-    'collections/HistoryCollection'
+  'marionette',
+  'templates',
+  'underscore',
+  'views/HistoryItemView',
+  'collections/HistoryCollection'
 ], function (Marionette, templates, _, HistoryItemView, HistoryCollection) {
-    'use strict';
+  'use strict';
 
-    return Marionette.CollectionView.extend({
-        childView: HistoryItemView,
-        tagName: 'ul',
-        className: 'table-view',
+  return Marionette.CollectionView.extend({
+    childView: HistoryItemView,
+    className: 'ui middle aligned selection list history-view',
 
-        onShow: function() {
-            this.trigger('nav:history');
-        },
+    onShow: function() {
+      this.trigger('nav:history');
+    },
 
-        initialize: function() {
-            this.collection = new HistoryCollection();
-            this.collection.fetch();
-        },
+    initialize: function() {
+      this.collection = new HistoryCollection();
+      this.collection.fetch();
+    },
 
-    });
+  });
 });
