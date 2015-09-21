@@ -10,6 +10,7 @@ define([
 
   return Marionette.ItemView.extend({
     template: templates.addamazonwish,
+    className: "ui grid",
 
     events: {
       'blur .amazon-url': 'onChangeUrl',
