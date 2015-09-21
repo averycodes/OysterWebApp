@@ -66,8 +66,13 @@ define([
 
     onClickFeature: function(e) {
       e.preventDefault();
-      this.model.set('featured', true);
-      this.model.save();
+      if (this.model.get('featured')) {
+        this.model.set('featured', false);
+        this.model.save();
+      } else {
+        this.model.set('featured', true);
+        this.model.save();
+      }
     },
 
     // TODO: deprecated

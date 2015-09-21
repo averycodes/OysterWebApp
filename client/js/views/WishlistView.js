@@ -77,14 +77,16 @@ define([
       if (value) {
         _.each(this.fullCollection.reject({id:model.id}), function(wish) {
           if (wish.get('featured')) {
-            wish.set('featured', false);
+            wish.set('featured', false, {silent:true});
             wish.save();
           }
         });
-        this.collection = this.fullCollection.unfeatured();
         this.model = model;
-        this.render();
+      } else {
+        this.model = null;
       }
+      this.collection = this.fullCollection.unfeatured();
+      this.render();
     },
 
     onClickCancel: function(e) {
