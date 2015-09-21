@@ -8,7 +8,6 @@ define([
   'use strict';
 
   return Marionette.ItemView.extend({
-    className: 'history-item-view list-group-item',
     template: templates.history,
     className: 'history-item-view item',
 
