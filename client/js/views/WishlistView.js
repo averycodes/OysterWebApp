@@ -51,11 +51,20 @@ define([
       this.wishContainer = this.regionManager.addRegion(
         "wishContainer", ".add-wish-container"
       );
+      this.featuredWish = this.regionManager.addRegion(
+        "featuredWish", ".featured-wish"
+      );
       this.wishContainer.show(new AddAmazonWish({
         parent: this,
         model: new Wish()
       }));
       this.ui.cancel.hide();
+
+      if (this.model) {
+        this.featuredWish.show(new WishView({
+          model: this.model
+        }));
+      }
     },
 
     onClose: function() {

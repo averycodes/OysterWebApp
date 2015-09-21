@@ -4,32 +4,7 @@
   <p><a href="#" class="cancel">Cancel</a></p>
 </div>
 <% if (showFeaturedCard) { %>
-<div class="ui centered card">
-  <div class="image">
-  <img src="<%= image_url %>">
-  </div>
-  <div class="content">
-  <a class="header"><%= title %></a>
-  <div class="meta">
-  <span class="date">$<%= amount %></span>
-  </div>
-  </div>
-
-  <div class="extra content">
-  <% if (window.app.user.get('bank') >= amount) { %>
-  <a class="buy">
-    <i class="cart icon"></i>
-    Buy
-  </a>
-  <% } %>
-
-  <a class="remove right floated">
-    <i class="trash icon"></i>
-  </a>
-  <a class="feature right floated">
-    <i class="<% if(featured) {%> yellow <% } %> star icon"></i>
-  </a>
-  </div>
+<div class="featured-wish">
 </div>
 <% } %>
 <div class="ui hidden divider"></div>

@@ -9,7 +9,7 @@ define([
 
   return Marionette.ItemView.extend({
     template: templates.wish,
-    className: 'card',
+    className: 'ui centered card',
     tagName: 'div',
 
     ui: {
@@ -23,8 +23,15 @@ define([
     },
 
     templateHelpers:function() {
+      var link_url;
+      if (this.model.get('amazon_url')) {
+        link_url = this.model.get('amazon_url');
+      } else {
+        link_url = this.model.get('url');
+      }
       return {
-        image: this.model.get('image'),
+        link_url: link_url,
+
       }
     },
 
