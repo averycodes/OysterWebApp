@@ -1,10 +1,25 @@
-<span class="undo primary pull-left icon icon-undo display-none"></span>
-<% if (is_credit) { %>
-<span class="vector positive pull-left icon icon-add"></span>
-<% } else { %>
-<span class="vector negative pull-left icon icon-minus"></span>
-<% } %>
-<div class="media-body">
-    $<%= amount %> <%= title %>
+<div class="content ui grid">
+  <div class="task sixteen column row">
+    <div class="fifteen wide column">
+      <div class="ui left fluid">
+        <div class="header">
+          <% if (is_credit) { %>
+          <i class="icon green check square"></i>
+          <% } else { %>
+          <i class="icon yellow trophy"></i>
+          <% } %>
+          <%= title %>
+        </div>
+        $<%= amount %>
+      </div>
+    </div>
+    <div class="one wide column">
+      <div class="ui right fluid">
+        <button class="circular ui blue icon button undo-button">
+          <i class="icon undo"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
-<span class="remove icon icon-minus2 btn-icon negative display-none"></span>
+

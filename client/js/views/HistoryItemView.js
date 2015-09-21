@@ -1,67 +1,57 @@
 /*global define */
 
 define([
-    'marionette',
-    'templates',
-    'underscore',
+  'marionette',
+  'templates',
+  'underscore',
 ], function (Marionette, templates, _) {
-    'use strict';
+  'use strict';
 
-    return Marionette.ItemView.extend({
-        className: 'history-item-view list-group-item',
-        template: templates.history,
-        tagName: 'li',
-        className: 'table-view-cell media',
+  return Marionette.ItemView.extend({
+    template: templates.history,
+    className: 'history-item-view item',
 
-        ui: {
-            'undo': '.undo',
-            'remove': '.remove',
-            'vector': '.vector'
-        },
+    ui: {
+      'undo': '.undo-button',
+    },
 
-        events: {
-            'click .undo': 'onClickUndo',
-            'click .remove': 'onClickRemove'
-        },
+    events: {
+      'click .undo': 'onClickUndo',
+      'mouseover': 'onHover',
+      'mouseout': 'onStopHover'
+    },
 
-        onShow: function() {
-            this.listenTo(app.events, 'editButtonClicked', this.onClickEdit);
-            this.listenTo(app.events, 'doneButtonClicked', this.onClickDone);
-        },
+    onRender: function() {
+      this.ui.undo.hide();
+    },
 
-        onClickUndo: function(e) {
-            e.preventDefault();
-            this.model.set('completed', false);
-            this.model.save();
+    onClickUndo: function(e) {
+      e.preventDefault();
+      this.model.set('completed', false);
+      this.model.save();
 
-            var user = window.app.user,
-                bank_amt = user.get("bank");
+      var user = window.app.user,
+        bank_amt = user.get("bank");
 
-            if (this.model.get('is_credit')) {
-                user.set("bank", bank_amt - this.model.get("amount"));
-            } else {
-                user.set("bank", bank_amt + this.model.get("amount"));
-            }
+      if (this.model.get('is_credit')) {
+        user.set("bank", bank_amt - this.model.get("amount"));
+      } else {
+        user.set("bank", bank_amt + this.model.get("amount"));
+      }
 
-            this.destroy();
-        },
+      this.destroy();
+    },
 
-        onClickRemove: function(e) {
-            e.preventDefault();
-            this.model.destroy();
-            this.destroy();
-        },
+    onHover: function() {
+      if(!window.mobile) {
+        this.ui.undo.show();
+      }
+    },
 
-        onClickEdit: function() {
-            this.ui.remove.removeClass('display-none');
-            this.ui.undo.removeClass('display-none');
-            this.ui.vector.addClass('display-none');
-        },
-
-        onClickDone: function() {
-            this.ui.remove.addClass('display-none');
-            this.ui.undo.addClass('display-none');
-            this.ui.vector.removeClass('display-none');
-        }
-    });
+    onStopHover: function() {
+      if (!window.mobile) {
+        this.ui.undo.hide();
+      }
+    }
+  });
 });

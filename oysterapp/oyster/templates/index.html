@@ -1,23 +1,39 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block styles %}
+<style>
+.ui.inverted.footer {
+  margin-top: 5em;
+}
+</style>
+{% endblock styles %}
+
 {% block header %}
 <div class="ui fixed inverted teal menu">
 <div id="nav">
 </div>
 <div class="right menu">
   <div class="item">
-    <div class="statistic" id="bank"></div>
+  <div class="statistic" id="bank"></div>
   </div>
   <a class="item" href="/accounts/logout">Logout</a>
 </div>
 </div>
 {% endblock header %}
 
-
-
-{% block content %}
-{% endblock content %}
+{% block footer %}
+<div class="ui inverted vertical footer segment">
+  <div class="ui center aligned container">
+    <img src="{% static 'img/icons/oyster-icon.png' %}" class="ui centered mini image">
+    <div class="ui horizontal inverted small divided link list">
+    <a class="item" href="#">Contact Us</a>
+    <a class="item" href="#">Terms and Conditions</a>
+    <a class="item" href="#">Privacy Policy</a>
+    </div>
+  </div>
+</div>
+{% endblock footer %}
 
 {% block javascripts %}
 <script>
