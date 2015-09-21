@@ -191,7 +191,8 @@ class TaskRule(models.Model):
             task_rule=self,
             doable=doable,
             due_date=self.infer_due_date(),
-            can_be_overdue=self.can_be_overdue
+            can_be_overdue=self.can_be_overdue,
+            is_credit=True
         )
         new_task.save()
         return new_task
