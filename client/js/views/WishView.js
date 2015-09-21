@@ -41,8 +41,6 @@ define([
     },
 
     onClickBuy: function(e) {
-      e.preventDefault();
-
       if (this.model.get('amount') <= window.app.user.get('bank')) {
         this.model.set('completed', true);
 
