@@ -14,22 +14,31 @@ define([
 
     events: {
       'blur .amazon-url': 'onChangeUrl',
-      'click .save-wish': 'onClickSaveWish'
+      'click .save-wish': 'onClickSaveWish',
+      'keypress .amazon-url': 'onSubmitInput'
     },
 
     initialize: function(options) {
       this.parent = this.options.parent;
     },
 
-    // onDomRefresh: function() {
-    //   $(this.ui.input).focus();
-    // },
-
     onChangeUrl: function(e) {
       this.model.set('amazon_link', $(e.target).val());
     },
 
     onClickSaveWish: function(e) {
+      e.preventDefault();
+      this.saveWish();
+    },
+
+    onSubmitInput: function(e) {
+      if (e.which === 13) {
+        this.model.set('amazon_link', $(e.target).val());
+        this.saveWish();
+      }
+    },
+
+    saveWish: function() {
       this.model.save();
 
       this.model.on("change", function() {
