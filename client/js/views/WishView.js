@@ -1,79 +1,89 @@
 /*global define */
 
 define([
-    'marionette',
-    'templates',
-    'underscore',
+  'marionette',
+  'templates',
+  'underscore',
 ], function (Marionette, templates, _) {
-    'use strict';
+  'use strict';
 
-    return Marionette.ItemView.extend({
-        template: templates.wish,
-        className: 'card',
-        tagName: 'div',
+  return Marionette.ItemView.extend({
+    template: templates.wish,
+    className: 'ui centered card',
+    tagName: 'div',
 
-        ui: {
-            'remove': '.remove',
-        },
+    ui: {
+      'remove': '.remove',
+    },
 
-        events: {
-            'click .buy': 'onClickBuy',
-            'click .remove': 'onClickRemove',
-            'click .feature': 'onClickFeature'
-        },
+    events: {
+      'click .buy': 'onClickBuy',
+      'click .remove': 'onClickRemove',
+      'click .feature': 'onClickFeature'
+    },
 
-        templateHelpers:function() {
-            return {
-                image: this.model.get('image'),
-            }
-        },
+    templateHelpers:function() {
+      var link_url;
+      if (this.model.get('amazon_url')) {
+        link_url = this.model.get('amazon_url');
+      } else {
+        link_url = this.model.get('url');
+      }
+      return {
+        link_url: link_url,
 
-        onShow: function() {
-            this.listenTo(app.events, 'editButtonClicked', this.onClickEdit);
-            this.listenTo(app.events, 'doneButtonClicked', this.onClickDone);
-        },
+      }
+    },
 
-        onClickBuy: function(e) {
-            e.preventDefault();
+    onShow: function() {
+      this.listenTo(app.events, 'editButtonClicked', this.onClickEdit);
+      this.listenTo(app.events, 'doneButtonClicked', this.onClickDone);
+    },
 
-            if (this.model.get('amount') <= window.app.user.get('bank')) {
-                this.model.set('completed', true);
+    onClickBuy: function(e) {
+      if (this.model.get('amount') <= window.app.user.get('bank')) {
+        this.model.set('completed', true);
 
-                this.model.save();
+        this.model.save();
 
-                var amount = window.app.user.get('bank');
-                amount = amount - this.model.get('amount');
-                window.app.user.set('bank', amount);
+        var amount = window.app.user.get('bank');
+        amount = amount - this.model.get('amount');
+        window.app.user.set('bank', amount);
 
-                this.destroy();
-            }
+        this.destroy();
+      }
 
-            // TODO: open the buy link
-        },
+      // TODO: open the buy link
+    },
 
-        onClickRemove: function(e) {
-            e.preventDefault();
-            this.model.destroy();
-            this.destroy();
-        },
+    onClickRemove: function(e) {
+      e.preventDefault();
+      this.model.destroy();
+      this.destroy();
+    },
 
-        onClickFeature: function(e) {
-            e.preventDefault();
-            this.model.set('featured', true);
-            this.model.save();
-        },
+    onClickFeature: function(e) {
+      e.preventDefault();
+      if (this.model.get('featured')) {
+        this.model.set('featured', false);
+        this.model.save();
+      } else {
+        this.model.set('featured', true);
+        this.model.save();
+      }
+    },
 
-        // TODO: deprecated
-        onClickEdit: function() {
-            this.ui.remove.removeClass('display-none');
-            this.ui.cart.addClass('display-none');
-        },
+    // TODO: deprecated
+    onClickEdit: function() {
+      this.ui.remove.removeClass('display-none');
+      this.ui.cart.addClass('display-none');
+    },
 
-        onClickDone: function() {
-            this.ui.remove.addClass('display-none');
-            this.ui.cart.removeClass('display-none');
-        },
+    onClickDone: function() {
+      this.ui.remove.addClass('display-none');
+      this.ui.cart.removeClass('display-none');
+    },
 
 
-    });
+  });
 });

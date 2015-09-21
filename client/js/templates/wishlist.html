@@ -1,49 +1,10 @@
 <div>
-  <div class="add-wishes">
-    <a href="#" class="primary add-wish">
-      <i class="large icons">
-      <i class="diamond icon"></i>
-      <i class="corner add icon"></i>
-    </i>
-    Add a Wish
-    </a>
-    <a href="#" class="primary add-amazon-wish">
-      <i class="large icons">
-      <i class="diamond icon"></i>
-      <i class="corner add icon"></i>
-    </i>
-    Add a Wish from amazon link
-    </a>
-  </div>
   <div class="add-wish-container"></div>
+  <p><a href="#" class="advanced-options">Advanced Options</a></p>
+  <p><a href="#" class="cancel">Cancel</a></p>
 </div>
 <% if (showFeaturedCard) { %>
-<div class="ui centered card">
-  <div class="image">
-  <img src="<%= image_url %>">
-  </div>
-  <div class="content">
-  <a class="header"><%= title %></a>
-  <div class="meta">
-  <span class="date">$<%= amount %></span>
-  </div>
-  </div>
-
-  <div class="extra content">
-  <% if (window.app.user.get('bank') >= amount) { %>
-  <a class="buy">
-    <i class="cart icon"></i>
-    Buy
-  </a>
-  <% } %>
-
-  <a class="remove right floated">
-    <i class="trash icon"></i>
-  </a>
-  <a class="feature right floated">
-    <i class="<% if(featured) {%> yellow <% } %> star icon"></i>
-  </a>
-  </div>
+<div class="featured-wish">
 </div>
 <% } %>
 <div class="ui hidden divider"></div>

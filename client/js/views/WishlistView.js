@@ -24,12 +24,13 @@ define([
     },
 
     ui: {
-      'addWishes': '.add-wishes'
+      'advancedoptions': '.advanced-options',
+      'cancel': '.cancel'
     },
 
     events: {
-      'click .add-wish': 'onClickAddWish',
-      'click .add-amazon-wish': 'onClickAddAmazonWish'
+      'click .advanced-options': 'onClickAdvancedOptions',
+      'click .cancel': 'onClickCancel'
     },
 
     initialize: function() {
@@ -50,6 +51,20 @@ define([
       this.wishContainer = this.regionManager.addRegion(
         "wishContainer", ".add-wish-container"
       );
+      this.featuredWish = this.regionManager.addRegion(
+        "featuredWish", ".featured-wish"
+      );
+      this.wishContainer.show(new AddAmazonWish({
+        parent: this,
+        model: new Wish()
+      }));
+      this.ui.cancel.hide();
+
+      if (this.model) {
+        this.featuredWish.show(new WishView({
+          model: this.model
+        }));
+      }
     },
 
     onClose: function() {
@@ -62,34 +77,38 @@ define([
       if (value) {
         _.each(this.fullCollection.reject({id:model.id}), function(wish) {
           if (wish.get('featured')) {
-            wish.set('featured', false);
+            wish.set('featured', false, {silent:true});
             wish.save();
           }
         });
-        this.collection = this.fullCollection.unfeatured();
         this.model = model;
-        this.render();
+      } else {
+        this.model = null;
       }
+      this.collection = this.fullCollection.unfeatured();
+      this.render();
     },
 
-    onClickAddAmazonWish: function(e) {
+    onClickCancel: function(e) {
       e.preventDefault();
 
       this.wishContainer.show(new AddAmazonWish({
         parent: this,
         model: new Wish()
       }));
-      this.ui.addWishes.hide();
+      this.ui.advancedoptions.show();
+      this.ui.cancel.hide();
     },
 
-    onClickAddWish: function(e) {
+    onClickAdvancedOptions: function(e) {
       e.preventDefault();
 
       this.wishContainer.show(new EditWishView({
         parent: this,
         model: new Wish()
       }));
-      this.ui.addWishes.hide();
+      this.ui.advancedoptions.hide();
+      this.ui.cancel.show();
     },
 
     onAddWish: function() {

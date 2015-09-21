@@ -2,7 +2,7 @@
   <img src="<%= image_url %>">
 </div>
 <div class="content">
-  <a class="header"><%= title %></a>
+  <a class="header" href="<%= link_url %>" target="_blank"><%= title %></a>
   <div class="meta">
   <span class="date">$<%= amount %></span>
   </div>
@@ -10,7 +10,7 @@
 
 <div class="extra content">
   <% if (window.app.user.get('bank') >= amount) { %>
-  <a class="buy">
+  <a class="buy" href="<%= link_url %>" target="_blank">
     <i class="cart icon"></i>
     Buy
   </a>
