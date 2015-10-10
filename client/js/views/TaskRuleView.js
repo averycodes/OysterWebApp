@@ -1,57 +1,56 @@
 /*global define */
 
 define([
-	'marionette',
-	'templates',
-	'underscore',
-	'moment'
+  'marionette',
+  'templates',
+  'underscore',
+  'moment'
 ], function (Marionette, templates, _, moment) {
-	'use strict';
+  'use strict';
 
-	return Marionette.ItemView.extend({
-		className: 'task-rule-view card ui',
-		template: templates.taskrule,
+  return Marionette.ItemView.extend({
+    className: 'task-rule-view card ui',
+    template: templates.taskrule,
 
-		templateHelpers: function() {
-			var datestr = "M-D-YYYY, h A";
-			return {
-				'next_run': moment(this.model.get('next_scheduled_run')).fromNow()
-			};
-		},
+    templateHelpers: function() {
+      return {
+        'next_run': moment(this.model.get('next_scheduled_run')).fromNow()
+      };
+    },
 
-		events: {
-			'click .edit-button': '',
-			'click .cancel-button': 'onClickCancelButton',
-			'click .reinstate-button': 'onClickReinstateButton',
-		},
+    events: {
+      'click .edit-button': '',
+      'click .cancel-button': 'onClickCancelButton',
+      'click .reinstate-button': 'onClickReinstateButton',
+    },
 
-		initialize: function() {
+    initialize: function() {
 
-		},
+    },
 
-		onRender: function() {
+    onRender: function() {
 
-		},
+    },
 
-		onShow: function() {
+    onShow: function() {
 
-		},
+    },
 
-		onClickCancelButton: function(e) {
-			e.preventDefault();
+    onClickCancelButton: function(e) {
+      e.preventDefault();
 
-			this.model.set('cancelled', true);
-			this.model.save();
-			this.render();
-		},
+      this.model.set('cancelled', true);
+      this.model.save();
+      this.render();
+    },
 
-		onClickReinstateButton: function(e) {
-			e.preventDefault();
+    onClickReinstateButton: function(e) {
+      e.preventDefault();
 
-			this.model.set('cancelled', false);
-			this.model.save();
-			this.render();
-		}
+      this.model.set('cancelled', false);
+      this.model.save();
+      this.render();
+    }
 
-	});
+  });
 });

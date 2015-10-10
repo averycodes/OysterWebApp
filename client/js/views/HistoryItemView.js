@@ -4,7 +4,8 @@ define([
   'marionette',
   'templates',
   'underscore',
-], function (Marionette, templates, _) {
+  'moment',
+], function (Marionette, templates, _, moment) {
   'use strict';
 
   return Marionette.ItemView.extend({
@@ -19,6 +20,12 @@ define([
       'click .undo': 'onClickUndo',
       'mouseover': 'onHover',
       'mouseout': 'onStopHover'
+    },
+
+    templateHelpers: function() {
+      return {
+        'updated_str': moment(this.model.get('updated')).fromNow()
+      };
     },
 
     onRender: function() {

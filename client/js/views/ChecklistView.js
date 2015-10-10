@@ -7,11 +7,14 @@ define([
   'views/TaskView',
   'views/BasicAddItemView',
   'views/EditRecurringTaskRuleView',
+  'views/MessageView',
   'models/Task',
   'models/TaskRule',
-  'collections/TaskCollection'
+  'collections/TaskCollection',
+  'collections/HistoryCollection'
 ], function (Marionette, templates, _, TaskView, BasicAddItemView,
-      EditRecurringTaskRuleView, Task, TaskRule, TaskCollection) {
+      EditRecurringTaskRuleView, MessageView, Task, TaskRule,
+      TaskCollection, HistoryCollection) {
   'use strict';
 
   return Marionette.CompositeView.extend({
@@ -26,13 +29,18 @@ define([
 
     initialize: function() {
       this.regionManager = new Marionette.RegionManager();
+      this.user = window.app.user;
     },
 
     onDomRefresh: function() {
       this.addItemForm = this.regionManager.addRegion(
         "addItemForm", "#add-item-form"
       );
+      this.messageContainer = this.regionManager.addRegion(
+        "messageContainer", "#message-container"
+      )
       this.showBasicAdd();
+      this.maybeShowMessage();
     },
 
     onClose: function() {
@@ -72,6 +80,30 @@ define([
       this.addItemForm.show(new BasicAddItemView({
         parent: this,
       }));
+    },
+
+    maybeShowMessage: function() {
+      var moment = require('moment'), // TODO: not requiring properly
+          historyCollection = new HistoryCollection(),
+          self=this;
+
+      historyCollection.fetch().success(_.bind(function(coll) {
+        var last_seen = moment(self.user.get('last_seen')),
+            messages;
+
+        messages = coll.filter(function(item) {
+          return moment(item.updated).isAfter(last_seen)
+        });
+
+        if (messages) {
+          self.messageContainer.show(new MessageView({
+            title: messages[0].title,
+            count: messages.length - 1
+          }));
+        }
+
+      }, {self: self}));
+
     },
 
     guid: function() {

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 
 from rest_framework import routers
@@ -26,11 +28,12 @@ class UserSerializer(serializers.ModelSerializer):
     small_amount = serializers.FloatField(source='userprofile.small_amount')
     mid_amount = serializers.FloatField(source='userprofile.mid_amount')
     large_amount = serializers.FloatField(source='userprofile.large_amount')
+    last_seen = serializers.DateTimeField(source='userprofile.last_seen')
 
     class Meta:
         model = User
         fields = ('url', 'username', 'id', 'bank', 'small_amount',
-                  'mid_amount', 'large_amount')
+                  'mid_amount', 'large_amount', 'last_seen')
         depth = 1
 
 
@@ -41,11 +44,25 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def update(self, request, pk):
+        updated = super(UserViewSet, self).update(request)
+        instance = self.get_object()
+        userprofile = instance.userprofile
+        userprofile.last_seen = datetime.now()
+        userprofile.save()
+        return updated
+
 
 @api_view(['GET'])
 def current_user(request):
     serializer = UserSerializer(request.user, context={'request': request})
-    return Response(serializer.data)
+    response = Response(serializer.data)
+
+    userprofile = request.user.userprofile
+    userprofile.last_seen = datetime.now()
+    userprofile.save()
+
+    return response
 
 
 class WishSerializer(serializers.ModelSerializer):
@@ -77,6 +94,13 @@ class WishViewSet(viewsets.ModelViewSet):
         serializer = WishSerializer(wish)
         return Response(serializer.data)
 
+    def update(self, request, pk):
+        instance = self.get_object()
+        userprofile = instance.user.userprofile
+        userprofile.last_seen = datetime.now()
+        userprofile.save()
+        return super(WishViewSet, self).update(request)
+
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
@@ -93,6 +117,13 @@ class HistoryViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return BillableItem.objects.filter(user=self.request.user, completed=True).order_by('-updated')
+
+    def update(self, request, pk):
+        instance = self.get_object()
+        userprofile = instance.user.userprofile
+        userprofile.last_seen = datetime.now()
+        userprofile.save()
+        return super(HistoryViewSet, self).update(request)
 
 
 class IncompleteTaskViewSet(viewsets.ModelViewSet):
@@ -114,6 +145,14 @@ class IncompleteTaskViewSet(viewsets.ModelViewSet):
 
         return Response(serialized_data,
                         status=status.HTTP_201_CREATED)
+
+    def update(self, request, pk):
+        updated = super(IncompleteTaskViewSet, self).update(request)
+        instance = self.get_object()
+        userprofile = instance.user.userprofile
+        userprofile.last_seen = datetime.now()
+        userprofile.save()
+        return updated
 
 
 class TaskRuleSerializer(serializers.ModelSerializer):
@@ -150,6 +189,13 @@ class TaskRuleViewSet(viewsets.ModelViewSet):
             doable=bool(data.get('completable_by') == 'Oyster')
         )
         return Response(data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, pk):
+        instance = self.get_object()
+        userprofile = instance.user.userprofile
+        userprofile.last_seen = datetime.now()
+        userprofile.save()
+        return super(TaskRuleViewSet, self).update(request)
 
     @detail_route(methods=['get'])
     def completed(self, request, uuid=None):
