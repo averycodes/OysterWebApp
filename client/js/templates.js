@@ -16,7 +16,8 @@ define(function (require) {
         wishlist: require('tpl!templates/wishlist.html'),
         settings: require('tpl!templates/settings.html'),
         editrecurringtaskview: require('tpl!templates/editrecurringtaskview.html'),
-	editwish: require('tpl!templates/editwish.html'),
+        editwish: require('tpl!templates/editwish.html'),
+	message: require('tpl!templates/message.html'),
 	};
 });
 

@@ -19,6 +19,7 @@ class UserProfile(models.Model):
     small_amount = models.FloatField(default=1)
     mid_amount = models.FloatField(default=5)
     large_amount = models.FloatField(default=10)
+    last_seen = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return "%s's profile" % self.user
