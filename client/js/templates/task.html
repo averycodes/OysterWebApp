@@ -3,7 +3,7 @@
   <div class="task sixteen column row">
     <div class="fourteen wide column">
       <div class="ui left fluid">
-        <div class="header"><%= title %></div>
+        <div class="header"><% if (!doable) { %><img height="15 px" src="static/img/ifttt-corner.png" alt="ifttt"><% } %><%= title %></div>
         $<%= amount %>
       </div>
     </div>
