@@ -16,9 +16,18 @@ define([
       }
     },
 
+    events: {
+      'click .close': 'onClickClose'
+    },
+
     initialize: function(options) {
       this.title = options.title;
       this.count = options.count;
+    },
+
+    onClickClose: function(e) {
+      e.preventDefault();
+      this.destroy();
     }
 
   });
