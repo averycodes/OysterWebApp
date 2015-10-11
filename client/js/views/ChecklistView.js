@@ -95,7 +95,7 @@ define([
           return moment(item.updated).isAfter(last_seen)
         });
 
-        if (messages) {
+        if (messages.length > 0) {
           self.messageContainer.show(new MessageView({
             title: messages[0].title,
             count: messages.length - 1
