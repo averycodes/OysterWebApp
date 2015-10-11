@@ -9,6 +9,8 @@ define([
     return Backbone.Collection.extend({
         model: Task,
         url: "/api/v1/tasks/",
-        comparator: 'created'
+        comparator: function(task) {
+            return task.get("doable") + task.get("created")
+        }
     });
 });
