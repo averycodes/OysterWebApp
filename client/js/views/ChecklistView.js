@@ -27,12 +27,17 @@ define([
       return compositeView.$el.find(compositeView.childViewContainer).prepend(itemView.el);
     },
 
+    collectionEvents: {
+      "change:featured": "render"
+    },
+
     initialize: function() {
       this.regionManager = new Marionette.RegionManager();
       this.user = window.app.user;
     },
 
     onDomRefresh: function() {
+      this.collection.sort();
       this.addItemForm = this.regionManager.addRegion(
         "addItemForm", "#add-item-form"
       );

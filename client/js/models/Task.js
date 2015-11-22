@@ -9,6 +9,7 @@ define([
         defaults: {
             title: 'Task Title',
             doable: true,
+            featured: false,
             amount: 1,
             completed: false
         },

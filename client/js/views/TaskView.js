@@ -15,6 +15,7 @@ define([
     ui: {
       'remove': '.remove',
       'edit': '.edit',
+      'feature': '.feature',
       'task': '.task',
       'editTask': '.edit-task',
       'newTitle': '.new-title',
@@ -25,6 +26,7 @@ define([
       'click .task': 'onClickTask',
       'click .remove': 'onClickRemove',
       'click .edit': 'onClickEdit',
+      'click .feature': 'onClickFeature',
       'click .save-task': 'onClickSaveTask',
       'mouseover': 'onHover',
       'mouseout': 'onStopHover'
@@ -36,6 +38,7 @@ define([
       }
       this.ui.remove.hide();
       this.ui.edit.hide();
+      this.ui.feature.hide();
       this.ui.editTask.hide();
       // event listener
     },
@@ -62,6 +65,13 @@ define([
       this.destroy();
     },
 
+    onClickFeature: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.model.set('featured', !(this.model.get('featured')));
+      this.model.save();
+    },
+
     onClickEdit: function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -74,13 +84,13 @@ define([
       this.model.set('title', this.ui.newTitle.val());
       this.model.set('amount', this.ui.newAmount.val());
       this.model.save();
-      this.render();
     },
 
     onHover: function() {
       if(!window.mobile) {
         this.ui.remove.show();
         this.ui.edit.show();
+        this.ui.feature.show();
       }
     },
 
@@ -88,6 +98,7 @@ define([
       if (!window.mobile) {
         this.ui.remove.hide();
         this.ui.edit.hide();
+        this.ui.feature.hide();
       }
     }
   });

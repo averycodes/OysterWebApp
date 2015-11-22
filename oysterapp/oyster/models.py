@@ -40,6 +40,7 @@ class BillableItem(models.Model):
     completed = models.BooleanField(default=False)
     amount = models.FloatField()
     is_credit = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False)
 
 
 class Task(BillableItem):
@@ -59,7 +60,6 @@ class Wish(BillableItem):
     amazon_link = models.CharField(max_length=255, null=True, blank=True)
     asin = models.CharField(max_length=255, null=True, blank=True)
     image_url = models.CharField(max_length=255, null=True, blank=True)
-    featured = models.BooleanField(default=False)
     url = models.CharField(max_length=255, null=True, blank=True)
 
 
