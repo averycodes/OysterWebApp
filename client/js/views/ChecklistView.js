@@ -29,6 +29,7 @@ define([
 
     collectionEvents: {
       "change:featured": "render"
+      "add": "render"
     },
 
     initialize: function() {
