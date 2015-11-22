@@ -28,7 +28,7 @@ define([
     },
 
     collectionEvents: {
-      "change:featured": "render"
+      "change:featured": "render",
       "add": "render"
     },
 
