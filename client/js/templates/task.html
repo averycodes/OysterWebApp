@@ -1,20 +1,27 @@
 <div class="content ui grid">
 
   <div class="task sixteen column row">
-    <div class="fourteen wide column">
+    <div class="thirteen wide column">
       <div class="ui left fluid">
-        <div class="header"><% if (!doable) { %><img height="15 px" src="static/img/ifttt-corner.png" alt="ifttt"><% } %><%= title %></div>
+        <div class="header">
+          <% if (!doable) { %><img height="15 px" src="static/img/ifttt-corner.png" alt="ifttt"><% } %>
+          <% if (featured) { %><i class="icon star yellow"></i><% } %>
+          <%= title %>
+        </div>
         $<%= amount %>
       </div>
     </div>
 
-    <div class="two wide column">
+    <div class="three wide column">
       <div class="ui right fluid">
         <button class="circular ui blue icon button edit">
           <i class="icon edit"></i>
         </button>
         <button class="circular ui red icon button remove">
           <i class="icon trash"></i>
+        </button>
+        <button class="circular ui yellow icon button feature">
+          <i class="icon star"></i>
         </button>
       </div>
     </div>
