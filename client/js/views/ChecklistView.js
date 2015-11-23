@@ -37,8 +37,12 @@ define([
       this.user = window.app.user;
     },
 
-    onDomRefresh: function() {
+    onRender: function() {
+      this.collection.fetch();
       this.collection.sort();
+    },
+
+    onDomRefresh: function() {
       this.addItemForm = this.regionManager.addRegion(
         "addItemForm", "#add-item-form"
       );
